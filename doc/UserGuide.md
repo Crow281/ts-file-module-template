@@ -6,7 +6,7 @@ This tutorial gives instructions to make the template project your own.
 
 Download a copy of the repository:
 ```console
-git clone https://github.com/Crow281/ts-folder-module-template.git
+git clone https://github.com/Crow281/ts-file-module-template.git
 ```
 
 You can probably just delete all files under the "doc" and "src" folders since
@@ -271,7 +271,7 @@ adding ".test.ts" files to it, and writing your
 tests inside of them.
 
 An example is located
-[here](https://crow281.github.io/ts-folder-module-template/src/math/algorithms/__tests__),
+[here](https://crow281.github.io/ts-file-module-template/src/math/algorithms/__tests__),
 which contains tests to make sure the code inside of
 "math/algorithms" is behaving as expected.
 
@@ -297,9 +297,9 @@ as a series of web pages.
 As a live example, the template project provides the API
 for the sample code via GitHub Pages.
 It is located
-[here](https://crow281.github.io/ts-folder-module-template/doc/api/latest).
+[here](https://crow281.github.io/ts-file-module-template/doc/api/latest).
 Github hosts the files located
-[here](https://github.com/Crow281/ts-folder-module-template/tree/gh-pages).
+[here](https://github.com/Crow281/ts-file-module-template/tree/gh-pages).
 
 If you want to do the same:
 - Create your own new branch called "gh-pages".

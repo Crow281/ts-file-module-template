@@ -40,7 +40,7 @@ import {
         </p>
         <p>
             Examples of how to import JSON and CSV are in folder
-            <a href="https://github.com/Crow281/ts-folder-module-template/tree/main/src/printing">
+            <a href="https://github.com/Crow281/ts-file-module-template/tree/main/src/printing">
                 "src/printing"
             </a>.
         </p>
@@ -64,23 +64,23 @@ import {
     </li>
 </ul>
 
-You can access the github project [here](https://github.com/Crow281/ts-folder-module-template).
+You can access the github project [here](https://github.com/Crow281/ts-file-module-template).
 
 ## Using This Template
 
 You can read instructions to use this template for your very own NPM project
 right
-[here](https://github.com/Crow281/ts-folder-module-template/tree/main/doc/UserGuide.md).
+[here](https://github.com/Crow281/ts-file-module-template/tree/main/doc/UserGuide.md).
 
 ## Documentation
 
-The API documentation is available [here](https://crow281.github.io/ts-folder-module-template/doc/api/latest/).
+The API documentation is available [here](https://crow281.github.io/ts-file-module-template/doc/api/latest/).
 
 ## Structure
 
 Whether due to curiosity, needing to fix a bug, or needing to modify it,
 you can read the details behind how this template works over
-[here](https://github.com/Crow281/ts-folder-module-template/tree/main/doc/Structure.md).
+[here](https://github.com/Crow281/ts-file-module-template/tree/main/doc/Structure.md).
 
 ## Commands
 
@@ -126,7 +126,7 @@ This will set package.json's exports field to exactly:
 ### Update Exports
 
 Whenever you add new internal folders to
-["{project}/src"](https://github.com/Crow281/ts-folder-module-template/tree/main/src),
+["{project}/src"](https://github.com/Crow281/ts-file-module-template/tree/main/src),
 you can use the following command to update your package.json's
 exports field to block public import access to the resulting new modules:
 ```console

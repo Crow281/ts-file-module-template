@@ -7,10 +7,10 @@ This document explains how the template is setup and the rationale behind it.
 This template uses Rollup as the overall bundler.
 
 The Rollup config file is located at
-["{project}/config/rollup.config.mjs"](https://github.com/Crow281/ts-folder-module-template/tree/main/config/rollup.config.mjs).
+["{project}/config/rollup.config.mjs"](https://github.com/Crow281/ts-file-module-template/tree/main/config/rollup.config.mjs).
 
 The config file will get a list of every source file under
-["{project}/src"](https://github.com/Crow281/ts-folder-module-template/tree/main/src)
+["{project}/src"](https://github.com/Crow281/ts-file-module-template/tree/main/src)
 and convert it into an object mapping entry points to their sources:
 ```TypeScript
 const inputs = {
@@ -23,7 +23,7 @@ const inputs = {
 Using Babel, it will build them into CommonJS and ES modules.
 
 These modules will be written to the
-["{project}/dist"](https://github.com/Crow281/ts-folder-module-template/tree/main/dist)
+["{project}/dist"](https://github.com/Crow281/ts-file-module-template/tree/main/dist)
 folder, using the same subfolders as their sources.
 For example, the builds for all scripts under folder "src/some-module"
 will be placed in "dist/some-module".
@@ -35,7 +35,7 @@ converting TypeScript source files into JavaScript module files and
 helping to ensure backwards compatibility.
 
 The Babel config file is located at
-["{project}/config/babel.config.json"](https://github.com/Crow281/ts-folder-module-template/tree/main/config/babel.config.json).
+["{project}/config/babel.config.json"](https://github.com/Crow281/ts-file-module-template/tree/main/config/babel.config.json).
 
 It includes presets to let it handle React and TypeScript.
 
@@ -48,19 +48,19 @@ definition files.
 ### Config
 
 The main TypeScript configuration file is in
-["{project}/tsconfig.json"](https://github.com/Crow281/ts-folder-module-template/tree/main/tsconfig.json).
+["{project}/tsconfig.json"](https://github.com/Crow281/ts-file-module-template/tree/main/tsconfig.json).
 
 In order to leave "__test__" folders out of the final build but
 ensure your editor recognizes them as typescript files,
 there is a second config file extending it inside of
-["{project}/config/tsconfig.production.json"](https://github.com/Crow281/ts-folder-module-template/tree/main/config/tsconfig.production.json)
+["{project}/config/tsconfig.production.json"](https://github.com/Crow281/ts-file-module-template/tree/main/config/tsconfig.production.json)
 used for the actual build.
 
 ### Custom File Extensions
 
 In the event that you need to support importing custom file extensions,
 you can leave the type definition files for them inside of the
-["{project}/config/types"](https://github.com/Crow281/ts-folder-module-template/tree/main/config/types)
+["{project}/config/types"](https://github.com/Crow281/ts-file-module-template/tree/main/config/types)
 folder.
 
 This folder already has definition files for
@@ -78,7 +78,7 @@ converts them into via the library,
 This template uses ESLint to check for any coding problems.
 
 The ESLint config file is located in
-["{project}/config/eslint.config.mjs"](https://github.com/Crow281/ts-folder-module-template/tree/main/config/eslint.config.mjs).
+["{project}/config/eslint.config.mjs"](https://github.com/Crow281/ts-file-module-template/tree/main/config/eslint.config.mjs).
 
 It is setup to handle JavaScript, TypeScript, React, and browser globals.
 
@@ -137,7 +137,7 @@ This template is using the following list of ESLint plugins:
 This template uses Prettier to keep the formatting consistent.
 
 The Prettier config file is located in
-["config/.prettierrc.json"](https://github.com/Crow281/ts-folder-module-template/tree/main/config/.prettierrc.json).
+["config/.prettierrc.json"](https://github.com/Crow281/ts-file-module-template/tree/main/config/.prettierrc.json).
 
 This template is using the following list of Prettier plugins:
 
