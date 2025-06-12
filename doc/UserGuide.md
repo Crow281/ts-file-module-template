@@ -190,7 +190,7 @@ Every file except "index.ts" represents a file module.
 ### Folder Modules
 "index.ts" represents the overall folder. If you want to document a folder,
 you can add a @packageDocumentation tag, like below:
-```ts
+```TypeScript
 /// index.ts
 /**
  * This comment describes this folder module.

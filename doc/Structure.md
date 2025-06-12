@@ -214,8 +214,8 @@ For example, "doc"'s value would be set to
 The build is exported via package.json's exports field.
 
 The template in its original form looks like this:
-```json
-    ...
+```TypeScript
+    //...
     "exports": {
         "./package.json": "./package.json",
         "./*": {
@@ -224,7 +224,7 @@ The template in its original form looks like this:
             "import": "./dist/*.mjs"
         }
     }
-    ...
+    //...
 ```
 
 ### Exports Object
@@ -234,7 +234,7 @@ by the update-exports script by default.
 
 The first property, "./package.json", makes it possible for users to
 import package.json if they want to:
-```ts
+```TypeScript
 import package from "@my_scope/package_name/package.json"
 ```
 
@@ -242,7 +242,7 @@ The second property, "./*", makes it possible to import any file module
 built to the "dist" folder.
 For example, if you wanted to import module "math/Matrix4",
 you could do so via:
-```ts
+```TypeScript
 import { Matrix4 } from "@my_scope/package_name/math/Matrix4"
 ```
 
@@ -271,8 +271,8 @@ npm run update-exports
 ```
 
 Calling it on the original project will result in the exports field looking like:
-```json
-    ...
+```TypeScript
+    //...
     "exports": {
         "./package.json": "./package.json",
         "./*": {
@@ -282,7 +282,7 @@ Calling it on the original project will result in the exports field looking like
         },
         "./math/algorithms/internal": null
     }
-    ...
+    //...
 ```
 
 ### Exports Reset

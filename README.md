@@ -110,8 +110,8 @@ npm run reset-exports
 ```
 
 This will set package.json's exports field to exactly:
-```json
-    ...
+```TypeScript
+    //...
     "exports": {
         "./package.json": "./package.json",
         "./*": {
@@ -120,7 +120,7 @@ This will set package.json's exports field to exactly:
             "import": "./dist/*.mjs"
         }
     }
-    ...
+    //...
 ```
 
 ### Update Exports

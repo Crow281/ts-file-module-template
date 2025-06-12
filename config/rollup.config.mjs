@@ -118,11 +118,11 @@ const sourceFilePaths = globSync(
 
 //Create the inputs object, mapping entry points to their source files.
 //For example,
-//```ts
+//```TypeScript
 //["src/SomeFile.ts"];
 //```
 //will become
-//```ts
+//```TypeScript
 //{
 //    "SomeFile": "src/SomeFile.ts"
 //}
