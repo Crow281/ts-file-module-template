@@ -1,0 +1,76 @@
+{
+    "name": "@crow281/folder-module-template",
+    "version": "1.0.0",
+    "private": true,
+    "author": "crow281",
+    "contributors": [],
+    "description": "A template to simplify implementing a new NPM library.",
+    "keywords": [],
+    "license": "MIT",
+    "homepage": "https://github.com/Crow281/ts-folder-module-template",
+    "bugs": "https://github.com/Crow281/ts-folder-module-template/issues",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Crow281/ts-folder-module-template"
+    },
+    "scripts": {
+        "lint": "eslint --config config/eslint.config.mjs src/",
+        "format": "prettier --config config/.prettierrc.json src/ --write",
+        "clean": "rimraf dist",
+        "reset-exports": "node ./config/ResetExports.js",
+        "update-exports": "node ./config/UpdateExports.js",
+        "build:js": "rollup --config config/rollup.config.mjs",
+        "build:types": "tsc --project config/tsconfig.production.json --emitDeclarationOnly",
+        "build": "npm run clean && npm run build:js && npm run build:types",
+        "test": "jest --config config/jest.config.js",
+        "doc": "typedoc --options typedoc.config.js"
+    },
+    "files": [
+        "dist",
+        "src",
+        "LICENSE",
+        "README.md"
+    ],
+    "type": "module",
+    "sideEffects": false,
+    "exports": {
+        "./package.json": "./package.json",
+        "./*": {
+            "types": "./dist/*.d.ts",
+            "require": "./dist/*.cjs",
+            "import": "./dist/*.mjs"
+        }
+    },
+    "devDependencies": {
+        "@babel/core": "^7.26.8",
+        "@babel/plugin-transform-runtime": "^7.26.8",
+        "@babel/preset-env": "^7.26.8",
+        "@babel/preset-react": "^7.26.3",
+        "@babel/preset-typescript": "^7.26.0",
+        "@eslint/js": "^9.20.0",
+        "@rollup/plugin-babel": "^6.0.4",
+        "@rollup/plugin-commonjs": "^28.0.2",
+        "@rollup/plugin-dsv": "^3.0.5",
+        "@rollup/plugin-json": "^6.1.0",
+        "@rollup/plugin-node-resolve": "^16.0.0",
+        "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+        "@types/jest": "^29.5.14",
+        "babel-jest": "^30.0.0",
+        "eslint-config-prettier": "^10.0.1",
+        "eslint-plugin-react": "^7.37.4",
+        "glob": "^11.0.1",
+        "globals": "^16.0.0",
+        "jest": "^30.0.0",
+        "rimraf": "^6.0.1",
+        "rollup": "^4.34.6",
+        "rollup-plugin-includepaths": "^0.2.4",
+        "typedoc": "^0.28.2",
+        "typedoc-plugin-external-module-map": "^2.2.0",
+        "typedoc-plugin-mdn-links": "^5.0.1",
+        "typescript": "^5.7.3",
+        "typescript-eslint": "^8.24.0"
+    },
+    "dependencies": {
+        "@types/d3-dsv": "^3.0.7"
+    }
+}
