@@ -21,8 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+import { calculateCircleArea } from "math/geometry/CalculateCircleArea";
+import { Circle } from "math/geometry/Circle";
 
-/**
- * A variable containing the name of the NPM library's package.
- */
-export const PACKAGE_NAME: string = "@crow281/ts-file-module-template";
+test("test whether calculateCircleArea(8.5) equals 226.9798775", () => {
+    //Radius we want the circle area for.
+    const radius: number = 8.5;
+
+    //Number representing the correct answer.
+    const correctAnswer: number = 226.9798775;
+
+    //Create circle.
+    const circle: Circle = {
+        center: {
+            x: 0,
+            y: 0,
+            z: 0,
+        },
+        radius: radius,
+    };
+
+    //Run the calculation.
+    const circleArea: number = calculateCircleArea(circle);
+
+    //Pass the result and correct answer to Jest.
+    expect(circleArea).toStrictEqual(correctAnswer);
+});

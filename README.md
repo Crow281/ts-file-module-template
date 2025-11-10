@@ -1,4 +1,4 @@
-# folder-module-template
+# ts-file-module-template
 
 ## Introduction
 
@@ -46,6 +46,24 @@ import {
         </p>
     </li>
     <li>
+        It supports pre-generating
+        <a href="https://json-schema.org/">
+            JSON Schema
+        </a>
+        validation code via
+        <a href="https://www.npmjs.com/package/ajv">
+            AJV
+        </a>.
+    </li>
+    <li>
+        It has a code generator script built over
+        <a href="https://www.npmjs.com/package/json-schema-to-typescript">
+            json-schema-to-typescript
+        </a>,
+        making it easy to create TypeScript interfaces
+        based on your json schema and load JSON files into them.
+    </li>
+    <li>
         You can check for problems in your code via
         <a href="https://www.npmjs.com/package/eslint">ESLint</a>
     </li>
@@ -83,6 +101,34 @@ you can read the details behind how this template works over
 [here](https://github.com/Crow281/ts-file-module-template/tree/main/doc/Structure.md).
 
 ## Commands
+
+### Generate
+
+This project comes with scripts that generate useful code for working with
+json-schema, making it possible to load JSON files into TypeScript interfaces.
+
+You can add your json-schema to anywhere inside of
+["{project}/src"](https://github.com/Crow281/ts-file-module-template/tree/main/src).
+
+Using the following script will dynamically create scripts that can be used
+to validate JSON files corresponding to the schema and load them into
+TypeScript interfaces. It will also create a matching TypeScript interface
+for each JSON schema. Each of these files will be placed in the same folder
+as the original JSON schema:
+```console
+npm run generate
+```
+
+#### Generated - Clean
+
+If you want to delete all of the dynamically generated scripts,
+this command will delete all script files in the source folder
+that start with a specific comment all dynamically generated
+scripts start with:
+
+```console
+npm run clean:generated
+```
 
 ### Lint
 
@@ -150,10 +196,10 @@ type definitions respectively as described below.
 
 If you just want to delete everything in the
 "{project}/dist"
-folder,
+folder:
 
 ```console
-npm run clean
+npm run clean:build
 ```
 
 #### Build - JS

@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  */
 /**
- * A module containing some example math operations
- * to show how this template can be used.
- * @module
+ * Contains stuff for math.
+ * @packageDocumentation
  */

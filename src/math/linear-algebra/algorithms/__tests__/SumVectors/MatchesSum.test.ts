@@ -21,8 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+import { Vector4 } from "math/linear-algebra/Vector4";
+import { sumVectors } from "math/linear-algebra/algorithms/SumVectors";
 
-/**
- * A variable containing the name of the NPM library's package.
- */
-export const PACKAGE_NAME: string = "@crow281/ts-file-module-template";
+test("adds (0, 0, 0, 0) + (0, 23, 2, 3) + (28, 6, 32, 0) to equal (28, 29, 34, 3)", () => {
+    //Vectors to sum up.
+    const vectors: Vector4[] = [
+        Vector4.fromZero(),
+        new Vector4(0, 23, 2, 3),
+        new Vector4(28, 6, 32, 0),
+    ];
+
+    //Vector representing the correct answer.
+    const correctAnswer: number[] = [28, 29, 34, 3];
+
+    //Sum the vectors.
+    const summedVector: Vector4 = sumVectors(vectors);
+
+    //Convert to an array so we can compare it.
+    const summedVectorArray = summedVector.toArray();
+
+    //Pass the result and correct answer to Jest.
+    expect(summedVectorArray).toStrictEqual(correctAnswer);
+});

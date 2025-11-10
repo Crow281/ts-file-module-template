@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 /**
- * A variable containing the name of the NPM library's package.
+ * A module containing some example math operations
+ * to show how this template can be used.
+ * @module
  */
-export const PACKAGE_NAME: string = "@crow281/ts-file-module-template";

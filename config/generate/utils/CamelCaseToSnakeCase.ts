@@ -21,8 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+/**
+ * Converts between different types of casing.
+ */
 
 /**
- * A variable containing the name of the NPM library's package.
+ * Converts camel case strings to snake case.
+ *
+ * Note that this does NOT change the character casing of the original string.
+ * If you want lower snake casing, then call toLowerCase() on the result.
+ * If you want upper snake casing, then call toUpperCase() on the result.
+ * @param camelCase
+ * Original camel case string.
+ * @returns
+ * String after converting it to snake case.
  */
-export const PACKAGE_NAME: string = "@crow281/ts-file-module-template";
+export function camelCaseToSnakeCase(camelCase: string): string {
+    //Split the individual words by the capital characters.
+    const words: string[] = camelCase.split(/(?=[A-Z])/);
+
+    //If split was succesful.
+    if (words) {
+        //Recombine the words with underscore between each of them.
+        const snakeCase: string = words.join("_");
+
+        return snakeCase;
+    }
+
+    //If there was nothing to split, just return the original word.
+    return camelCase;
+}

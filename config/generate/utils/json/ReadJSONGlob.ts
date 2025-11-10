@@ -21,8 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+import { readJSONFiles } from "./ReadJSONFiles";
+import { glob } from "glob";
 
 /**
- * A variable containing the name of the NPM library's package.
+ *
+ * @param inputPattern
+ * Glob pattern to all UTF-8 JSON files that are to be loaded.
+ * @returns
+ * A map, mapping absolute file paths to the JSON objects stored to them.
  */
-export const PACKAGE_NAME: string = "@crow281/ts-file-module-template";
+export async function readJSONGlob(
+    inputPattern: string,
+): Promise<Map<string, object>> {
+    //Get the file paths to the JSON files.
+    const filePaths: string[] = await glob(inputPattern);
+
+    //Load all of the JSON files into objects.
+    //The result will have the same order as parameter file paths.
+    const jsonObjects: any[] = await readJSONFiles(filePaths);
+
+    //Map to hold the schema objects.
+    const filePathToObject: Map<string, any> = new Map();
+
+    //Map the file paths to the object they load.
+    for (let index: number = 0; index < filePaths.length; ++index) {
+        //Map the schema to its file path.
+        filePathToObject.set(filePaths[index], jsonObjects[index]);
+    }
+
+    return filePathToObject;
+}

@@ -21,8 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+import { Circle } from "math/geometry/Circle";
+import { PI } from "math/geometry/internal/PI";
 
 /**
- * A variable containing the name of the NPM library's package.
+ * @param circle
+ * Circle we want the area for.
+ * @returns
+ * Square area of the given circle.
  */
-export const PACKAGE_NAME: string = "@crow281/ts-file-module-template";
+export function calculateCircleArea(circle: Circle): number {
+    //Fetch the radius of the circle.
+    const radius: number = circle.radius;
+
+    //Area of a circle = PI * radius ^ 2.
+    return PI * radius * radius;
+}

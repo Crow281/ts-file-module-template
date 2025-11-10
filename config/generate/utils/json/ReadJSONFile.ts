@@ -21,8 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+import { promises } from "fs";
 
 /**
- * A variable containing the name of the NPM library's package.
+ * Loads given UTF-8 text file into a json object.
+ * @param filePath
+ * Path to the json file.
+ * @returns
+ * Json object loaded from the file.
  */
-export const PACKAGE_NAME: string = "@crow281/ts-file-module-template";
+export async function readJSONFile(filePath: string): Promise<any> {
+    //Load JSON schema file.
+    const jsonSchemaText: string = await promises.readFile(filePath, "utf8");
+
+    //Convert text to a json object.
+    const jsonObject: any = JSON.parse(jsonSchemaText);
+
+    return jsonObject;
+}

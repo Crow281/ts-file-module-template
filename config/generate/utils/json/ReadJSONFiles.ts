@@ -21,8 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+import { readJSONFile } from "./ReadJSONFile";
 
 /**
- * A variable containing the name of the NPM library's package.
+ * @returns
+ * Promise returning an array with each object,
+ * their indexes corresponding to the matching json file path index.
  */
-export const PACKAGE_NAME: string = "@crow281/ts-file-module-template";
+export async function readJSONFiles(jsonFilePaths: string[]): Promise<any[]> {
+    //Allocate array of all the file promises.
+    const promises = new Array(jsonFilePaths.length);
+
+    //Iterate the file paths.
+    for (let index = 0; index < jsonFilePaths.length; ++index) {
+        promises[index] = readJSONFile(jsonFilePaths[index]);
+    }
+
+    //Create promise that will wait for all of them to load.
+    return Promise.all(promises);
+}

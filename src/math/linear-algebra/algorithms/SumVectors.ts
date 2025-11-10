@@ -21,8 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+import { Vector4 } from "math/linear-algebra/Vector4";
 
 /**
- * A variable containing the name of the NPM library's package.
+ *
+ * @param vectors
+ * An iterable containing some numbers we want to add up.
+ * @returns
+ * The sum of all numbers inside of iterable.
  */
-export const PACKAGE_NAME: string = "@crow281/ts-file-module-template";
+export function sumVectors(vectors: Iterable<Vector4>): Vector4 {
+    //Used to record sum while calculating it.
+    let x: number = 0;
+    let y: number = 0;
+    let z: number = 0;
+    let w: number = 0;
+
+    //Iterate all the vectors.
+    for (const value of vectors) {
+        //Sum up their values.
+        x += value.x;
+        y += value.y;
+        z += value.z;
+        w += value.w;
+    }
+
+    return new Vector4(x, y, z, w);
+}

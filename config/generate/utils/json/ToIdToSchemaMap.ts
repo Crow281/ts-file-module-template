@@ -21,8 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 /**
- * A variable containing the name of the NPM library's package.
+ *
+ * @param schemas
+ * List of JSON schema we want mappings for.
+ * @returns
+ * Maps JSON schema ids to corresponding schema.
  */
-export const PACKAGE_NAME: string = "@crow281/ts-file-module-template";
+export function toIdToSchemaMap(
+    schemas: IterableIterator<object>,
+): Map<string, object> {
+    //Map we are creating.
+    const idToSchema: Map<string, object> = new Map();
+
+    //Iterate the schema.
+    for (const schema of schemas) {
+        //Fetch id.
+        const id: string | undefined = schema["$id"];
+
+        //If it has an id and has the correct type.
+        if (typeof id === "string") {
+            //Check if id has already been used.
+            const oldSchema: object | undefined = idToSchema.get(id);
+
+            //If multiple schema use the same id.
+            if (oldSchema !== undefined) {
+                //Fire an error.
+                throw new Error(
+                    `Multiple schema files are using the same id, "${id}"`,
+                );
+            }
+
+            //Save the new mapping.
+            idToSchema.set(id, schema);
+        }
+    }
+
+    return idToSchema;
+}

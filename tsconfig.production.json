@@ -1,4 +1,6 @@
-//This file is used to tell the editor how the source should be handled.
+//This file is used to generate the TypeScript definitions of the project.
+//The only functional difference between this file and tsconfig.json is that
+//this file excludes the test scripts.
 {
     //Extended build file. Records the desired compiler options.
     "extends": "./config/build/tsconfig.base.json",
@@ -16,6 +18,9 @@
     "exclude": [
         //Do not include NPM modules in the build.
         "**/node_modules/**",
+
+        //Do not include test scripts in the build.
+        "**/__tests__/**",
     ],
 
     //How to compile.

@@ -35,10 +35,7 @@
  * }
  * ```
  */
-import {
-    readFileSync,
-    writeFileSync
-} from "fs";
+import { readFileSync, writeFileSync } from "fs";
 
 //Fetch a copy of the commandline arguments and convert them to a set.
 //Skip the first 2 arguments of the argv array
@@ -51,20 +48,17 @@ const npmPackageURL = new URL("../package.json", import.meta.url);
 
 /**
  * Function that runs the overall script.
- * @returns 
+ * @returns
  */
 function run() {
     //Read the NPM project's package.json so we can get configuration data.
-    const npmPackage = JSON.parse(readFileSync(
-        npmPackageURL,
-        "utf8"
-    ));
+    const npmPackage = JSON.parse(readFileSync(npmPackageURL, "utf8"));
 
     //Set the exports object to the project's default state for it.
     npmPackage.exports = {
         //Automatically provides access to importing package.json.
         "./package.json": "./package.json",
-    
+
         //Allows all other modules to be imported via their file path name.
         //For example, "src/SomeFolder/SomeFile.ts"
         //is imported as "SomeFolder/SomeFile".
@@ -72,19 +66,19 @@ function run() {
             //We can get the module's types by accessing
             //the dist folder, appending the module path,
             //and then appending the definition file extension.
-            "types": "./dist/*.d.ts",
-    
+            types: "./dist/*.d.ts",
+
             //We can get the module's CommonJs Module build by accessing
             //the dist folder, appending the module path,
             //and then appending the CommonJS Module file extension.
-            "require": "./dist/*.cjs",
-    
+            require: "./dist/*.cjs",
+
             //We can get the module's ES Module build by accessing
             //the dist folder, appending the module path,
             //and then appending the ES Module file extension.
-            "import": "./dist/*.mjs"
-        }
-    }
+            import: "./dist/*.mjs",
+        },
+    };
 
     //Convert the NPM package back into text.
     const npmPackageText = JSON.stringify(
@@ -95,14 +89,11 @@ function run() {
         null,
 
         //Use 4 spacing indents.
-        4
+        4,
     );
 
     //Replace the old npm package file with the one with new exports.
-    writeFileSync(
-        npmPackageURL,
-        npmPackageText
-    );
+    writeFileSync(npmPackageURL, npmPackageText);
 }
 
 //Call the script.

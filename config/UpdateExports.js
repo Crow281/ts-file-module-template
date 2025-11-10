@@ -25,19 +25,16 @@
  * This script reads in the NPM package's package.json file
  * and the list of source files and
  * uses that data to update its exports field.
- * 
+ *
  * It will mark all modules with any parent folders named "internal"
  * as null, preventing access.
- * 
+ *
  * However, if the exports field has preexisting "internal"
  * exports set to anything other than null, it will not update them.
  */
+import { readFileSync, writeFileSync } from "fs";
 import { globSync } from "glob";
-import {
-    readFileSync,
-    writeFileSync
-} from "fs";
-import * as path  from "node:path";
+import * as path from "node:path";
 
 //Fetch a copy of the commandline arguments and convert them to a set.
 //Skip the first 2 arguments of the argv array
@@ -50,14 +47,11 @@ const npmPackageURL = new URL("../package.json", import.meta.url);
 
 /**
  * Function that runs the overall script.
- * @returns 
+ * @returns
  */
 function run() {
     //Read the NPM project's package.json so we can get configuration data.
-    const npmPackage = JSON.parse(readFileSync(
-        npmPackageURL,
-        "utf8"
-    ));
+    const npmPackage = JSON.parse(readFileSync(npmPackageURL, "utf8"));
 
     //Get list of all internal source file paths.
     const internalSourceFilePaths = globSync(
@@ -65,9 +59,9 @@ function run() {
         {
             ignore: [
                 //Exclude all test folders from the build.
-                "**/__tests__/**"
-            ]
-        }
+                "**/__tests__/**",
+            ],
+        },
     );
 
     //Stores collection of all folder paths relative to "src"
@@ -85,7 +79,7 @@ function run() {
         const folderPath = path.relative(
             "src",
             //Cut off the file path.
-            path.dirname(internalSourceFilePath)
+            path.dirname(internalSourceFilePath),
         );
 
         //Record folder to the set.
@@ -107,7 +101,7 @@ function run() {
         exports = {
             //Automatically provides access to importing package.json.
             "./package.json": "./package.json",
-        
+
             //Allows all other modules to be imported via their file path name.
             //For example, "src/SomeFolder/SomeFile.ts"
             //is imported as "SomeFolder/SomeFile".
@@ -115,18 +109,18 @@ function run() {
                 //We can get the module's types by accessing
                 //the dist folder, appending the module path,
                 //and then appending the definition file extension.
-                "types": "./dist/*.d.ts",
-        
+                types: "./dist/*.d.ts",
+
                 //We can get the module's CommonJs Module build by accessing
                 //the dist folder, appending the module path,
                 //and then appending the CommonJS Module file extension.
-                "require": "./dist/*.cjs",
-        
+                require: "./dist/*.cjs",
+
                 //We can get the module's ES Module build by accessing
                 //the dist folder, appending the module path,
                 //and then appending the ES Module file extension.
-                "import": "./dist/*.mjs"
-            }
+                import: "./dist/*.mjs",
+            },
         };
 
         //Save it to npm package.
@@ -149,9 +143,9 @@ function run() {
             //Notify user that we did not update this line because
             //it is not internal
             console.log(
-                "Skipping update of export \"" +
-                exportKey +
-                "\" because it is not internal."
+                'Skipping update of export "' +
+                    exportKey +
+                    '" because it is not internal.',
             );
 
             //Skip this export.
@@ -165,10 +159,10 @@ function run() {
             //Notify user that we did not update this line because
             //it appears to be custom.
             console.log(
-                "Skipping update of export \"" +
-                exportKey +
-                "\" because it is set to a non-null value, " +
-                "implying it was hand set by the user."
+                'Skipping update of export "' +
+                    exportKey +
+                    '" because it is set to a non-null value, ' +
+                    "implying it was hand set by the user.",
             );
 
             //Skip this export.
@@ -203,14 +197,11 @@ function run() {
         null,
 
         //Use 4 spacing indents.
-        4
+        4,
     );
 
     //Replace the old npm package file with the one with new exports.
-    writeFileSync(
-        npmPackageURL,
-        npmPackageText
-    );
+    writeFileSync(npmPackageURL, npmPackageText);
 }
 
 //Call the script.

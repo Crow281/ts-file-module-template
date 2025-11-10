@@ -21,8 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+import { toCommentBlock } from "./ToComment";
+import { promises as filePromises } from "node:fs";
 
 /**
- * A variable containing the name of the NPM library's package.
+ * File path to load the license string from.
+ * Since script is run from the project root,
+ * that is where the file path should be relative to.
  */
-export const PACKAGE_NAME: string = "@crow281/ts-file-module-template";
+const licenseTextFilePath: string = "./LICENSE";
+
+/**
+ *
+ * @returns
+ * The license text inside a comment format.
+ */
+export async function getLicenseComment(): Promise<string> {
+    //Read the license file.
+    const promise = filePromises.readFile(licenseTextFilePath, {
+        encoding: "utf-8",
+    });
+
+    //Wait for it to finish loading.
+    const licenseText: string = await promise;
+
+    //Convert the license to a comment.
+    return toCommentBlock(licenseText);
+}

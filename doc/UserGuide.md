@@ -139,9 +139,18 @@ The properties you will want to consider changing include the following:
             files
         </td>
         <td>
-            List of files that should be uploaded if you are publishing your
-            NPM package.
-            The initial value will probably be enough under most circumstances.
+            <p>
+                List of files that should be uploaded if you are publishing your
+                NPM package.
+                The initial value will probably be enough under most circumstances.
+            </p>
+            <p>
+                The initial value submits the actual built modules,
+                the source code behind them, the license, and the Read Me.
+                It is set to NOT submit the tsbuildinfo files, which are
+                only needed by the TypeScript compiler to
+                keep track of what has been built.
+            </p>
         </td>
     </tr>
     <tr>
@@ -181,6 +190,23 @@ The properties you will want to consider changing include the following:
             </table>
         </td>
     </tr>
+    <tr>
+        <td>
+            dependencies
+        </td>
+        <td>
+            <p>
+                List of NPM packages the build is dependant on.
+            </p>
+            <p>
+                If you are not using
+                [JSON Schema](https://json-schema.org/)
+                files, then you may as well
+                delete "ajv-formats" from it since that is
+                what the library is used to handle.
+            </p>
+        </td>
+    </tr>
 </table>
 
 ## Modules
@@ -188,6 +214,7 @@ The properties you will want to consider changing include the following:
 Every file except "index.ts" represents a file module.
 
 ### Folder Modules
+
 "index.ts" represents the overall folder. If you want to document a folder,
 you can add a @packageDocumentation tag, like below:
 ```TypeScript
@@ -201,8 +228,8 @@ you can add a @packageDocumentation tag, like below:
  */
 ```
 
-While the option is technically open, I advise that you NOT use the "index.ts"
-files as barrel files.
+While the option is technically open, using the "index.ts"
+files as barrel files is generally recommended against.
 
 ### Internal Modules
 
@@ -217,6 +244,33 @@ to the exports field and setting them to null.
 ```console
 npm run update-exports
 ```
+
+## JSON Schema
+
+[JSON Schema](https://json-schema.org/)
+is a file format used to define
+the correct structure for a type of JSON document.
+This project contains several scripts for dynamically generating code for
+JSON Schema files.
+
+For example, if you have a file,
+{project}/src/some/module/SomeSchema.schema.json,
+you can use the following command to generate
+a TypeScript interface representing the data
+the schema represents,
+a validation function verifying that a given
+JSON object matches the schema,
+and an object mapping all JSON Schema ids
+to the corresponding JSON Schema:
+
+```console
+npm run generate
+```
+
+This will result in the creation of the following files:
+- {project}/src/some/module/SomeSchema.ts
+- {project}/src/some/module/ValidateSomeSchema.ts
+- {project}/src/internal/IDToJSONSchema.ts
 
 ## Linting
 

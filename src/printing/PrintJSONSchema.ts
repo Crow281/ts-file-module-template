@@ -21,8 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+import CIRCLE_SCHEMA from "math/geometry/Circle.schema.json";
 
 /**
- * A variable containing the name of the NPM library's package.
+ * Prints the contents of file "generated/src/math/geometry/CircleSchema.json"
+ * as a JSON object to the console.
  */
-export const PACKAGE_NAME: string = "@crow281/ts-file-module-template";
+export function printJSON() {
+    //Print the file.
+    console.log(CIRCLE_SCHEMA);
+}

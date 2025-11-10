@@ -1,13 +1,17 @@
-# Configuration
+# Structure
 
 This document explains how the template is setup and the rationale behind it.
+
+Project
+[NPM Dependencies](https://github.com/Crow281/ts-file-module-template/tree/main/doc/Dependencies.md)
+are on their own page.
 
 ## Rollup
 
 This template uses Rollup as the overall bundler.
 
 The Rollup config file is located at
-["{project}/config/rollup.config.mjs"](https://github.com/Crow281/ts-file-module-template/tree/main/config/rollup.config.mjs).
+["{project}/config/build/rollup.config.mjs"](https://github.com/Crow281/ts-file-module-template/tree/main/config/build/rollup.config.mjs).
 
 The config file will get a list of every source file under
 ["{project}/src"](https://github.com/Crow281/ts-file-module-template/tree/main/src)
@@ -35,32 +39,35 @@ converting TypeScript source files into JavaScript module files and
 helping to ensure backwards compatibility.
 
 The Babel config file is located at
-["{project}/config/babel.config.json"](https://github.com/Crow281/ts-file-module-template/tree/main/config/babel.config.json).
+["{project}/config/build/babel.config.json"](https://github.com/Crow281/ts-file-module-template/tree/main/config/build/babel.config.json).
 
 It includes presets to let it handle React and TypeScript.
 
 ## TypeScript
 
 While Babel is used to handle the actual task of transpiling TypeScript
-code to JavaScript, TypeScript itself is still used to create the
-definition files.
+code to JavaScript, the original TypeScript compiler is still used to
+create the definition files.
 
 ### Config
 
-The main TypeScript configuration file is in
+One TypeScript configuration file, intended for your editor's use, is in
 ["{project}/tsconfig.json"](https://github.com/Crow281/ts-file-module-template/tree/main/tsconfig.json).
 
-In order to leave "__test__" folders out of the final build but
-ensure your editor recognizes them as typescript files,
-there is a second config file extending it inside of
-["{project}/config/tsconfig.production.json"](https://github.com/Crow281/ts-file-module-template/tree/main/config/tsconfig.production.json)
-used for the actual build.
+A second TypeScript configuration file, intended for the actual build, is in
+["{project}/config/tsconfig.production.json"](https://github.com/Crow281/ts-file-module-template/tree/main/config/tsconfig.production.json).
+
+The only difference between the two is that "tsconfig.production.json"
+excludes all "__test__" folders.
+The reason this is necessary is so
+that your editor will recognize the __test__ scripts as TypeScript
+files while excluding them from the actual build.
 
 ### Custom File Extensions
 
 In the event that you need to support importing custom file extensions,
 you can leave the type definition files for them inside of the
-["{project}/config/types"](https://github.com/Crow281/ts-file-module-template/tree/main/config/types)
+["{project}/config/build/types"](https://github.com/Crow281/ts-file-module-template/tree/main/build/config/types)
 folder.
 
 This folder already has definition files for
@@ -73,12 +80,34 @@ as the arrays that the
 converts them into via the library,
 ["d3-dsv"](https://www.npmjs.com/package/d3-dsv).
 
+## Generated
+
+This template has several scripts that can dynamically generate code
+to work with any JSON Schema files you have in the project.
+
+These scripts are located inside of
+["{project}/config/generate"](https://github.com/Crow281/ts-file-module-template/tree/main/config/generate).
+
+### Clean
+
+All generated scripts start with a specific comment located inside of
+["{project}/config/generate/utils/GeneratedHeader.ts"](https://github.com/Crow281/ts-file-module-template/tree/main/config/generate/utils/GeneratedHeader.ts),
+used to identify them. The
+["{project}/config/generate/CleanGeneratedScript.ts"](https://github.com/Crow281/ts-file-module-template/tree/main/config/generate/CleanGeneratedScript.ts)
+scans for all files under {project}/src starting with that comment
+and delete them when you want to clean all the old generated scripts.
+
+I originally attempted to place the generated scripts into their own
+source folder, but that messed up their relationship compared to the
+rest of the library as there is no easy way to make TypeScript and
+its related tools to treat two separate source folders as the same.
+
 ## ESLint
 
 This template uses ESLint to check for any coding problems.
 
 The ESLint config file is located in
-["{project}/config/eslint.config.mjs"](https://github.com/Crow281/ts-file-module-template/tree/main/config/eslint.config.mjs).
+["{project}/config/lint/eslint.config.mjs"](https://github.com/Crow281/ts-file-module-template/tree/main/config/lint/eslint.config.mjs).
 
 It is setup to handle JavaScript, TypeScript, React, and browser globals.
 
@@ -134,10 +163,12 @@ This template is using the following list of ESLint plugins:
 
 ## Prettier
 
-This template uses Prettier to keep the formatting consistent.
+This template uses
+[Prettier](https://www.npmjs.com/package/prettier)
+to keep the formatting consistent.
 
 The Prettier config file is located in
-["config/.prettierrc.json"](https://github.com/Crow281/ts-file-module-template/tree/main/config/.prettierrc.json).
+["{project}/config/format/.prettierrc.json"](https://github.com/Crow281/ts-file-module-template/tree/main/config/format/.prettierrc.json).
 
 This template is using the following list of Prettier plugins:
 
@@ -162,11 +193,13 @@ This template is using the following list of Prettier plugins:
 
 ## Typedoc
 
-This template uses Typedoc to generate documentation for the source files.
+This template uses
+[TypeDoc](https://www.npmjs.com/package/typedoc)
+to generate documentation for the source files.
 
 It uses two custom plugins.
 
-### config/TypeDocRootModule.js
+### config/doc/plugin/RootModule.js
 
 This moves all the modules to under a "root" folder, "./" and converts any
 "index.ts" at the root into the root module.
@@ -198,7 +231,7 @@ As opposed to:
 - PackageName
 ```
 
-### config/TypeDocTagInternal.js
+### config/doc/plugin/TagInternal.js
 
 This marks everything under an "internal" folder as @internal,
 telling users using the documentation that they are not for public use.
@@ -296,3 +329,18 @@ npm run reset-exports
 
 It runs a project script to read in package.json and reset the exports
 field to the original value of the template.
+
+## Jest
+
+This project uses
+[Jest](https://www.npmjs.com/package/jest)
+for testing.
+
+The Jest config file is located at
+["{project}/config/build/jest.config.js"](https://github.com/Crow281/ts-file-module-template/tree/main/config/jest.config.js).
+The reason it isn't in its own "{project}/config/test" folder is due to the
+fact that it needs to be able to find the babel config file,
+so they were added to the same folder.
+
+All test scripts are placed in files with the following format:
+"src/../{FolderWithTestedModule}/__test__/{TestedModule}/{TestName}.test.ts"
