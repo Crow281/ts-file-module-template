@@ -11,10 +11,10 @@ are on their own page.
 This template uses Rollup as the overall bundler.
 
 The Rollup config file is located at
-["{project}/config/build/rollup.config.mjs"](https://github.com/Crow281/ts-file-module-template/tree/main/config/build/rollup.config.mjs).
+["{project}/config/build/rollup.config.mjs"](https://github.com/Crow281/ts-file-module-template/blob/main/config/build/rollup.config.mjs).
 
 The config file will get a list of every source file under
-["{project}/src"](https://github.com/Crow281/ts-file-module-template/tree/main/src)
+["{project}/src"](https://github.com/Crow281/ts-file-module-template/tree/main/src/)
 and convert it into an object mapping entry points to their sources:
 ```TypeScript
 const inputs = {
@@ -27,7 +27,7 @@ const inputs = {
 Using Babel, it will build them into CommonJS and ES modules.
 
 These modules will be written to the
-["{project}/dist"](https://github.com/Crow281/ts-file-module-template/tree/main/dist)
+["{project}/dist"](https://github.com/Crow281/ts-file-module-template/tree/main/dist/)
 folder, using the same subfolders as their sources.
 For example, the builds for all scripts under folder "src/some-module"
 will be placed in "dist/some-module".
@@ -39,7 +39,7 @@ converting TypeScript source files into JavaScript module files and
 helping to ensure backwards compatibility.
 
 The Babel config file is located at
-["{project}/config/build/babel.config.json"](https://github.com/Crow281/ts-file-module-template/tree/main/config/build/babel.config.json).
+["{project}/config/build/babel.config.json"](https://github.com/Crow281/ts-file-module-template/blob/main/config/build/babel.config.json).
 
 It includes presets to let it handle React and TypeScript.
 
@@ -52,10 +52,10 @@ create the definition files.
 ### Config
 
 One TypeScript configuration file, intended for your editor's use, is in
-["{project}/tsconfig.json"](https://github.com/Crow281/ts-file-module-template/tree/main/tsconfig.json).
+["{project}/tsconfig.json"](https://github.com/Crow281/ts-file-module-template/blob/main/tsconfig.json).
 
 A second TypeScript configuration file, intended for the actual build, is in
-["{project}/config/tsconfig.production.json"](https://github.com/Crow281/ts-file-module-template/tree/main/config/tsconfig.production.json).
+["{project}/tsconfig.production.json"](https://github.com/Crow281/ts-file-module-template/blob/main/tsconfig.production.json).
 
 The only difference between the two is that "tsconfig.production.json"
 excludes all "__test__" folders.
@@ -67,7 +67,7 @@ files while excluding them from the actual build.
 
 In the event that you need to support importing custom file extensions,
 you can leave the type definition files for them inside of the
-["{project}/config/build/types"](https://github.com/Crow281/ts-file-module-template/tree/main/build/config/types)
+["{project}/config/build/types"](https://github.com/Crow281/ts-file-module-template/tree/main/build/config/types/)
 folder.
 
 This folder already has definition files for
@@ -86,14 +86,14 @@ This template has several scripts that can dynamically generate code
 to work with any JSON Schema files you have in the project.
 
 These scripts are located inside of
-["{project}/config/generate"](https://github.com/Crow281/ts-file-module-template/tree/main/config/generate).
+["{project}/config/generate"](https://github.com/Crow281/ts-file-module-template/tree/main/config/generate/).
 
 ### Clean
 
 All generated scripts start with a specific comment located inside of
-["{project}/config/generate/utils/GeneratedHeader.ts"](https://github.com/Crow281/ts-file-module-template/tree/main/config/generate/utils/GeneratedHeader.ts),
+["{project}/config/generate/utils/GeneratedHeader.ts"](https://github.com/Crow281/ts-file-module-template/blob/main/config/generate/utils/GeneratedHeader.ts),
 used to identify them. The
-["{project}/config/generate/CleanGeneratedScript.ts"](https://github.com/Crow281/ts-file-module-template/tree/main/config/generate/CleanGeneratedScript.ts)
+["{project}/config/generate/CleanGeneratedScript.ts"](https://github.com/Crow281/ts-file-module-template/blob/main/config/generate/CleanGeneratedScript.ts)
 scans for all files under {project}/src starting with that comment
 and delete them when you want to clean all the old generated scripts.
 
@@ -107,7 +107,7 @@ its related tools to treat two separate source folders as the same.
 This template uses ESLint to check for any coding problems.
 
 The ESLint config file is located in
-["{project}/config/lint/eslint.config.mjs"](https://github.com/Crow281/ts-file-module-template/tree/main/config/lint/eslint.config.mjs).
+["{project}/config/lint/eslint.config.mjs"](https://github.com/Crow281/ts-file-module-template/blob/main/config/lint/eslint.config.mjs).
 
 It is setup to handle JavaScript, TypeScript, React, and browser globals.
 
@@ -337,7 +337,7 @@ This project uses
 for testing.
 
 The Jest config file is located at
-["{project}/config/build/jest.config.js"](https://github.com/Crow281/ts-file-module-template/tree/main/config/jest.config.js).
+["{project}/config/build/jest.config.js"](https://github.com/Crow281/ts-file-module-template/blob/main/config/jest.config.js).
 The reason it isn't in its own "{project}/config/test" folder is due to the
 fact that it needs to be able to find the babel config file,
 so they were added to the same folder.

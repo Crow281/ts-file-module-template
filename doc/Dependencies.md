@@ -21,7 +21,9 @@ Libraries this project is dependant on for building.
         </td>
         <td>
             Is used by script
-            ["config/generate/json-schema/GenerateSchemaInterfaces.ts"](https://github.com/Crow281/ts-file-module-template/tree/main/config/generate/json-schema/GenerateSchemaInterfaces.ts)
+            <a href="https://github.com/Crow281/ts-file-module-template/blob/main/config/generate/json-schema/GenerateSchemaInterfaces.ts">
+                "{project}/config/generate/json-schema/GenerateSchemaInterfaces.ts"
+            </a>
             to fetch external schema files while creating the interfaces.
         </td>
     </tr>
@@ -219,7 +221,9 @@ Libraries this project is dependant on for building.
         </td>
         <td>
             Enables script
-            ["config/generate/json-schema/GenerateSchemaInterfaces.ts"](https://github.com/Crow281/ts-file-module-template/tree/main/config/generate/json-schema/GenerateSchemaInterfaces.ts)
+            <a href="https://github.com/Crow281/ts-file-module-template/blob/main/config/generate/json-schema/GenerateSchemaInterfaces.ts">
+                "{project}/config/generate/json-schema/GenerateSchemaInterfaces.ts"
+            </a>
             to convert JSON schema into equivalent TypeScript interfaces.
         </td>
     </tr>

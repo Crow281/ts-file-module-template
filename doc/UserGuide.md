@@ -200,7 +200,9 @@ The properties you will want to consider changing include the following:
             </p>
             <p>
                 If you are not using
-                [JSON Schema](https://json-schema.org/)
+                <a href="https://json-schema.org/">
+                    JSON Schema
+                </a>
                 files, then you may as well
                 delete "ajv-formats" from it since that is
                 what the library is used to handle.
@@ -325,7 +327,7 @@ adding ".test.ts" files to it, and writing your
 tests inside of them.
 
 An example is located
-[here](https://crow281.github.io/ts-file-module-template/src/math/algorithms/__tests__),
+[here](https://github.com/Crow281/ts-file-module-template/tree/main/src/math/linear-algebra/algorithms/__tests__/),
 which contains tests to make sure the code inside of
 "math/algorithms" is behaving as expected.
 
@@ -353,7 +355,7 @@ for the sample code via GitHub Pages.
 It is located
 [here](https://crow281.github.io/ts-file-module-template/doc/api/latest).
 Github hosts the files located
-[here](https://github.com/Crow281/ts-file-module-template/tree/gh-pages).
+[here](https://github.com/Crow281/ts-file-module-template/tree/gh-pages/).
 
 If you want to do the same:
 - Create your own new branch called "gh-pages".

@@ -98,7 +98,7 @@ The API documentation is available [here](https://crow281.github.io/ts-file-modu
 
 Whether due to curiosity, needing to fix a bug, or needing to modify it,
 you can read the details behind how this template works over
-[here](https://github.com/Crow281/ts-file-module-template/tree/main/doc/Structure.md).
+[here](https://github.com/Crow281/ts-file-module-template/blob/main/doc/Structure.md).
 
 ## Commands
 
