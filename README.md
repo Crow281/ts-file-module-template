@@ -88,7 +88,7 @@ You can access the github project [here](https://github.com/Crow281/ts-file-modu
 
 You can read instructions to use this template for your very own NPM project
 right
-[here](https://github.com/Crow281/ts-file-module-template/tree/main/doc/UserGuide.md).
+[here](https://github.com/Crow281/ts-file-module-template/blob/main/doc/UserGuide.md).
 
 ## Documentation
 

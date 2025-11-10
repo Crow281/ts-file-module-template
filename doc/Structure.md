@@ -27,7 +27,7 @@ const inputs = {
 Using Babel, it will build them into CommonJS and ES modules.
 
 These modules will be written to the
-["{project}/dist"](https://github.com/Crow281/ts-file-module-template/tree/main/dist/)
+"{project}/dist"
 folder, using the same subfolders as their sources.
 For example, the builds for all scripts under folder "src/some-module"
 will be placed in "dist/some-module".
@@ -67,7 +67,7 @@ files while excluding them from the actual build.
 
 In the event that you need to support importing custom file extensions,
 you can leave the type definition files for them inside of the
-["{project}/config/build/types"](https://github.com/Crow281/ts-file-module-template/tree/main/build/config/types/)
+["{project}/config/build/types"](https://github.com/Crow281/ts-file-module-template/tree/main/config/build/types/)
 folder.
 
 This folder already has definition files for

@@ -329,7 +329,7 @@ tests inside of them.
 An example is located
 [here](https://github.com/Crow281/ts-file-module-template/tree/main/src/math/linear-algebra/algorithms/__tests__/),
 which contains tests to make sure the code inside of
-"math/algorithms" is behaving as expected.
+"src/math/linear-algebra/algorithms" is behaving as expected.
 
 When you want run your tests to ensure your source changes haven't broken
 anything, you can use the following console command:
