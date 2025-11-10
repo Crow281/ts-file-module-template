@@ -37,8 +37,6 @@ const config = {
         //This custom plugin marks all modules under
         //an "internal" folder with the @internal tag.
         "./plugin/TagInternal.js",
-        //This custom plugin will move all the modules to under a root folder.
-        "./plugin/RootModule.js",
     ],
     //Tells TypeDoc how to handle 3rd party library types.
     externalSymbolLinkMappings: {},

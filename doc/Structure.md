@@ -197,41 +197,9 @@ This template uses
 [TypeDoc](https://www.npmjs.com/package/typedoc)
 to generate documentation for the source files.
 
-It uses two custom plugins.
-
-### config/doc/plugin/RootModule.js
-
-This moves all the modules to under a "root" folder, "./" and converts any
-"index.ts" at the root into the root module.
-
-So if for example your file structure looked like:
-
-```
-- {project}
--- src
---- math
---- printing
---- index.ts
---- PackageName.ts
-```
-
-Typedoc would present:
-```
-- .
--- math
--- printing
--- PackageName
-```
-
-As opposed to:
-```
-- index
-- math
-- printing
-- PackageName
-```
-
 ### config/doc/plugin/TagInternal.js
+
+This is one of the custom TypeDoc plugins used by the project.
 
 This marks everything under an "internal" folder as @internal,
 telling users using the documentation that they are not for public use.
