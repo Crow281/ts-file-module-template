@@ -93,7 +93,7 @@ These scripts are located inside of
 All generated scripts start with a specific comment located inside of
 ["{project}/config/generate/utils/GeneratedHeader.ts"](https://github.com/Crow281/ts-file-module-template/blob/main/config/generate/utils/GeneratedHeader.ts),
 used to identify them. The
-["{project}/config/generate/CleanGeneratedScript.ts"](https://github.com/Crow281/ts-file-module-template/blob/main/config/generate/CleanGeneratedScripts.ts)
+["{project}/config/generate/CleanGeneratedScripts.ts"](https://github.com/Crow281/ts-file-module-template/blob/main/config/generate/CleanGeneratedScripts.ts)
 scans for all files under {project}/src starting with that comment
 and delete them when you want to clean all the old generated scripts.
 
