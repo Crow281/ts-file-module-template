@@ -93,7 +93,7 @@ These scripts are located inside of
 All generated scripts start with a specific comment located inside of
 ["{project}/config/generate/utils/GeneratedHeader.ts"](https://github.com/Crow281/ts-file-module-template/blob/main/config/generate/utils/GeneratedHeader.ts),
 used to identify them. The
-["{project}/config/generate/CleanGeneratedScript.ts"](https://github.com/Crow281/ts-file-module-template/blob/main/config/generate/CleanGeneratedScript.ts)
+["{project}/config/generate/CleanGeneratedScript.ts"](https://github.com/Crow281/ts-file-module-template/blob/main/config/generate/CleanGeneratedScripts.ts)
 scans for all files under {project}/src starting with that comment
 and delete them when you want to clean all the old generated scripts.
 
@@ -337,7 +337,7 @@ This project uses
 for testing.
 
 The Jest config file is located at
-["{project}/config/build/jest.config.js"](https://github.com/Crow281/ts-file-module-template/blob/main/config/jest.config.js).
+["{project}/config/build/jest.config.js"](https://github.com/Crow281/ts-file-module-template/blob/main/config/build/jest.config.js).
 The reason it isn't in its own "{project}/config/test" folder is due to the
 fact that it needs to be able to find the babel config file,
 so they were added to the same folder.
