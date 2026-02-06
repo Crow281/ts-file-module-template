@@ -239,9 +239,6 @@ The build is exported via package.json's exports field.
 
 ### Exports Object
 
-The first two properties in the exports object are always added
-by the update-exports script by default.
-
 The first property, "./package.json", makes it possible for users to
 import package.json if they want to:
 ```TypeScript
@@ -250,13 +247,13 @@ import package from "@my_scope/package_name/package.json"
 
 The second property, "./*", makes it possible to import any file module
 built to the "dist" folder.
-For example, if you wanted to import module "math/Matrix4",
+For example, if you wanted to import module "math/Matrix4" in ESM,
 you could do so via:
 ```TypeScript
 import { Matrix4 } from "@my_scope/package_name/math/Matrix4"
 ```
 
-This will result in it importing Matrix4 from module "./dist/math/Matrix4.mjs".
+This will result in it importing Matrix4 from module "./dist/mjs/math/Matrix4.mjs".
 
 ### Modules Objects
 

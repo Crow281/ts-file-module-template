@@ -209,6 +209,17 @@ folder, use the following command:
 npm run build:types
 ```
 
+#### Build - Copy Types
+
+If you want to copy all the custom written definitions
+already stored to the source folder over to
+"{project}/dist"
+folder, use the following command:
+
+```console
+npm run build:copy-types
+```
+
 ### Test
 
 The following command allows you to use
