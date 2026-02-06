@@ -34,6 +34,14 @@ this project's node_modules:
 npm install
 ```
 
+### CHANGELOG.md
+
+Whenever you publish a new version of your package, you will want to update
+[{project}/CHANGELOG.md](https://crow281.github.io/ts-file-module-template/CHANGELOG.md).
+
+One recommended guide is
+[here](https://keepachangelog.com/).
+
 ## Package.json
 
 Now you will want to go open your repository's copy of
