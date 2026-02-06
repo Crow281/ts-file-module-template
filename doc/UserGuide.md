@@ -192,11 +192,11 @@ The properties you will want to consider changing include the following:
     </tr>
     <tr>
         <td>
-            dependencies
+            devDependencies
         </td>
         <td>
             <p>
-                List of NPM packages the build is dependant on.
+                List of NPM packages needed to develop this package.
             </p>
             <p>
                 If you are not using
@@ -204,8 +204,32 @@ The properties you will want to consider changing include the following:
                     JSON Schema
                 </a>
                 files, then you may as well
-                delete "ajv-formats" from it since that is
-                what the library is used to handle.
+                delete "ajv" and "ajv-formats" from it since that is
+                what the libraries in question are used to handle.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            dependencies
+        </td>
+        <td>
+            <p>
+                List of NPM packages the build is dependant on.
+            </p>
+            <p>
+                By default, this project only has 1 dependency, "@babel/runtime".
+                Babel defines several helper functions to increase the code's
+                compatibility across platforms.
+                This project is set to import these helpers from this dependency.
+                That way, if a project has multiple dependencies that are also
+                reliant on the babel runtime, they can simply import the same helper code
+                instead of each of them defining it internally.
+            </p>
+            <p>
+                If you plan to use JSON Schema Formats, you should
+                also move package "ajv-formats" from devDependencies
+                to dependencies.
             </p>
         </td>
     </tr>
@@ -213,25 +237,7 @@ The properties you will want to consider changing include the following:
 
 ## Modules
 
-Every file except "index.ts" represents a file module.
-
-### Folder Modules
-
-"index.ts" represents the overall folder. If you want to document a folder,
-you can add a @packageDocumentation tag, like below:
-```TypeScript
-/// index.ts
-/**
- * This comment describes this folder module.
- * 
- * The below tag, "packageDocumentation", marks this comment as
- * being part of the module.
- * @packageDocumentation
- */
-```
-
-While the option is technically open, using the "index.ts"
-files as barrel files is generally recommended against.
+Every file represents a file module.
 
 ### Internal Modules
 
@@ -239,13 +245,10 @@ If you want a folder full of code that should NOT be directly accessible
 to the public, intended only for use by the library itself,
 you can name it "internal".
 
-You can then call the following script to update package.json's exports field
-to disable access to any folder marked "internal" and any of its subfolders.
-This script will disable access by adding the path to these folders
-to the exports field and setting them to null.
-```console
-npm run update-exports
-```
+The Rollup build script will not include any entries for scripts
+inside of internal folders. However, if non-internal scripts
+reference them, then it will build them to JS files which
+the non-internal scripts can then import.
 
 ## JSON Schema
 
@@ -273,6 +276,38 @@ This will result in the creation of the following files:
 - {project}/src/some/module/SomeSchema.ts
 - {project}/src/some/module/ValidateSomeSchema.ts
 - {project}/src/internal/IDToJSONSchema.ts
+
+When running generate, you might notice the following error message:
+
+```console
+The following generated JSON Schema validators are dependant on NPM package "ajv-formats":
+```
+
+This happens when your JSON Schema code wants to validate a format,
+but you do not have the "ajv-formats" package needed to do so
+set as a project dependency.
+You are advised to follow the warning's instructions to install
+or move it.
+
+## Knip
+
+To find any unused dependencies,
+use the following console command:
+
+```console
+npm run knip
+```
+
+The knip config file is located at: 
+[{project}/config/knip/knip.config.ts](https://github.com/Crow281/ts-file-module-template/tree/main/config/knip/knip.config.ts)
+
+If you have a package that is being used in a way that knip cannot
+detect, then you can add its name to config property
+ignoreDependencies.
+
+If one of your files is conducting a valid import in a way that
+knip does not recognize, then you can add it to config property
+ignoreUnresolved.
 
 ## Linting
 

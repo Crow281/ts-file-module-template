@@ -29,14 +29,11 @@ import Data from "./CSVData.csv";
  */
 export function printCSV() {
     //Print the contents of the file.
-    //Cast data to its specific CSV type.
-    const castedData = Data as CSV<"mathConstant" | "value">;
-
     //Tell user what we are about to do.
     console.log("Printing list of math constants");
 
     //Iterate all the data.
-    for (const data of castedData) {
+    for (const data of Data) {
         //Associate the label property of each element with its value property.
         console.log(`${data.mathConstant} = ${data.value}`);
     }

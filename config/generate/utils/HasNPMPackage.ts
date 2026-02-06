@@ -25,13 +25,32 @@
  * Contains functions for checking if given
  * NPM packages exist.
  */
-import { readJSONFile } from "./json/ReadJSONFile";
+import { readFile } from "node:fs/promises";
+
+/**
+ * Loads given UTF-8 text file into a json object.
+ * @param filePath
+ * Path to the json file.
+ * @returns
+ * Json object loaded from the file.
+ */
+export async function readJSONFile(
+    filePath: string,
+): Promise<Record<string, unknown>> {
+    //Load JSON schema file.
+    const jsonSchemaText: string = await readFile(filePath, "utf8");
+
+    //Convert text to a json object.
+    const jsonObject: Record<string, unknown> = JSON.parse(jsonSchemaText);
+
+    return jsonObject;
+}
 
 /**
  * @returns
  * NPM package.json file as a JSON object.
  */
-function loadProjectPackage(): Promise<object> {
+function loadProjectPackage(): Promise<Record<string, unknown>> {
     //Read JSON file at package.json.
     return readJSONFile("./package.json");
 }
@@ -48,23 +67,25 @@ function loadProjectPackage(): Promise<object> {
  * true if package exists as dependencyType.
  */
 export function objectHasNPMPackage(
-    jsonObject: object,
+    jsonObject: Record<string, unknown>,
     dependencyType: "devDependencies" | "peerDependencies" | "dependencies",
     packageName: string,
 ): boolean {
     //Fetch object containing desired dependencies.
     const dependencies = jsonObject[dependencyType];
 
-    //If we do not have the given dependency type in the first place, fail.
+    //If dependencies is not an object, fail.
     if (typeof dependencies !== "object") {
         return false;
     }
 
-    //Fetch dependency.
-    const dependency = dependencies[packageName];
+    //If dependencies is null or undefined, fail.
+    if (!dependencies) {
+        return false;
+    }
 
-    //Return true if dependency exists.
-    if (dependency) {
+    //If this object has a property of packageName, it has the package.
+    if (Object.hasOwn(dependencies, packageName)) {
         return true;
     }
 
@@ -85,7 +106,7 @@ export async function hasNPMPackage(
     packageName: string,
 ): Promise<boolean> {
     //Fetch project package.
-    const projectPackage: object = await loadProjectPackage();
+    const projectPackage: Record<string, unknown> = await loadProjectPackage();
 
     return objectHasNPMPackage(projectPackage, dependencyType, packageName);
 }
@@ -102,7 +123,7 @@ export async function getNPMPackageDependencyType(
     packageName: string,
 ): Promise<"devDependencies" | "peerDependencies" | "dependencies" | "none"> {
     //Fetch project package.
-    const projectPackage: object = await loadProjectPackage();
+    const projectPackage: Record<string, unknown> = await loadProjectPackage();
 
     //Check each dependency type.
     //Return said dependency type if it matches.

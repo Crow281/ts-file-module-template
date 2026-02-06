@@ -1,12 +1,12 @@
 //This file is used to tell the editor how the source should be handled.
 {
     //Extended build file. Records the desired compiler options.
-    "extends": "./config/build/tsconfig.base.json",
+    "extends": "./config/ts/tsconfig.base.json",
 
     //List of folders to be built.
     "include": [
         //Include type definitions for custom file formats.
-        "./config/build/types/**/*",
+        "config/ts/types/**/*",
 
         //Build the source folder.
         "./src/**/*"
@@ -15,7 +15,7 @@
     //List of folders to NOT be built.
     "exclude": [
         //Do not include NPM modules in the build.
-        "**/node_modules/**",
+        "**/node_modules/**"
     ],
 
     //How to compile.
@@ -28,6 +28,6 @@
         "rootDir": "./src",
 
         //Indicate where to output the TypeScript definitions.
-        "declarationDir": "./dist",
+        "declarationDir": "./dist/types",
     }
 }

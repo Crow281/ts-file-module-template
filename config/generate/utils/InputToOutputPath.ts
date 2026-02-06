@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { basename, dirname, extname, join, relative } from "node:path";
+import { basename, dirname, join, relative } from "node:path";
 
 /**
  *

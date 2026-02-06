@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+import { expect, test } from "@jest/globals";
 import { Circle } from "math/geometry/Circle";
 import { validateCircle } from "math/geometry/ValidateCircle";
 

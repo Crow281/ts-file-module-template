@@ -14,28 +14,28 @@
         "url": "https://github.com/Crow281/ts-file-module-template"
     },
     "scripts": {
-        "generate:json-schema:id-mapping": "tsx ./config/generate/json-schema/GenerateIDMapping.ts",
-        "generate:json-schema:interfaces": "tsx ./config/generate/json-schema/GenerateSchemaInterfaces.ts",
-        "generate:json-schema:validators": "tsx ./config/generate/json-schema/GenerateSchemaValidators.ts",
+        "generate:json-schema:id-mapping": "tsx ./config/generate/json-schema/bin/GenerateIDMapping.ts",
+        "generate:json-schema:interfaces": "tsx ./config/generate/json-schema/bin/GenerateSchemaInterfaces.ts",
+        "generate:json-schema:validators": "tsx ./config/generate/json-schema/bin/GenerateValidators.ts",
         "generate:json-schema": "npm run generate:json-schema:id-mapping && npm run generate:json-schema:interfaces && npm run generate:json-schema:validators",
         "generate": "npm run clean:generated && npm run generate:json-schema",
-        "lint": "eslint --config ./config/lint/eslint.config.mjs src/",
-        "format": "prettier --config ./config/format/.prettierrc.json src/ --write",
+        "knip": "knip --config config/knip/knip.config.ts",
+        "lint": "eslint --config ./config/eslint/eslint.config.mjs src/ config/",
+        "format": "prettier --config ./config/prettier/prettierrc.config.js src/ config/ --write",
         "clean:coverage": "rimraf coverage",
-        "clean:generated": "tsx ./config/generate/CleanGeneratedScripts.ts",
+        "clean:generated": "tsx ./config/generate/bin/CleanGeneratedScripts.ts",
         "clean:dist": "rimraf dist",
         "clean": "npm run clean:coverage && npm run clean:generated && npm run clean:dist",
-        "reset-exports": "node ./config/ResetExports.js",
-        "update-exports": "node ./config/UpdateExports.js",
-        "build:js": "rollup --config ./config/build/rollup.config.mjs",
+        "build:js": "rollup --config ./config/rollup/rollup.config.mjs",
         "build:types": "tsc --project ./tsconfig.production.json --emitDeclarationOnly",
-        "build": "npm run clean:dist && npm run build:js && npm run build:types",
-        "test": "jest --config config/build/jest.config.js",
-        "doc": "typedoc --options config/doc/typedoc.config.js"
+        "build:copy-types": "copyfiles ./src/**/*.d.ts ./dist/types",
+        "build": "npm run clean:dist && npm run build:js && npm run build:types && npm run build:copy-types",
+        "test": "jest --config config/jest/jest.config.js",
+        "test-all-versions": "tsx ./config/TestAllVersions.ts",
+        "doc": "typedoc --options config/typedoc/typedoc.config.js"
     },
     "files": [
         "dist",
-        "generated",
         "src",
         "LICENSE",
         "README.md",
@@ -46,19 +46,20 @@
     "exports": {
         "./package.json": "./package.json",
         "./*": {
-            "types": "./dist/*.d.ts",
-            "require": "./dist/*.cjs",
-            "import": "./dist/*.mjs"
+            "types": "./dist/types/*.d.ts",
+            "require": "./dist/cjs/*.cjs",
+            "import": "./dist/esm/*.mjs"
         }
     },
     "devDependencies": {
-        "@apidevtools/json-schema-ref-parser": "^14.1.0",
+        "@apidevtools/json-schema-ref-parser": "^15.1.2",
         "@babel/core": "^7.28.0",
         "@babel/plugin-transform-runtime": "^7.28.0",
         "@babel/preset-env": "^7.28.0",
         "@babel/preset-react": "^7.27.1",
         "@babel/preset-typescript": "^7.27.1",
         "@eslint/js": "^9.30.1",
+        "@jest/globals": "^30.2.0",
         "@rollup/plugin-babel": "^6.0.4",
         "@rollup/plugin-commonjs": "^29.0.0",
         "@rollup/plugin-dsv": "^3.0.5",
@@ -69,20 +70,28 @@
         "ajv": "^8.17.1",
         "ajv-formats": "^3.0.1",
         "babel-jest": "^30.0.4",
+        "copyfiles": "^2.4.1",
+        "eslint": "^9.39.1",
         "eslint-config-prettier": "^10.1.5",
         "eslint-plugin-react": "^7.37.5",
-        "glob": "^11.0.3",
-        "globals": "^16.3.0",
+        "glob": "^13.0.0",
+        "globals": "^17.0.0",
         "jest": "^30.0.4",
         "json-schema-to-typescript": "^15.0.4",
+        "knip": "^5.70.2",
         "prettier": "^3.6.2",
         "rimraf": "^6.0.1",
         "rollup": "^4.44.2",
         "rollup-plugin-includepaths": "^0.2.4",
+        "rollup-plugin-node-externals": "^8.1.2",
+        "test-all-versions": "^6.2.0",
+        "tsx": "^4.20.6",
         "typedoc": "^0.28.9",
         "typedoc-plugin-mdn-links": "^5.0.3",
         "typescript": "^5.8.3",
         "typescript-eslint": "^8.36.0"
     },
-    "dependencies": {}
+    "dependencies": {
+        "@babel/runtime": "^7.28.6"
+    }
 }

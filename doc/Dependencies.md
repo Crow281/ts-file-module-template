@@ -40,7 +40,7 @@ Libraries this project is dependant on for building.
             @babel/plugin-transform-runtime
         </td>
         <td>
-            Pollyfills Babel helper code while Babel transpiles.
+            Enables Babel to reuse polyfilled helper code while transpiling by importing from a dependency, @babel/runtime.
         </td>
     </tr>
     <tr>
@@ -73,6 +73,15 @@ Libraries this project is dependant on for building.
         </td>
         <td>
             Enables ESLint to check JavaScript code.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @jest/globals
+        </td>
+        <td>
+            Dependency of Jest, is explicitly imported so that
+            my test scripts can explicitly import jest functions.
         </td>
     </tr>
     <tr>
@@ -173,6 +182,24 @@ Libraries this project is dependant on for building.
     </tr>
     <tr>
         <td>
+            copyfiles
+        </td>
+        <td>
+            Enables project to copy custom generated
+            Type Definition files (.d.ts) in the
+            source directory over to the dist/types folder.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            eslint
+        </td>
+        <td>
+            Tool to check code for formatting problems.
+        </td>
+    </tr>
+    <tr>
+        <td>
             eslint-config-prettier
         </td>
         <td>
@@ -229,10 +256,18 @@ Libraries this project is dependant on for building.
     </tr>
     <tr>
         <td>
+            knip
+        </td>
+        <td>
+            Tool to find unused dependencies.
+        </td>
+    </tr>
+    <tr>
+        <td>
             prettier
         </td>
         <td>
-            Handles fixing code formatting.
+            Tool to fix code formatting.
         </td>
     </tr>
     <tr>
@@ -240,7 +275,7 @@ Libraries this project is dependant on for building.
             rimraf
         </td>
         <td>
-            Handles cleaning files the project no longer needs.
+            Tool to delete files the project no longer needs.
         </td>
     </tr>
     <tr>
@@ -248,7 +283,7 @@ Libraries this project is dependant on for building.
             rollup
         </td>
         <td>
-            Handles the build process.
+            Tool to build the project.
         </td>
     </tr>
     <tr>
@@ -262,10 +297,26 @@ Libraries this project is dependant on for building.
     </tr>
     <tr>
         <td>
+            rollup-plugin-node-externals
+        </td>
+        <td>
+            Tells Rollup which imports reference code outside the project.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            tsx
+        </td>
+        <td>
+            Tool to let NPM project run TypeScript files without compiling them.
+        </td>
+    </tr>
+    <tr>
+        <td>
             typedoc
         </td>
         <td>
-            Scans source files and TSDoc comments and creates
+            Tool to scans source files and TSDoc comments and create
             web pages documenting them.
         </td>
     </tr>
@@ -283,7 +334,7 @@ Libraries this project is dependant on for building.
             typescript
         </td>
         <td>
-            Is used to create TypeScript definition files.
+            Tool to create TypeScript definition files.
         </td>
     </tr>
     <tr>
@@ -308,5 +359,17 @@ Libraries the project's build is dependant on.
         <th>
             Use
         </th>
+    </tr>
+    <tr>
+        <td>
+            @babel/runtime
+        </td>
+        <td>
+            Babel defines helpers to increase compatibility across platforms.
+            They can either be defined inside the library itself
+            or they can be imported from the @babel/runtime library.
+            Picking the latter allows multiple dependencies also relying on babel
+            to share the same code.
+        </td>
     </tr>
 </table>

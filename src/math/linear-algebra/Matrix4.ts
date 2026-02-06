@@ -21,11 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+import { ArrayN } from "math/linear-algebra/ArrayN";
 
 /**
  * Represents a 4 by 4 matrix for linear algebra calculations.
  */
-export class Matrix4 {
+export class Matrix4 implements ArrayN<number> {
     /**
      *
      * @returns
@@ -44,7 +45,7 @@ export class Matrix4 {
      *
      * @param iterable
      * An iterable containing numbers to build a matrix from.
-     * @throws {@link RangeError}
+     * @throws {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError RangeError}
      * If iterable does not have at least 16 elements.
      * @returns
      * A matrix built from the numbers inside of iterable.
@@ -122,5 +123,69 @@ export class Matrix4 {
      */
     public get rows(): number {
         return 4;
+    }
+
+    public getValue(position: number[]): number {
+        //Get the spot where this value is stored.
+        const index: number = this.calculateIndex(position);
+
+        return this._array[index];
+    }
+
+    /**
+     * Calculates the index in the array of the given position array.
+     * @param position
+     * Position we want to retrieve value from.
+     *
+     * If position array has fewer dimensions than this array,
+     * they will be treated as 0.
+     * @returns
+     * Index in the backing array where value for position is stored.
+     */
+    private calculateIndex(position: number[]): number {
+        //Coordinates to get value of.
+        let x: number;
+        let y: number;
+
+        //Depending on length of position.
+        switch (position.length) {
+            case 0:
+                x = 0;
+                y = 0;
+                break;
+
+            case 1:
+                x = position[0];
+                y = 0;
+                break;
+
+            default:
+                x = position[0];
+                y = position[1];
+                break;
+        }
+
+        return y * 4 + x;
+    }
+
+    public setValue(position: number[], value: number): void {
+        //Get the spot where this value is stored.
+        const index: number = this.calculateIndex(position);
+
+        this._array[index] = value;
+    }
+
+    public getSize(dimension: number): number {
+        //We are using 2 dimensions.
+        if (dimension === 0 || dimension === 1) {
+            //Both dimensions have the same size.
+            return 4;
+        }
+
+        return 0;
+    }
+
+    get dimensions(): number {
+        return 2;
     }
 }
