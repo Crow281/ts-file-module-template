@@ -37,7 +37,7 @@ npm install
 ### CHANGELOG.md
 
 Whenever you publish a new version of your package, you will want to update
-[{project}/CHANGELOG.md](https://crow281.github.io/ts-file-module-template/CHANGELOG.md).
+[{project}/CHANGELOG.md](https://github.com/Crow281/ts-file-module-template/blob/main/CHANGELOG.md).
 
 One recommended guide is
 [here](https://keepachangelog.com/).
