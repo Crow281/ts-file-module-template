@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+import { expect, test } from "@jest/globals";
 import { Vector4 } from "math/linear-algebra/Vector4";
 import { sumVectors } from "math/linear-algebra/algorithms/SumVectors";
 

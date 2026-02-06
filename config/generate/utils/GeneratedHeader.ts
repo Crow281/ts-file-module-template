@@ -22,8 +22,9 @@
  * THE SOFTWARE.
  */
 /**
- * First text that should be used for all
- * compatible generated files.
+ * Text added to all compatible generated files
+ * so that they can be recognized.
+ *
  *
  * The first couple lines, "eslint-disable" and
  * "@ts-nocheck", tell ESLint and the TypeScript
@@ -35,31 +36,22 @@
  * This overall comment block is used to identify
  * generated files during cleanup.
  */
-export const GENERATED_HEADER = `/* eslint-disable */
-// @ts-nocheck
-/**
+export const GENERATED_HEADER = `/**
  * Some of the scripts creating generated scripts are
  * dependant on 3rd party libraries.
- * These 3rd party libraries sometimes generate code
- * that would cause errors, like creating unused variables.
- * While said errors would not cause compilation problems,
- * it does disrupt strict error checks.
- * For this unfortunate reason, eslint-disable and ts-nocheck
- * are at the top of the file, to tell eslint and
- * the TypeScript compiler not to run any error checks.
  *
  * This file was dynamically generated via script.
  * Generated files should NOT be edited by hand.
  * If you need to change something,
  * edit the script that created this file
  * or the file that it generated this script from.
- * The generation scripts are located inside of
+ * A comment showing the path to said script should
+ * be just below this one.
+ * The generation scripts in general are located inside of
  * {project}/config/generate/*.
  *
- * Any UTF-8 file that starts exactly with
- * directive eslint-disable, directive ts-nocheck,
- * and this comment block, character by character,
- * will be considered a generated file.
+ * Any UTF-8 file that contains this comment block,
+ * character by character, will be considered a generated file.
  * Files with these exact comments will be deleted if you use:
  * npm run clean:generated
  */`;

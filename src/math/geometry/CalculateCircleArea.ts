@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { Circle } from "math/geometry/Circle";
+import { type Circle } from "math/geometry/Circle";
 import { PI } from "math/geometry/internal/PI";
 
 /**

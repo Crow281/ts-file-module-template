@@ -21,11 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+import { ArrayN } from "math/linear-algebra/ArrayN";
 
 /**
- *
+ * Represents a direction in space.
  */
-export class Vector4 {
+export class Vector4 implements ArrayN<number> {
     /**
      *
      * @returns
@@ -151,5 +152,54 @@ export class Vector4 {
      */
     public set w(w: number) {
         this._array[3] = w;
+    }
+
+    getValue(position: number[]): number {
+        //Get the spot where this value is stored.
+        const index: number = this.calculateIndex(position);
+
+        return this._array[index];
+    }
+
+    setValue(position: number[], value: number): void {
+        //Get the spot where this value is stored.
+        const index: number = this.calculateIndex(position);
+
+        this._array[index] = value;
+    }
+
+    /**
+     * Calculates the index in the array of the given position array.
+     * @param position
+     * Position we want to retrieve value from.
+     *
+     * If position array has fewer dimensions than this array,
+     * they will be treated as 0.
+     * @returns
+     * Index in the backing array where value for position is stored.
+     */
+    private calculateIndex(position: number[]): number {
+        //If position has a value.
+        if (position.length >= 1) {
+            //Then return it.
+            return position[0];
+        }
+
+        //Otherwise, default to 0.
+        return 0;
+    }
+
+    getSize(dimension: number): number {
+        //This entity has exactly 1 dimension of size 4.
+        if (dimension === 0) {
+            return 4;
+        }
+
+        //All other dimensions are flat.
+        return 0;
+    }
+
+    get dimensions(): number {
+        return 1;
     }
 }

@@ -46,6 +46,13 @@ import {
         </p>
     </li>
     <li>
+        It uses
+        <a href="https://www.npmjs.com/package/knip">
+            knip
+        </a>
+        to help you find any problems with your project's dependencies.
+    </li>
+    <li>
         It supports pre-generating
         <a href="https://json-schema.org/">
             JSON Schema
@@ -82,7 +89,8 @@ import {
     </li>
 </ul>
 
-You can access the github project [here](https://github.com/Crow281/ts-file-module-template).
+You can access the github project
+[here](https://github.com/Crow281/ts-file-module-template).
 
 ## Using This Template
 
@@ -92,7 +100,8 @@ right
 
 ## Documentation
 
-The API documentation is available [here](https://crow281.github.io/ts-file-module-template/doc/api/latest/).
+The API documentation is available
+[here](https://crow281.github.io/ts-file-module-template/doc/api/latest/).
 
 ## Structure
 
@@ -130,6 +139,15 @@ scripts start with:
 npm run clean:generated
 ```
 
+### Knip
+
+The following command allows you to use
+[Knip](https://www.npmjs.com/package/knip)
+to search your code for any unused dependencies and the like:
+```console
+npm run knip
+```
+
 ### Lint
 
 The following command allows you to use
@@ -146,37 +164,6 @@ The following command allows you to use
 to format your code:
 ```console
 npm run format
-```
-
-### Reset Exports
-
-If for some reason you need to reset your package.json's exports field to its original state, you can use:
-```console
-npm run reset-exports
-```
-
-This will set package.json's exports field to exactly:
-```TypeScript
-    //...
-    "exports": {
-        "./package.json": "./package.json",
-        "./*": {
-            "types": "./dist/*.d.ts",
-            "require": "./dist/*.cjs",
-            "import": "./dist/*.mjs"
-        }
-    }
-    //...
-```
-
-### Update Exports
-
-Whenever you add new internal folders to
-["{project}/src"](https://github.com/Crow281/ts-file-module-template/tree/main/src),
-you can use the following command to update your package.json's
-exports field to block public import access to the resulting new modules:
-```console
-npm run update-exports
 ```
 
 ### Build
