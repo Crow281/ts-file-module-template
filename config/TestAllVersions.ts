@@ -52,33 +52,27 @@ function execAsync(
             const childProcess = spawn(
                 //Command to be executed.
                 command,
+
                 //Arguments passed to process.
                 commandArguments,
-                {},
+
+                //Options
+                {
+                    //Make the child process inherit the parent process's terminal.
+                    stdio: "inherit"
+                },
             );
 
-            //Bind output.
-            childProcess.stdout.on("data", (data: unknown) => {
-                console.log(data);
-            });
-
-            //Bind errors.
-            childProcess.stderr.on("data", (data: unknown) => {
-                console.error(data);
-            });
-
             //Bind close event so that we know when it terminates.
-            //NOTES: For whatever reason, the type definition file for child_process
-            //mentions the existence of this function, yet my editor
-            //cannot detect its existence.
             childProcess.on("close", (code: unknown) => {
-                //If the process terminated normally.
+                //If code is the number zero, that means it terminated normally.
                 if (code === 0) {
+                    //Since the process ended normally, resolve the promise normally.
                     resolve();
 
                     //If something went wrong.
                 } else {
-                    //Trigger error code.
+                    //Trigger error code on promise rejection.
                     reject(code);
                 }
             });
@@ -104,8 +98,26 @@ function testVersion(packageName: string, versionRange: string): Promise<void> {
     //Tell user which package we are about to test.
     console.log(`Testing ${packageName} versions ${versionRange}`);
 
+    //Array of arguments to pass to test all versions.
+    const args: string[] = [
+        //The package to test.
+        packageName,
+
+        //The list of versions to test.
+        versionRange,
+
+        //The program to run.
+        "npm",
+
+        //The NPM argument to run.
+        "run",
+
+        //NPM script to run.
+        "test"
+    ];
+
     //Run the command.
-    return execAsync("tav", [packageName, versionRange]);
+    return execAsync("tav", args);
 }
 
 /**
@@ -117,11 +129,13 @@ function testVersion(packageName: string, versionRange: string): Promise<void> {
  */
 async function testDependencies(
     npmPackage: Record<string, unknown>,
-    dependencyType: "peerDependencies" | "dependencies",
+    dependencyType: "peerDependencies" | "dependencies" | "optionalDependencies",
 ): Promise<void> {
     //Fetch the desired dependencies.
+    //Dependencies is expected to be an object, mapping package names to version ranges.
     const dependencies = npmPackage[dependencyType];
 
+    //Check that dependencies has the right type.
     //If dependencies is not an object, nothing to test.
     if (typeof dependencies !== "object") {
         return;
@@ -165,6 +179,12 @@ async function run(): Promise<void> {
     await testDependencies(
         Package as Record<string, unknown>,
         "peerDependencies",
+    );
+
+    //Then test the optional dependencies.
+    await testDependencies(
+        Package as Record<string, unknown>,
+        "optionalDependencies",
     );
 }
 

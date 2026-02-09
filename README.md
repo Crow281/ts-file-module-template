@@ -229,6 +229,24 @@ to run your test scripts:
 npm run test
 ```
 
+### Test All Versions
+
+The following command is a more expensive version
+of the test command.
+You would generally use it after a regular test and shortly before publishing.
+It is intended to ensure that all the dependency version ranges
+you specified in your package.json actually work correctly.
+
+It will iterate all of your NPM dependencies/peerDependencies/optionalDependencies.
+For each dependency, it will print the package and version range being tested against
+[Jest](https://www.npmjs.com/package/jest)
+and then run your Jest test suite on that.
+If any of the test suites fail, then the test script will terminate
+without testing any more package version ranges:
+```console
+npm run test-all-versions
+```
+
 ### Document
 
 The following command allows you to use

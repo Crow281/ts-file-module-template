@@ -153,10 +153,14 @@ Libraries this project is dependant on for building.
             ajv
         </td>
         <td>
-            Library used by generate code to create
-            validation code.
-            This library is not needed if you are not using JSON Schema
-            in the first place.
+            <p>
+                Library used by generate code to create
+                validation code.
+            </p>
+            <p>
+                This library is not needed if you are not using JSON Schema
+                in the first place.
+            </p>
         </td>
     </tr>
     <tr>
@@ -164,12 +168,18 @@ Libraries this project is dependant on for building.
             ajv-formats
         </td>
         <td>
-            Library used by JSON Schema validation code
-            to validate formats.
-            This library is not needed if you are not using JSON Schema
-            in the first place.
-            You will need to move this to dependencies if any of the
-            validation functions need it.
+            <p>
+                Library used by JSON Schema validation code
+                to validate formats.
+            </p>
+            <p>
+                This library is not needed if you are not using JSON Schema
+                in the first place.
+            </p>
+            <p>
+                You will need to move this to peerDependencies if any of the
+                validation functions need it.
+            </p>
         </td>
     </tr>
     <tr>
@@ -349,7 +359,7 @@ Libraries this project is dependant on for building.
 
 ### dependencies
 
-Libraries the project's build is dependant on.
+Libraries the project's distribution is dependant on.
 
 <table>
     <tr>
@@ -373,3 +383,5 @@ Libraries the project's build is dependant on.
         </td>
     </tr>
 </table>
+
+### peerDependencies

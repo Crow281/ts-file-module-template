@@ -277,3 +277,14 @@ The Jest config file is located at
 
 All test scripts are placed in files with the following format:
 "{project}/src/../{FolderWithTestedModule}/__test__/{TestedModule}/{TestName}.test.ts"
+
+## Test All Versions
+
+This project uses
+[Test All Versions](https://www.npmjs.com/package/test-all-versions)
+in order to test version range support.
+
+This project defines npm run test-all-versions via script
+["{project}/config/TestAllVersions.ts"](https://github.com/Crow281/ts-file-module-template/tree/main/config/TestAllVersions.ts).
+
+It will iterate over each dependency/peerDependency/optionalDependency and the run Test All Versions against each of them using the Jest test.

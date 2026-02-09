@@ -204,7 +204,14 @@ The properties you will want to consider changing include the following:
         </td>
         <td>
             <p>
-                List of NPM packages needed to develop this package.
+                List of NPM packages needed to develop this package
+                but are NOT needed for the final distribution.
+            </p>
+            <p>
+                For example, a person working on the project itself might
+                use ESLint to look for problems in the project's source code.
+                But unless the compiled project is an ESLint plugin,
+                it doesn't need ESLint to run and as such end users don't need to install it.
             </p>
             <p>
                 If you are not using
@@ -223,7 +230,11 @@ The properties you will want to consider changing include the following:
         </td>
         <td>
             <p>
-                List of NPM packages the build is dependant on.
+                List of NPM packages the project's distribution is specifically dependant on.
+            </p>
+            <p>
+                These are packages that people importing your library also need
+                in order to use the library.
             </p>
             <p>
                 By default, this project only has 1 dependency, "@babel/runtime".
@@ -237,7 +248,62 @@ The properties you will want to consider changing include the following:
             <p>
                 If you plan to use JSON Schema Formats, you should
                 also move package "ajv-formats" from devDependencies
-                to dependencies.
+                to peerDependencies.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            peerDependencies
+        </td>
+        <td>
+            <p>
+                List of NPM packages the project's distribution is dependant on.
+            </p>
+            <p>
+                This is similar to dependencies.
+                The difference is that you use peerDependencies instead of
+                dependencies when having multiple different versions of the
+                dependency in your project imported by different packages would cause problems.
+            </p>
+            <p>
+                peerDependencies are most useful for plugin libraries.
+                For example, if you wanted to build a custom widget library over
+                an overall UI library, like React, you would define React as a peerDependency.
+                That way, when the user imports multiple custom React widget
+                packages, they can then pick which mutually compatible version of React
+                to use, which all the custom widget libraries will then share.
+            </p>
+            <p>
+                By default, this project has no peerDependencies.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            peerDependenciesMeta
+        </td>
+        <td>
+            <p>
+                Can be used to define peerDependencies as optional.
+                When a peerDependency is marked as optional,
+                that will make it so that NPM does not install it by default.
+            </p>
+            <p>
+                One reason to use this is if your library has optional features dependant on optional packages.
+                For example, maybe your library provides a custom new
+                <a href="https://en.wikipedia.org/wiki/Query_language">Query language</a>.
+                Your library is designed to operate over multiple backends.
+                There might be one
+                <a href="https://en.wikipedia.org/wiki/Adapter_pattern">adapter</a>
+                that converts your Query Language
+                to save to a file system, another adapter that saves to
+                <a href="https://en.wikipedia.org/wiki/MySQL">MySQL databases</a>,
+                and another adapter that saves to
+                <a href="https://en.wikipedia.org/wiki/SQLite">SQLite databases</a>.
+                End users are only likely to need one of these adapters.
+                Thus, you can declare each database package it has an adapter for
+                to be an optional peerDependency.
             </p>
         </td>
     </tr>
@@ -296,6 +362,11 @@ but you do not have the "ajv-formats" package needed to do so
 set as a project dependency.
 You are advised to follow the warning's instructions to install
 or move it.
+
+If you are NOT using JSON Schema, then you can delete folder
+{project}/config/generate
+and then use the knip tool, mentioned below,
+to find anything else you can remove from your project.
 
 ## Knip
 
@@ -379,6 +450,17 @@ anything, you can use the following console command:
 
 ```console
 npm run test
+```
+
+### Test All Versions
+
+Note that this script is expensive, so it's most efficient to only use it when about to publish.
+Whenever you are about to publish, you should run the regular test first.
+Once you've verified that your project works normally by default,
+you can use this script to make sure that all accepted version ranges of your NPM dependencies work too:
+
+```console
+npm run test-all-versions
 ```
 
 ## Documentation

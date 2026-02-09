@@ -73,6 +73,10 @@ const config: KnipConfig = {
         //Is used by prettierrc.config.js
         "@trivago/prettier-plugin-sort-imports",
 
+        //A tool used to test all versions of a dependency against Jest.
+        //Is used by the {project}/config/TestAllVersions.ts script.
+        "test-all-versions",
+
         //One of the plugins used by TypeDoc.
         //TypeDoc uses it to create external links to MDN types.
         "typedoc-plugin-mdn-links",

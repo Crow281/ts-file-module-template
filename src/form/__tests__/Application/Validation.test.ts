@@ -74,7 +74,7 @@ test("test whether validateApplication detects that an Application object is val
         specialNotes: "Just a regular trip.",
     };
 
-    //Validate
+    //Validate the object.
     const isValid: boolean = validateApplication(jsonObject);
 
     //Pass the result and correct answer to Jest.
