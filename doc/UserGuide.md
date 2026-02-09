@@ -155,7 +155,7 @@ The properties you will want to consider changing include the following:
             <p>
                 The initial value submits the actual built modules,
                 the source code behind them, the license, and the Read Me.
-                It is set to NOT submit the tsbuildinfo files, which are
+                It is set to NOT submit any tsbuildinfo files, which are
                 only needed by the TypeScript compiler to
                 keep track of what has been built.
             </p>
@@ -248,7 +248,7 @@ The properties you will want to consider changing include the following:
             <p>
                 If you plan to use JSON Schema Formats, you should
                 also move package "ajv-formats" from devDependencies
-                to peerDependencies.
+                to dependencies.
             </p>
         </td>
     </tr>
