@@ -35,7 +35,7 @@ This will result in the creation of the following files:
 - {project}/src/internal/IDToJSONSchema.ts
 
 You can add your JSON Schema to anywhere inside of
-["{project}/src"](https://github.com/Crow281/ts-file-module-template/tree/main/src).
+"{project}/src".
 
 If your JSON Schema is only intended for internal use,
 you can just add it to an internal folder
@@ -103,7 +103,7 @@ npm run knip
 ```
 
 The knip config file is located at: 
-[{project}/config/knip/knip.config.ts](https://github.com/Crow281/ts-file-module-template/tree/main/config/knip/knip.config.ts)
+[{project}/config/knip/knip.config.ts](../config/knip/knip.config.ts)
 
 If you have a package that is being used in a way that knip cannot
 detect, then you can add its name to config property
@@ -217,6 +217,7 @@ to ensure that your changes haven't broken anything.
 
 An example is located
 [here](https://github.com/Crow281/ts-file-module-template/tree/main/src/math/linear-algebra/algorithms/__tests__/),
+in the original template project,
 which contains tests to make sure the code inside of
 "src/math/linear-algebra/algorithms" is behaving as expected.
 
