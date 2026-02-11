@@ -127,7 +127,7 @@ npm run lint
 
 This script allows you to use
 [Prettier](https://www.npmjs.com/package/prettier)
-to keep formatting consistent, imports organized, etc.
+to keep code formatting consistent, imports organized, etc.
 
 ```console
 npm run format
