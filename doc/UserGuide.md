@@ -9,21 +9,36 @@ Download a copy of the repository:
 git clone https://github.com/Crow281/ts-file-module-template.git
 ```
 
-You can probably just delete all files under the "doc" and "src" folders since
-you presumably won't be needing the example files under them
+You can probably just delete all files under the "src" folder since
+you presumably won't be needing the example files under it
 for your own project.
 
-Likewise, you will probably want to replace "README.md", "CHANGELOG.md",
+Likewise, you should just delete most of the files under the "doc" folder,
+though you might want to keep the
+[{project}/doc/Scripts.md](https://github.com/Crow281/ts-file-module-template/blob/main/doc/Scripts.md)
+file since it serves as a general purpose guide to the project's development scripts.
+
+You will probably want to replace "README.md", "CHANGELOG.md",
 and "LICENSE" with your own files.
 
+## CHANGELOG.md
+
+Whenever you publish a new version of your package, you will want to update
+[{project}/CHANGELOG.md](https://github.com/Crow281/ts-file-module-template/blob/main/CHANGELOG.md).
+
+One recommended guide is
+[here](https://keepachangelog.com/).
+
+## NPM Dependency Update
+
 You can use the following console command to update the project for
-any minor version changes to its dependencies.
+any minor version changes to its devDependencies and dependencies.
 ```console
 npm update
 ```
 
 You can use the following console command to check if any of the
-project's dependencies are outdated:
+project's dependencies are outdated, especially in terms of major versions:
 ```console
 npm outdated
 ```
@@ -34,13 +49,11 @@ this project's node_modules:
 npm install
 ```
 
-### CHANGELOG.md
-
-Whenever you publish a new version of your package, you will want to update
-[{project}/CHANGELOG.md](https://github.com/Crow281/ts-file-module-template/blob/main/CHANGELOG.md).
-
-One recommended guide is
-[here](https://keepachangelog.com/).
+As for the project's peerDependencies, you will want to keep
+the version range as flexible as what your library supports,
+so barring a need for new library features,
+you will probably just be adding "| ^{newMajorVersion}.0.0"
+to updated peerDependencies.
 
 ## Package.json
 
@@ -332,159 +345,36 @@ the correct structure for a type of JSON document.
 This project contains several scripts for dynamically generating code for
 JSON Schema files.
 
-For example, if you have a file,
-{project}/src/some/module/SomeSchema.schema.json,
-you can use the following command to generate
-a TypeScript interface representing the data
-the schema represents,
-a validation function verifying that a given
-JSON object matches the schema,
-and an object mapping all JSON Schema ids
-to the corresponding JSON Schema:
+[Open this guide](https://github.com/Crow281/ts-file-module-template/blob/main/doc/Scripts.md)
+for details on how to use it.
 
-```console
-npm run generate
+### Removal
+
+If you are NOT using JSON Schema, then you can use the
+following steps to clean it from your project:
+
+1. Delete folder ["{project}/config/generate"](https://github.com/Crow281/ts-file-module-template/tree/main/config/generate).
+2. Delete the following list of packages from package.json's list of devDependencies/dependencies:
+    * @apidevtools/json-schema-ref-parser
+    * ajv
+    * ajv-formats
+    * json-schema-to-typescript
+3. Modify package.json's scripts section and delete all the generate scripts.
+```TypeScript
+    //...
+    "scripts": {
+        "generate:json-schema:id-mapping": "tsx ./config/generate/json-schema/bin/GenerateIDMapping.ts",
+        "generate:json-schema:interfaces": "tsx ./config/generate/json-schema/bin/GenerateSchemaInterfaces.ts",
+        "generate:json-schema:validators": "tsx ./config/generate/json-schema/bin/GenerateValidators.ts",
+        "generate:json-schema": "npm run generate:json-schema:id-mapping && npm run generate:json-schema:interfaces && npm run generate:json-schema:validators",
+        "generate": "npm run clean:generated && npm run generate:json-schema",
+        //...
+    }
+    //...
 ```
+4. Delete the Generate section from document ["{project}/doc/Scripts.md"](https://github.com/Crow281/ts-file-module-template/blob/main/doc/Scripts.md).
 
-This will result in the creation of the following files:
-- {project}/src/some/module/SomeSchema.ts
-- {project}/src/some/module/ValidateSomeSchema.ts
-- {project}/src/internal/IDToJSONSchema.ts
+## Scripts
 
-When running generate, you might notice the following error message:
-
-```console
-The following generated JSON Schema validators are dependant on NPM package "ajv-formats":
-```
-
-This happens when your JSON Schema code wants to validate a format,
-but you do not have the "ajv-formats" package needed to do so
-set as a project dependency.
-You are advised to follow the warning's instructions to install
-or move it.
-
-If you are NOT using JSON Schema, then you can delete folder
-{project}/config/generate
-and then use the knip tool, mentioned below,
-to find anything else you can remove from your project.
-
-## Knip
-
-To find any unused dependencies,
-use the following console command:
-
-```console
-npm run knip
-```
-
-The knip config file is located at: 
-[{project}/config/knip/knip.config.ts](https://github.com/Crow281/ts-file-module-template/tree/main/config/knip/knip.config.ts)
-
-If you have a package that is being used in a way that knip cannot
-detect, then you can add its name to config property
-ignoreDependencies.
-
-If one of your files is conducting a valid import in a way that
-knip does not recognize, then you can add it to config property
-ignoreUnresolved.
-
-## Linting
-
-To detect possible problems in your source code,
-use the following console command:
-
-```console
-npm run lint
-```
-
-## Formatting
-
-To keep the formatting of your code consistent,
-your imports organized, etc, you can
-use the following console command:
-
-```console
-npm run format
-```
-
-## Building
-
-When you want to compile your code into JavaScript Modules for external use,
-use the following console command:
-
-```console
-npm run build
-```
-
-This will transpile all of your code into ES and CommonJS modules,
-allowing others to export them.
-They will be saved to the dist folder.
-
-## Cleaning
-
-If for some reason you need to erase your current build, one option is
-to use the following console command:
-
-```console
-npm run clean
-```
-
-## Testing
-
-This project uses
-[Jest](https://www.npmjs.com/package/jest)
-for its test scripts.
-
-You can write unit tests by adding a "__tests__"
-folder,
-adding ".test.ts" files to it, and writing your
-tests inside of them.
-
-An example is located
-[here](https://github.com/Crow281/ts-file-module-template/tree/main/src/math/linear-algebra/algorithms/__tests__/),
-which contains tests to make sure the code inside of
-"src/math/linear-algebra/algorithms" is behaving as expected.
-
-When you want run your tests to ensure your source changes haven't broken
-anything, you can use the following console command:
-
-```console
-npm run test
-```
-
-### Test All Versions
-
-Note that this script is expensive, so it's most efficient to only use it when about to publish.
-Whenever you are about to publish, you should run the regular test first.
-Once you've verified that your project works normally by default,
-you can use this script to make sure that all accepted version ranges of your NPM dependencies work too:
-
-```console
-npm run test-all-versions
-```
-
-## Documentation
-
-You can use TypeDoc to build the documentation via:
-
-```console
-npm run doc
-```
-
-This command will output it to
-"{project}/doc/api/latest"
-as a series of web pages.
-
-As a live example, the template project provides the API
-for the sample code via GitHub Pages.
-It is located
-[here](https://crow281.github.io/ts-file-module-template/doc/api/latest).
-Github hosts the files located
-[here](https://github.com/Crow281/ts-file-module-template/tree/gh-pages/).
-
-If you want to do the same:
-- Create your own new branch called "gh-pages".
-- Commit the web resources generated by TypeDoc somewhere on this branch.
-- Go to the project's settings and click on the "Pages" button
-to open the GitHub Pages menu. You can select the "gh-pages" branch
-to host it.
+To learn how to use all NPM project scripts, such as test and build, you can
+[open this guide](https://github.com/Crow281/ts-file-module-template/blob/main/doc/Scripts.md).

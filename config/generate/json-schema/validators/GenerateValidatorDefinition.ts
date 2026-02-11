@@ -187,7 +187,7 @@ function generateValidateFunction(
  * @example
  * This example shows you how you can verify that a
  * value matches type ${typeName}.
- * \`\`\`ts
+ * \`\`\`TypeScript
  * //A function that can only operate on ${typeName}.
  * //Will print it to the console.
  * function printObject(obj: ${typeName}): void {
@@ -228,7 +228,7 @@ declare const ${validationFunctionName}: {
      * This example shows you how to fetch the resulting
      * {@link ErrorObject}
      * array if something goes wrong during validation.
-     * \`\`\`ts
+     * \`\`\`TypeScript
      * //Some object we want to validate.
      * const obj: unknown = {
      *     someProperty: 25

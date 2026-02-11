@@ -49,10 +49,6 @@ While Babel is used to handle the actual task of transpiling TypeScript
 code to JavaScript, the original TypeScript compiler is still used to
 create the definition files.
 
-Since the TypeScript compiler won't copy over handwritten Type Definitions,
-the build command includes a copy-types phase, copying all
-Type Definition files (.d.ts) in the source folder over to the types distribution folder.
-
 ### Config
 
 One TypeScript configuration file, intended for your editor's use, is in
@@ -83,6 +79,15 @@ as the arrays that the
 [Rollup "dsv" plugin](https://www.npmjs.com/package/@rollup/plugin-dsv)
 converts them into via the library,
 ["d3-dsv"](https://www.npmjs.com/package/d3-dsv).
+
+### Custom Type Definitions
+
+You can add your own custom Type Definition files (.d.ts) inside of the src
+folder.
+
+Since the TypeScript compiler won't copy over handwritten Type Definitions,
+the build command includes a copy-types phase, copying all
+Type Definition files in the source folder over to the types distribution folder.
 
 ## Generated
 
@@ -206,6 +211,20 @@ This template is using the following list of Prettier plugins:
 This template uses
 [TypeDoc](https://www.npmjs.com/package/typedoc)
 to generate documentation for the source files.
+
+The TypeDoc config file is located in
+["{project}/config/typedoc/typedoc.config.js"](https://github.com/Crow281/ts-file-module-template/tree/main/config/typedoc/typedoc.config.js).
+
+### Included Documents
+
+TypeDoc includes the project README by default.
+In order to ensure that links do not break, all links on
+[{project}/README.md](https://github.com/Crow281/ts-file-module-template/tree/main/README.md)
+are set to absolute links as opposed to relative links.
+
+The TypeDoc config is set to also include
+[{project}/CHANGELOG.md](https://github.com/Crow281/ts-file-module-template/tree/main/CHANGELOG.md)
+in the list of documents.
 
 ### config/doc/plugin/TagInternal.js
 

@@ -125,7 +125,7 @@ type ErrorObject = unknown extends AjvErrorObject
  * @example
  * This example shows you how you can verify that a
  * value matches type Point3.
- * ```ts
+ * ```TypeScript
  * //A function that can only operate on Point3.
  * //Will print it to the console.
  * function printObject(obj: Point3): void {
@@ -166,7 +166,7 @@ declare const validatePoint3: {
      * This example shows you how to fetch the resulting
      * {@link ErrorObject}
      * array if something goes wrong during validation.
-     * ```ts
+     * ```TypeScript
      * //Some object we want to validate.
      * const obj: unknown = {
      *     someProperty: 25
