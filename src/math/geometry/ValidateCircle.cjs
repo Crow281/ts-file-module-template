@@ -34,154 +34,301 @@
 
 "use strict";
 exports.validateCircle = validate12;
-const schema13 = {"$schema":"http://json-schema.org/draft-07/schema","$id":"urn:module:math/geometry/Circle.schema.json","title":"Circle","description":"Represents a circle.","type":"object","properties":{"center":{"description":"Coordinates of the center of this circle.","$ref":"urn:module:math/geometry/Point3.schema.json"},"radius":{"description":"Length from the center of the circle to its border.","type":"number","minimum":0}},"required":["center","radius"],"additionalProperties":true};
-const schema11 = {"$schema":"http://json-schema.org/draft-07/schema","$id":"urn:module:math/geometry/Point3.schema.json","title":"Point3","description":"Represents a 3d coordinate in space.","type":"object","properties":{"x":{"description":"X coordinate of the position.","type":"number","default":0},"y":{"description":"Y coordinate of the position.","type":"number","default":0},"z":{"description":"Z coordinate of the position.","type":"number","default":0}},"required":["x","y","z"],"additionalProperties":true};
+const schema13 = {
+    $schema: "http://json-schema.org/draft-07/schema",
+    $id: "urn:module:math/geometry/Circle.schema.json",
+    title: "Circle",
+    description: "Represents a circle.",
+    type: "object",
+    properties: {
+        center: {
+            description: "Coordinates of the center of this circle.",
+            $ref: "urn:module:math/geometry/Point3.schema.json",
+        },
+        radius: {
+            description: "Length from the center of the circle to its border.",
+            type: "number",
+            minimum: 0,
+        },
+    },
+    required: ["center", "radius"],
+    additionalProperties: true,
+};
+const schema11 = {
+    $schema: "http://json-schema.org/draft-07/schema",
+    $id: "urn:module:math/geometry/Point3.schema.json",
+    title: "Point3",
+    description: "Represents a 3d coordinate in space.",
+    type: "object",
+    properties: {
+        x: {
+            description: "X coordinate of the position.",
+            type: "number",
+            default: 0,
+        },
+        y: {
+            description: "Y coordinate of the position.",
+            type: "number",
+            default: 0,
+        },
+        z: {
+            description: "Z coordinate of the position.",
+            type: "number",
+            default: 0,
+        },
+    },
+    required: ["x", "y", "z"],
+    additionalProperties: true,
+};
 
-function validate12(data, {instancePath="", parentData, parentDataProperty, rootData=data}={}){
-/*# sourceURL="urn:module:math/geometry/Circle.schema.json" */;
-let vErrors = null;
-let errors = 0;
-if(data && typeof data == "object" && !Array.isArray(data)){
-if(data.center === undefined){
-const err0 = {instancePath,schemaPath:"#/required",keyword:"required",params:{missingProperty: "center"},message:"must have required property '"+"center"+"'",schema:schema13.required,parentSchema:schema13,data};
-if(vErrors === null){
-vErrors = [err0];
-}
-else {
-vErrors.push(err0);
-}
-errors++;
-}
-if(data.radius === undefined){
-const err1 = {instancePath,schemaPath:"#/required",keyword:"required",params:{missingProperty: "radius"},message:"must have required property '"+"radius"+"'",schema:schema13.required,parentSchema:schema13,data};
-if(vErrors === null){
-vErrors = [err1];
-}
-else {
-vErrors.push(err1);
-}
-errors++;
-}
-if(data.center !== undefined){
-let data0 = data.center;
-if(data0 && typeof data0 == "object" && !Array.isArray(data0)){
-if(data0.x === undefined){
-const err2 = {instancePath:instancePath+"/center",schemaPath:"urn:module:math/geometry/Point3.schema.json/required",keyword:"required",params:{missingProperty: "x"},message:"must have required property '"+"x"+"'",schema:schema11.required,parentSchema:schema11,data:data0};
-if(vErrors === null){
-vErrors = [err2];
-}
-else {
-vErrors.push(err2);
-}
-errors++;
-}
-if(data0.y === undefined){
-const err3 = {instancePath:instancePath+"/center",schemaPath:"urn:module:math/geometry/Point3.schema.json/required",keyword:"required",params:{missingProperty: "y"},message:"must have required property '"+"y"+"'",schema:schema11.required,parentSchema:schema11,data:data0};
-if(vErrors === null){
-vErrors = [err3];
-}
-else {
-vErrors.push(err3);
-}
-errors++;
-}
-if(data0.z === undefined){
-const err4 = {instancePath:instancePath+"/center",schemaPath:"urn:module:math/geometry/Point3.schema.json/required",keyword:"required",params:{missingProperty: "z"},message:"must have required property '"+"z"+"'",schema:schema11.required,parentSchema:schema11,data:data0};
-if(vErrors === null){
-vErrors = [err4];
-}
-else {
-vErrors.push(err4);
-}
-errors++;
-}
-if(data0.x !== undefined){
-let data1 = data0.x;
-if(!((typeof data1 == "number") && (isFinite(data1)))){
-const err5 = {instancePath:instancePath+"/center/x",schemaPath:"urn:module:math/geometry/Point3.schema.json/properties/x/type",keyword:"type",params:{type: "number"},message:"must be number",schema:schema11.properties.x.type,parentSchema:schema11.properties.x,data:data1};
-if(vErrors === null){
-vErrors = [err5];
-}
-else {
-vErrors.push(err5);
-}
-errors++;
-}
-}
-if(data0.y !== undefined){
-let data2 = data0.y;
-if(!((typeof data2 == "number") && (isFinite(data2)))){
-const err6 = {instancePath:instancePath+"/center/y",schemaPath:"urn:module:math/geometry/Point3.schema.json/properties/y/type",keyword:"type",params:{type: "number"},message:"must be number",schema:schema11.properties.y.type,parentSchema:schema11.properties.y,data:data2};
-if(vErrors === null){
-vErrors = [err6];
-}
-else {
-vErrors.push(err6);
-}
-errors++;
-}
-}
-if(data0.z !== undefined){
-let data3 = data0.z;
-if(!((typeof data3 == "number") && (isFinite(data3)))){
-const err7 = {instancePath:instancePath+"/center/z",schemaPath:"urn:module:math/geometry/Point3.schema.json/properties/z/type",keyword:"type",params:{type: "number"},message:"must be number",schema:schema11.properties.z.type,parentSchema:schema11.properties.z,data:data3};
-if(vErrors === null){
-vErrors = [err7];
-}
-else {
-vErrors.push(err7);
-}
-errors++;
-}
-}
-}
-else {
-const err8 = {instancePath:instancePath+"/center",schemaPath:"urn:module:math/geometry/Point3.schema.json/type",keyword:"type",params:{type: "object"},message:"must be object",schema:schema11.type,parentSchema:schema11,data:data0};
-if(vErrors === null){
-vErrors = [err8];
-}
-else {
-vErrors.push(err8);
-}
-errors++;
-}
-}
-if(data.radius !== undefined){
-let data4 = data.radius;
-if((typeof data4 == "number") && (isFinite(data4))){
-if(data4 < 0 || isNaN(data4)){
-const err9 = {instancePath:instancePath+"/radius",schemaPath:"#/properties/radius/minimum",keyword:"minimum",params:{comparison: ">=", limit: 0},message:"must be >= 0",schema:0,parentSchema:schema13.properties.radius,data:data4};
-if(vErrors === null){
-vErrors = [err9];
-}
-else {
-vErrors.push(err9);
-}
-errors++;
-}
-}
-else {
-const err10 = {instancePath:instancePath+"/radius",schemaPath:"#/properties/radius/type",keyword:"type",params:{type: "number"},message:"must be number",schema:schema13.properties.radius.type,parentSchema:schema13.properties.radius,data:data4};
-if(vErrors === null){
-vErrors = [err10];
-}
-else {
-vErrors.push(err10);
-}
-errors++;
-}
-}
-}
-else {
-const err11 = {instancePath,schemaPath:"#/type",keyword:"type",params:{type: "object"},message:"must be object",schema:schema13.type,parentSchema:schema13,data};
-if(vErrors === null){
-vErrors = [err11];
-}
-else {
-vErrors.push(err11);
-}
-errors++;
-}
-validate12.errors = vErrors;
-return errors === 0;
+function validate12(
+    data,
+    { instancePath = "", parentData, parentDataProperty, rootData = data } = {},
+) {
+    /*# sourceURL="urn:module:math/geometry/Circle.schema.json" */ let vErrors =
+        null;
+    let errors = 0;
+    if (data && typeof data == "object" && !Array.isArray(data)) {
+        if (data.center === undefined) {
+            const err0 = {
+                instancePath,
+                schemaPath: "#/required",
+                keyword: "required",
+                params: { missingProperty: "center" },
+                message: "must have required property '" + "center" + "'",
+                schema: schema13.required,
+                parentSchema: schema13,
+                data,
+            };
+            if (vErrors === null) {
+                vErrors = [err0];
+            } else {
+                vErrors.push(err0);
+            }
+            errors++;
+        }
+        if (data.radius === undefined) {
+            const err1 = {
+                instancePath,
+                schemaPath: "#/required",
+                keyword: "required",
+                params: { missingProperty: "radius" },
+                message: "must have required property '" + "radius" + "'",
+                schema: schema13.required,
+                parentSchema: schema13,
+                data,
+            };
+            if (vErrors === null) {
+                vErrors = [err1];
+            } else {
+                vErrors.push(err1);
+            }
+            errors++;
+        }
+        if (data.center !== undefined) {
+            let data0 = data.center;
+            if (data0 && typeof data0 == "object" && !Array.isArray(data0)) {
+                if (data0.x === undefined) {
+                    const err2 = {
+                        instancePath: instancePath + "/center",
+                        schemaPath:
+                            "urn:module:math/geometry/Point3.schema.json/required",
+                        keyword: "required",
+                        params: { missingProperty: "x" },
+                        message: "must have required property '" + "x" + "'",
+                        schema: schema11.required,
+                        parentSchema: schema11,
+                        data: data0,
+                    };
+                    if (vErrors === null) {
+                        vErrors = [err2];
+                    } else {
+                        vErrors.push(err2);
+                    }
+                    errors++;
+                }
+                if (data0.y === undefined) {
+                    const err3 = {
+                        instancePath: instancePath + "/center",
+                        schemaPath:
+                            "urn:module:math/geometry/Point3.schema.json/required",
+                        keyword: "required",
+                        params: { missingProperty: "y" },
+                        message: "must have required property '" + "y" + "'",
+                        schema: schema11.required,
+                        parentSchema: schema11,
+                        data: data0,
+                    };
+                    if (vErrors === null) {
+                        vErrors = [err3];
+                    } else {
+                        vErrors.push(err3);
+                    }
+                    errors++;
+                }
+                if (data0.z === undefined) {
+                    const err4 = {
+                        instancePath: instancePath + "/center",
+                        schemaPath:
+                            "urn:module:math/geometry/Point3.schema.json/required",
+                        keyword: "required",
+                        params: { missingProperty: "z" },
+                        message: "must have required property '" + "z" + "'",
+                        schema: schema11.required,
+                        parentSchema: schema11,
+                        data: data0,
+                    };
+                    if (vErrors === null) {
+                        vErrors = [err4];
+                    } else {
+                        vErrors.push(err4);
+                    }
+                    errors++;
+                }
+                if (data0.x !== undefined) {
+                    let data1 = data0.x;
+                    if (!(typeof data1 == "number" && isFinite(data1))) {
+                        const err5 = {
+                            instancePath: instancePath + "/center/x",
+                            schemaPath:
+                                "urn:module:math/geometry/Point3.schema.json/properties/x/type",
+                            keyword: "type",
+                            params: { type: "number" },
+                            message: "must be number",
+                            schema: schema11.properties.x.type,
+                            parentSchema: schema11.properties.x,
+                            data: data1,
+                        };
+                        if (vErrors === null) {
+                            vErrors = [err5];
+                        } else {
+                            vErrors.push(err5);
+                        }
+                        errors++;
+                    }
+                }
+                if (data0.y !== undefined) {
+                    let data2 = data0.y;
+                    if (!(typeof data2 == "number" && isFinite(data2))) {
+                        const err6 = {
+                            instancePath: instancePath + "/center/y",
+                            schemaPath:
+                                "urn:module:math/geometry/Point3.schema.json/properties/y/type",
+                            keyword: "type",
+                            params: { type: "number" },
+                            message: "must be number",
+                            schema: schema11.properties.y.type,
+                            parentSchema: schema11.properties.y,
+                            data: data2,
+                        };
+                        if (vErrors === null) {
+                            vErrors = [err6];
+                        } else {
+                            vErrors.push(err6);
+                        }
+                        errors++;
+                    }
+                }
+                if (data0.z !== undefined) {
+                    let data3 = data0.z;
+                    if (!(typeof data3 == "number" && isFinite(data3))) {
+                        const err7 = {
+                            instancePath: instancePath + "/center/z",
+                            schemaPath:
+                                "urn:module:math/geometry/Point3.schema.json/properties/z/type",
+                            keyword: "type",
+                            params: { type: "number" },
+                            message: "must be number",
+                            schema: schema11.properties.z.type,
+                            parentSchema: schema11.properties.z,
+                            data: data3,
+                        };
+                        if (vErrors === null) {
+                            vErrors = [err7];
+                        } else {
+                            vErrors.push(err7);
+                        }
+                        errors++;
+                    }
+                }
+            } else {
+                const err8 = {
+                    instancePath: instancePath + "/center",
+                    schemaPath:
+                        "urn:module:math/geometry/Point3.schema.json/type",
+                    keyword: "type",
+                    params: { type: "object" },
+                    message: "must be object",
+                    schema: schema11.type,
+                    parentSchema: schema11,
+                    data: data0,
+                };
+                if (vErrors === null) {
+                    vErrors = [err8];
+                } else {
+                    vErrors.push(err8);
+                }
+                errors++;
+            }
+        }
+        if (data.radius !== undefined) {
+            let data4 = data.radius;
+            if (typeof data4 == "number" && isFinite(data4)) {
+                if (data4 < 0 || isNaN(data4)) {
+                    const err9 = {
+                        instancePath: instancePath + "/radius",
+                        schemaPath: "#/properties/radius/minimum",
+                        keyword: "minimum",
+                        params: { comparison: ">=", limit: 0 },
+                        message: "must be >= 0",
+                        schema: 0,
+                        parentSchema: schema13.properties.radius,
+                        data: data4,
+                    };
+                    if (vErrors === null) {
+                        vErrors = [err9];
+                    } else {
+                        vErrors.push(err9);
+                    }
+                    errors++;
+                }
+            } else {
+                const err10 = {
+                    instancePath: instancePath + "/radius",
+                    schemaPath: "#/properties/radius/type",
+                    keyword: "type",
+                    params: { type: "number" },
+                    message: "must be number",
+                    schema: schema13.properties.radius.type,
+                    parentSchema: schema13.properties.radius,
+                    data: data4,
+                };
+                if (vErrors === null) {
+                    vErrors = [err10];
+                } else {
+                    vErrors.push(err10);
+                }
+                errors++;
+            }
+        }
+    } else {
+        const err11 = {
+            instancePath,
+            schemaPath: "#/type",
+            keyword: "type",
+            params: { type: "object" },
+            message: "must be object",
+            schema: schema13.type,
+            parentSchema: schema13,
+            data,
+        };
+        if (vErrors === null) {
+            vErrors = [err11];
+        } else {
+            vErrors.push(err11);
+        }
+        errors++;
+    }
+    validate12.errors = vErrors;
+    return errors === 0;
 }

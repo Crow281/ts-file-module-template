@@ -51,7 +51,8 @@ const config = {
         [
             "@babel/plugin-transform-runtime",
             {
-                //Tell Babel transform plugin which version of the runtime it is using so it knows what polyfills are available.
+                //Tell Babel transform plugin which version of the runtime
+                //it is using so it knows what polyfills are available.
                 version: runtimePackage.version,
             },
         ],

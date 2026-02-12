@@ -42,8 +42,8 @@
  * SOFTWARE.
  *
  */
-import Point3 from "../math/Point3.schema.json";
 import Application from "../form/Application.schema.json";
+import Point3 from "../math/Point3.schema.json";
 import Circle from "../math/geometry/Circle.schema.json";
 
 /**

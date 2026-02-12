@@ -59,7 +59,7 @@ function execAsync(
                 //Options
                 {
                     //Make the child process inherit the parent process's terminal.
-                    stdio: "inherit"
+                    stdio: "inherit",
                 },
             );
 
@@ -113,7 +113,7 @@ function testVersion(packageName: string, versionRange: string): Promise<void> {
         "run",
 
         //NPM script to run.
-        "test"
+        "test",
     ];
 
     //Run the command.
@@ -129,7 +129,10 @@ function testVersion(packageName: string, versionRange: string): Promise<void> {
  */
 async function testDependencies(
     npmPackage: Record<string, unknown>,
-    dependencyType: "peerDependencies" | "dependencies" | "optionalDependencies",
+    dependencyType:
+        | "peerDependencies"
+        | "dependencies"
+        | "optionalDependencies",
 ): Promise<void> {
     //Fetch the desired dependencies.
     //Dependencies is expected to be an object, mapping package names to version ranges.

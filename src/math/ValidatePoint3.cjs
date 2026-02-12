@@ -34,93 +34,176 @@
 
 "use strict";
 exports.validatePoint3 = validate10;
-const schema11 = {"$schema":"http://json-schema.org/draft-07/schema","$id":"urn:module:math/geometry/Point3.schema.json","title":"Point3","description":"Represents a 3d coordinate in space.","type":"object","properties":{"x":{"description":"X coordinate of the position.","type":"number","default":0},"y":{"description":"Y coordinate of the position.","type":"number","default":0},"z":{"description":"Z coordinate of the position.","type":"number","default":0}},"required":["x","y","z"],"additionalProperties":true};
+const schema11 = {
+    $schema: "http://json-schema.org/draft-07/schema",
+    $id: "urn:module:math/geometry/Point3.schema.json",
+    title: "Point3",
+    description: "Represents a 3d coordinate in space.",
+    type: "object",
+    properties: {
+        x: {
+            description: "X coordinate of the position.",
+            type: "number",
+            default: 0,
+        },
+        y: {
+            description: "Y coordinate of the position.",
+            type: "number",
+            default: 0,
+        },
+        z: {
+            description: "Z coordinate of the position.",
+            type: "number",
+            default: 0,
+        },
+    },
+    required: ["x", "y", "z"],
+    additionalProperties: true,
+};
 
-function validate10(data, {instancePath="", parentData, parentDataProperty, rootData=data}={}){
-/*# sourceURL="urn:module:math/geometry/Point3.schema.json" */;
-let vErrors = null;
-let errors = 0;
-if(data && typeof data == "object" && !Array.isArray(data)){
-if(data.x === undefined){
-const err0 = {instancePath,schemaPath:"#/required",keyword:"required",params:{missingProperty: "x"},message:"must have required property '"+"x"+"'",schema:schema11.required,parentSchema:schema11,data};
-if(vErrors === null){
-vErrors = [err0];
-}
-else {
-vErrors.push(err0);
-}
-errors++;
-}
-if(data.y === undefined){
-const err1 = {instancePath,schemaPath:"#/required",keyword:"required",params:{missingProperty: "y"},message:"must have required property '"+"y"+"'",schema:schema11.required,parentSchema:schema11,data};
-if(vErrors === null){
-vErrors = [err1];
-}
-else {
-vErrors.push(err1);
-}
-errors++;
-}
-if(data.z === undefined){
-const err2 = {instancePath,schemaPath:"#/required",keyword:"required",params:{missingProperty: "z"},message:"must have required property '"+"z"+"'",schema:schema11.required,parentSchema:schema11,data};
-if(vErrors === null){
-vErrors = [err2];
-}
-else {
-vErrors.push(err2);
-}
-errors++;
-}
-if(data.x !== undefined){
-let data0 = data.x;
-if(!((typeof data0 == "number") && (isFinite(data0)))){
-const err3 = {instancePath:instancePath+"/x",schemaPath:"#/properties/x/type",keyword:"type",params:{type: "number"},message:"must be number",schema:schema11.properties.x.type,parentSchema:schema11.properties.x,data:data0};
-if(vErrors === null){
-vErrors = [err3];
-}
-else {
-vErrors.push(err3);
-}
-errors++;
-}
-}
-if(data.y !== undefined){
-let data1 = data.y;
-if(!((typeof data1 == "number") && (isFinite(data1)))){
-const err4 = {instancePath:instancePath+"/y",schemaPath:"#/properties/y/type",keyword:"type",params:{type: "number"},message:"must be number",schema:schema11.properties.y.type,parentSchema:schema11.properties.y,data:data1};
-if(vErrors === null){
-vErrors = [err4];
-}
-else {
-vErrors.push(err4);
-}
-errors++;
-}
-}
-if(data.z !== undefined){
-let data2 = data.z;
-if(!((typeof data2 == "number") && (isFinite(data2)))){
-const err5 = {instancePath:instancePath+"/z",schemaPath:"#/properties/z/type",keyword:"type",params:{type: "number"},message:"must be number",schema:schema11.properties.z.type,parentSchema:schema11.properties.z,data:data2};
-if(vErrors === null){
-vErrors = [err5];
-}
-else {
-vErrors.push(err5);
-}
-errors++;
-}
-}
-}
-else {
-const err6 = {instancePath,schemaPath:"#/type",keyword:"type",params:{type: "object"},message:"must be object",schema:schema11.type,parentSchema:schema11,data};
-if(vErrors === null){
-vErrors = [err6];
-}
-else {
-vErrors.push(err6);
-}
-errors++;
-}
-validate10.errors = vErrors;
-return errors === 0;
+function validate10(
+    data,
+    { instancePath = "", parentData, parentDataProperty, rootData = data } = {},
+) {
+    /*# sourceURL="urn:module:math/geometry/Point3.schema.json" */ let vErrors =
+        null;
+    let errors = 0;
+    if (data && typeof data == "object" && !Array.isArray(data)) {
+        if (data.x === undefined) {
+            const err0 = {
+                instancePath,
+                schemaPath: "#/required",
+                keyword: "required",
+                params: { missingProperty: "x" },
+                message: "must have required property '" + "x" + "'",
+                schema: schema11.required,
+                parentSchema: schema11,
+                data,
+            };
+            if (vErrors === null) {
+                vErrors = [err0];
+            } else {
+                vErrors.push(err0);
+            }
+            errors++;
+        }
+        if (data.y === undefined) {
+            const err1 = {
+                instancePath,
+                schemaPath: "#/required",
+                keyword: "required",
+                params: { missingProperty: "y" },
+                message: "must have required property '" + "y" + "'",
+                schema: schema11.required,
+                parentSchema: schema11,
+                data,
+            };
+            if (vErrors === null) {
+                vErrors = [err1];
+            } else {
+                vErrors.push(err1);
+            }
+            errors++;
+        }
+        if (data.z === undefined) {
+            const err2 = {
+                instancePath,
+                schemaPath: "#/required",
+                keyword: "required",
+                params: { missingProperty: "z" },
+                message: "must have required property '" + "z" + "'",
+                schema: schema11.required,
+                parentSchema: schema11,
+                data,
+            };
+            if (vErrors === null) {
+                vErrors = [err2];
+            } else {
+                vErrors.push(err2);
+            }
+            errors++;
+        }
+        if (data.x !== undefined) {
+            let data0 = data.x;
+            if (!(typeof data0 == "number" && isFinite(data0))) {
+                const err3 = {
+                    instancePath: instancePath + "/x",
+                    schemaPath: "#/properties/x/type",
+                    keyword: "type",
+                    params: { type: "number" },
+                    message: "must be number",
+                    schema: schema11.properties.x.type,
+                    parentSchema: schema11.properties.x,
+                    data: data0,
+                };
+                if (vErrors === null) {
+                    vErrors = [err3];
+                } else {
+                    vErrors.push(err3);
+                }
+                errors++;
+            }
+        }
+        if (data.y !== undefined) {
+            let data1 = data.y;
+            if (!(typeof data1 == "number" && isFinite(data1))) {
+                const err4 = {
+                    instancePath: instancePath + "/y",
+                    schemaPath: "#/properties/y/type",
+                    keyword: "type",
+                    params: { type: "number" },
+                    message: "must be number",
+                    schema: schema11.properties.y.type,
+                    parentSchema: schema11.properties.y,
+                    data: data1,
+                };
+                if (vErrors === null) {
+                    vErrors = [err4];
+                } else {
+                    vErrors.push(err4);
+                }
+                errors++;
+            }
+        }
+        if (data.z !== undefined) {
+            let data2 = data.z;
+            if (!(typeof data2 == "number" && isFinite(data2))) {
+                const err5 = {
+                    instancePath: instancePath + "/z",
+                    schemaPath: "#/properties/z/type",
+                    keyword: "type",
+                    params: { type: "number" },
+                    message: "must be number",
+                    schema: schema11.properties.z.type,
+                    parentSchema: schema11.properties.z,
+                    data: data2,
+                };
+                if (vErrors === null) {
+                    vErrors = [err5];
+                } else {
+                    vErrors.push(err5);
+                }
+                errors++;
+            }
+        }
+    } else {
+        const err6 = {
+            instancePath,
+            schemaPath: "#/type",
+            keyword: "type",
+            params: { type: "object" },
+            message: "must be object",
+            schema: schema11.type,
+            parentSchema: schema11,
+            data,
+        };
+        if (vErrors === null) {
+            vErrors = [err6];
+        } else {
+            vErrors.push(err6);
+        }
+        errors++;
+    }
+    validate10.errors = vErrors;
+    return errors === 0;
 }

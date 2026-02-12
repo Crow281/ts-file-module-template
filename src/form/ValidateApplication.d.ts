@@ -179,7 +179,7 @@ declare const validateApplication: {
      *
      *     //Fetch the list of errors.
      *     const errors = validateApplication.errors;
-     * 
+     *
      *     //By default, the error messages are in English.
      *     //Use ajv-i18n to localize the error messages.
      *     //This localize function was imported from "ajv-i18n/localize/fr"

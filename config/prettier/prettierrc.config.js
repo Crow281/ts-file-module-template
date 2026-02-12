@@ -31,10 +31,26 @@
  * @type {Partial<import("prettier").Config>}
  */
 const config = {
-    plugins: ["@trivago/prettier-plugin-sort-imports"],
+    plugins: [
+        //Add plugin to give imports consistent ordering.
+        "@trivago/prettier-plugin-sort-imports",
+    ],
+
+    //Adds line breaks between different groups of imports,
+    //as specified by the string patterns inside of
+    //config property importOrder
     importOrderSeparation: true,
+
+    //Orders the imported types from a given module.
+    //For example,
+    //import { B, A } from "SomeModule" will become
+    //import { A, B } from "SomeModule"
     importOrderSortSpecifiers: true,
+
+    //Try to keep lines no bigger than 80 characters.
     printWidth: 80,
+
+    //Make each indent 4 spaces.
     tabWidth: 4,
 };
 

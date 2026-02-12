@@ -34,154 +34,289 @@
 
 "use strict";
 exports.validateApplication = validate11;
-const schema12 = {"$schema":"http://json-schema.org/draft-07/schema","$id":"urn:module:form/Application.schema.json","title":"Application","description":"Represents an application for some website.","type":"object","properties":{"firstName":{"description":"First name of the applicant.","type":"string"},"birthDate":{"description":"When the user was born.","type":"string","format":"date","formatMinimum":"1850-01-01"},"duration":{"description":"How long your request will last.","type":"string","format":"duration","default":"P3D"},"specialNotes":{"description":"Any special notes you have about your application.","type":"string","default":""}},"required":["firstName","birthDate","duration"],"additionalProperties":false};
+const schema12 = {
+    $schema: "http://json-schema.org/draft-07/schema",
+    $id: "urn:module:form/Application.schema.json",
+    title: "Application",
+    description: "Represents an application for some website.",
+    type: "object",
+    properties: {
+        firstName: {
+            description: "First name of the applicant.",
+            type: "string",
+        },
+        birthDate: {
+            description: "When the user was born.",
+            type: "string",
+            format: "date",
+            formatMinimum: "1850-01-01",
+        },
+        duration: {
+            description: "How long your request will last.",
+            type: "string",
+            format: "duration",
+            default: "P3D",
+        },
+        specialNotes: {
+            description: "Any special notes you have about your application.",
+            type: "string",
+            default: "",
+        },
+    },
+    required: ["firstName", "birthDate", "duration"],
+    additionalProperties: false,
+};
 const formats0 = require("ajv-formats/dist/formats").fullFormats.date;
-const formats3 = /^P(?!$)((\d+Y)?(\d+M)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+S)?)?|(\d+W)?)$/;
+const formats3 =
+    /^P(?!$)((\d+Y)?(\d+M)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+S)?)?|(\d+W)?)$/;
 
-function validate11(data, {instancePath="", parentData, parentDataProperty, rootData=data}={}){
-/*# sourceURL="urn:module:form/Application.schema.json" */;
-let vErrors = null;
-let errors = 0;
-if(data && typeof data == "object" && !Array.isArray(data)){
-if(data.firstName === undefined){
-const err0 = {instancePath,schemaPath:"#/required",keyword:"required",params:{missingProperty: "firstName"},message:"must have required property '"+"firstName"+"'",schema:schema12.required,parentSchema:schema12,data};
-if(vErrors === null){
-vErrors = [err0];
-}
-else {
-vErrors.push(err0);
-}
-errors++;
-}
-if(data.birthDate === undefined){
-const err1 = {instancePath,schemaPath:"#/required",keyword:"required",params:{missingProperty: "birthDate"},message:"must have required property '"+"birthDate"+"'",schema:schema12.required,parentSchema:schema12,data};
-if(vErrors === null){
-vErrors = [err1];
-}
-else {
-vErrors.push(err1);
-}
-errors++;
-}
-if(data.duration === undefined){
-const err2 = {instancePath,schemaPath:"#/required",keyword:"required",params:{missingProperty: "duration"},message:"must have required property '"+"duration"+"'",schema:schema12.required,parentSchema:schema12,data};
-if(vErrors === null){
-vErrors = [err2];
-}
-else {
-vErrors.push(err2);
-}
-errors++;
-}
-for(const key0 in data){
-if(!((((key0 === "firstName") || (key0 === "birthDate")) || (key0 === "duration")) || (key0 === "specialNotes"))){
-const err3 = {instancePath,schemaPath:"#/additionalProperties",keyword:"additionalProperties",params:{additionalProperty: key0},message:"must NOT have additional properties",schema:false,parentSchema:schema12,data};
-if(vErrors === null){
-vErrors = [err3];
-}
-else {
-vErrors.push(err3);
-}
-errors++;
-}
-}
-if(data.firstName !== undefined){
-let data0 = data.firstName;
-if(typeof data0 !== "string"){
-const err4 = {instancePath:instancePath+"/firstName",schemaPath:"#/properties/firstName/type",keyword:"type",params:{type: "string"},message:"must be string",schema:schema12.properties.firstName.type,parentSchema:schema12.properties.firstName,data:data0};
-if(vErrors === null){
-vErrors = [err4];
-}
-else {
-vErrors.push(err4);
-}
-errors++;
-}
-}
-if(data.birthDate !== undefined){
-let data1 = data.birthDate;
-if(typeof data1 === "string"){
-if(!(formats0.validate(data1))){
-const err5 = {instancePath:instancePath+"/birthDate",schemaPath:"#/properties/birthDate/format",keyword:"format",params:{format: "date"},message:"must match format \""+"date"+"\"",schema:"date",parentSchema:schema12.properties.birthDate,data:data1};
-if(vErrors === null){
-vErrors = [err5];
-}
-else {
-vErrors.push(err5);
-}
-errors++;
-}
-if(formats0.compare(data1, "1850-01-01") < 0){
-const err6 = {instancePath:instancePath+"/birthDate",schemaPath:"#/properties/birthDate/formatMinimum",keyword:"formatMinimum",params:{comparison: ">=", limit: "1850-01-01"},message:"should be >= "+"1850-01-01",schema:"1850-01-01",parentSchema:schema12.properties.birthDate,data:data1};
-if(vErrors === null){
-vErrors = [err6];
-}
-else {
-vErrors.push(err6);
-}
-errors++;
-}
-}
-else {
-const err7 = {instancePath:instancePath+"/birthDate",schemaPath:"#/properties/birthDate/type",keyword:"type",params:{type: "string"},message:"must be string",schema:schema12.properties.birthDate.type,parentSchema:schema12.properties.birthDate,data:data1};
-if(vErrors === null){
-vErrors = [err7];
-}
-else {
-vErrors.push(err7);
-}
-errors++;
-}
-}
-if(data.duration !== undefined){
-let data2 = data.duration;
-if(typeof data2 === "string"){
-if(!(formats3.test(data2))){
-const err8 = {instancePath:instancePath+"/duration",schemaPath:"#/properties/duration/format",keyword:"format",params:{format: "duration"},message:"must match format \""+"duration"+"\"",schema:"duration",parentSchema:schema12.properties.duration,data:data2};
-if(vErrors === null){
-vErrors = [err8];
-}
-else {
-vErrors.push(err8);
-}
-errors++;
-}
-}
-else {
-const err9 = {instancePath:instancePath+"/duration",schemaPath:"#/properties/duration/type",keyword:"type",params:{type: "string"},message:"must be string",schema:schema12.properties.duration.type,parentSchema:schema12.properties.duration,data:data2};
-if(vErrors === null){
-vErrors = [err9];
-}
-else {
-vErrors.push(err9);
-}
-errors++;
-}
-}
-if(data.specialNotes !== undefined){
-let data3 = data.specialNotes;
-if(typeof data3 !== "string"){
-const err10 = {instancePath:instancePath+"/specialNotes",schemaPath:"#/properties/specialNotes/type",keyword:"type",params:{type: "string"},message:"must be string",schema:schema12.properties.specialNotes.type,parentSchema:schema12.properties.specialNotes,data:data3};
-if(vErrors === null){
-vErrors = [err10];
-}
-else {
-vErrors.push(err10);
-}
-errors++;
-}
-}
-}
-else {
-const err11 = {instancePath,schemaPath:"#/type",keyword:"type",params:{type: "object"},message:"must be object",schema:schema12.type,parentSchema:schema12,data};
-if(vErrors === null){
-vErrors = [err11];
-}
-else {
-vErrors.push(err11);
-}
-errors++;
-}
-validate11.errors = vErrors;
-return errors === 0;
+function validate11(
+    data,
+    { instancePath = "", parentData, parentDataProperty, rootData = data } = {},
+) {
+    /*# sourceURL="urn:module:form/Application.schema.json" */ let vErrors =
+        null;
+    let errors = 0;
+    if (data && typeof data == "object" && !Array.isArray(data)) {
+        if (data.firstName === undefined) {
+            const err0 = {
+                instancePath,
+                schemaPath: "#/required",
+                keyword: "required",
+                params: { missingProperty: "firstName" },
+                message: "must have required property '" + "firstName" + "'",
+                schema: schema12.required,
+                parentSchema: schema12,
+                data,
+            };
+            if (vErrors === null) {
+                vErrors = [err0];
+            } else {
+                vErrors.push(err0);
+            }
+            errors++;
+        }
+        if (data.birthDate === undefined) {
+            const err1 = {
+                instancePath,
+                schemaPath: "#/required",
+                keyword: "required",
+                params: { missingProperty: "birthDate" },
+                message: "must have required property '" + "birthDate" + "'",
+                schema: schema12.required,
+                parentSchema: schema12,
+                data,
+            };
+            if (vErrors === null) {
+                vErrors = [err1];
+            } else {
+                vErrors.push(err1);
+            }
+            errors++;
+        }
+        if (data.duration === undefined) {
+            const err2 = {
+                instancePath,
+                schemaPath: "#/required",
+                keyword: "required",
+                params: { missingProperty: "duration" },
+                message: "must have required property '" + "duration" + "'",
+                schema: schema12.required,
+                parentSchema: schema12,
+                data,
+            };
+            if (vErrors === null) {
+                vErrors = [err2];
+            } else {
+                vErrors.push(err2);
+            }
+            errors++;
+        }
+        for (const key0 in data) {
+            if (
+                !(
+                    key0 === "firstName" ||
+                    key0 === "birthDate" ||
+                    key0 === "duration" ||
+                    key0 === "specialNotes"
+                )
+            ) {
+                const err3 = {
+                    instancePath,
+                    schemaPath: "#/additionalProperties",
+                    keyword: "additionalProperties",
+                    params: { additionalProperty: key0 },
+                    message: "must NOT have additional properties",
+                    schema: false,
+                    parentSchema: schema12,
+                    data,
+                };
+                if (vErrors === null) {
+                    vErrors = [err3];
+                } else {
+                    vErrors.push(err3);
+                }
+                errors++;
+            }
+        }
+        if (data.firstName !== undefined) {
+            let data0 = data.firstName;
+            if (typeof data0 !== "string") {
+                const err4 = {
+                    instancePath: instancePath + "/firstName",
+                    schemaPath: "#/properties/firstName/type",
+                    keyword: "type",
+                    params: { type: "string" },
+                    message: "must be string",
+                    schema: schema12.properties.firstName.type,
+                    parentSchema: schema12.properties.firstName,
+                    data: data0,
+                };
+                if (vErrors === null) {
+                    vErrors = [err4];
+                } else {
+                    vErrors.push(err4);
+                }
+                errors++;
+            }
+        }
+        if (data.birthDate !== undefined) {
+            let data1 = data.birthDate;
+            if (typeof data1 === "string") {
+                if (!formats0.validate(data1)) {
+                    const err5 = {
+                        instancePath: instancePath + "/birthDate",
+                        schemaPath: "#/properties/birthDate/format",
+                        keyword: "format",
+                        params: { format: "date" },
+                        message: 'must match format "' + "date" + '"',
+                        schema: "date",
+                        parentSchema: schema12.properties.birthDate,
+                        data: data1,
+                    };
+                    if (vErrors === null) {
+                        vErrors = [err5];
+                    } else {
+                        vErrors.push(err5);
+                    }
+                    errors++;
+                }
+                if (formats0.compare(data1, "1850-01-01") < 0) {
+                    const err6 = {
+                        instancePath: instancePath + "/birthDate",
+                        schemaPath: "#/properties/birthDate/formatMinimum",
+                        keyword: "formatMinimum",
+                        params: { comparison: ">=", limit: "1850-01-01" },
+                        message: "should be >= " + "1850-01-01",
+                        schema: "1850-01-01",
+                        parentSchema: schema12.properties.birthDate,
+                        data: data1,
+                    };
+                    if (vErrors === null) {
+                        vErrors = [err6];
+                    } else {
+                        vErrors.push(err6);
+                    }
+                    errors++;
+                }
+            } else {
+                const err7 = {
+                    instancePath: instancePath + "/birthDate",
+                    schemaPath: "#/properties/birthDate/type",
+                    keyword: "type",
+                    params: { type: "string" },
+                    message: "must be string",
+                    schema: schema12.properties.birthDate.type,
+                    parentSchema: schema12.properties.birthDate,
+                    data: data1,
+                };
+                if (vErrors === null) {
+                    vErrors = [err7];
+                } else {
+                    vErrors.push(err7);
+                }
+                errors++;
+            }
+        }
+        if (data.duration !== undefined) {
+            let data2 = data.duration;
+            if (typeof data2 === "string") {
+                if (!formats3.test(data2)) {
+                    const err8 = {
+                        instancePath: instancePath + "/duration",
+                        schemaPath: "#/properties/duration/format",
+                        keyword: "format",
+                        params: { format: "duration" },
+                        message: 'must match format "' + "duration" + '"',
+                        schema: "duration",
+                        parentSchema: schema12.properties.duration,
+                        data: data2,
+                    };
+                    if (vErrors === null) {
+                        vErrors = [err8];
+                    } else {
+                        vErrors.push(err8);
+                    }
+                    errors++;
+                }
+            } else {
+                const err9 = {
+                    instancePath: instancePath + "/duration",
+                    schemaPath: "#/properties/duration/type",
+                    keyword: "type",
+                    params: { type: "string" },
+                    message: "must be string",
+                    schema: schema12.properties.duration.type,
+                    parentSchema: schema12.properties.duration,
+                    data: data2,
+                };
+                if (vErrors === null) {
+                    vErrors = [err9];
+                } else {
+                    vErrors.push(err9);
+                }
+                errors++;
+            }
+        }
+        if (data.specialNotes !== undefined) {
+            let data3 = data.specialNotes;
+            if (typeof data3 !== "string") {
+                const err10 = {
+                    instancePath: instancePath + "/specialNotes",
+                    schemaPath: "#/properties/specialNotes/type",
+                    keyword: "type",
+                    params: { type: "string" },
+                    message: "must be string",
+                    schema: schema12.properties.specialNotes.type,
+                    parentSchema: schema12.properties.specialNotes,
+                    data: data3,
+                };
+                if (vErrors === null) {
+                    vErrors = [err10];
+                } else {
+                    vErrors.push(err10);
+                }
+                errors++;
+            }
+        }
+    } else {
+        const err11 = {
+            instancePath,
+            schemaPath: "#/type",
+            keyword: "type",
+            params: { type: "object" },
+            message: "must be object",
+            schema: schema12.type,
+            parentSchema: schema12,
+            data,
+        };
+        if (vErrors === null) {
+            vErrors = [err11];
+        } else {
+            vErrors.push(err11);
+        }
+        errors++;
+    }
+    validate11.errors = vErrors;
+    return errors === 0;
 }

@@ -88,7 +88,7 @@ const modulePlugins = [
     //This plugin tells Rollup what imports refer to code outside the project code.
     nodeExternals({
         //Ensure imports of dependencies are marked as external.
-        deps: true
+        deps: true,
     }),
     //Makes it possible to import files using src as the base path.
     includePaths({

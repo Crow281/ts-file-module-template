@@ -179,7 +179,7 @@ declare const validatePoint3: {
      *
      *     //Fetch the list of errors.
      *     const errors = validatePoint3.errors;
-     * 
+     *
      *     //By default, the error messages are in English.
      *     //Use ajv-i18n to localize the error messages.
      *     //This localize function was imported from "ajv-i18n/localize/fr"
