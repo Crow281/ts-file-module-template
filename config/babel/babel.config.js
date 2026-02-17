@@ -40,9 +40,6 @@ const config = {
             },
         ],
 
-        //Make Babel support React.
-        "@babel/preset-react",
-
         //Make Babel support TypeScript.
         "@babel/preset-typescript",
     ],
@@ -58,6 +55,22 @@ const config = {
         ],
     ],
 };
+
+//This try catch block is to make Babel React Preset optional.
+//Check and see if package @babel/preset-react is installed.
+try {
+    //Attempt to import the desired package.
+    await import("@babel/preset-react");
+
+    //If we reached this point, then package exists.
+    //Add it to the config.
+    //Make Babel support React.
+    config.presets.push("@babel/preset-react");
+
+    //If we fail to import Babel React Preset.
+} catch {
+    //Nothing to do.
+}
 
 //Provide the configuration object.
 export default config;

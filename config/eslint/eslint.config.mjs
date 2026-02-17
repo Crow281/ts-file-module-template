@@ -27,7 +27,6 @@
  */
 import pluginJs from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
-import pluginReactConfig from "eslint-plugin-react/configs/recommended.js";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
@@ -37,22 +36,13 @@ import tseslint from "typescript-eslint";
  * @type {import("eslint").Linter.Config[]}
  */
 const config = [
-    //Tell pluginReactConfig how to determine the react version.
-    //In this case, it is being told to check for itself.
-    //Note that if React isn't installed, this will result in a warning.
-    {
-        settings: {
-            react: {
-                version: "detect",
-            },
-        },
-    },
     //Tell Lint we want access to browser globals.
     {
         languageOptions: {
             globals: globals.browser,
         },
     },
+    //Add any custom rules we want to ESLint.
     {
         rules: {
             //Disable unused parameter checking.
@@ -73,10 +63,36 @@ const config = [
     pluginJs.configs.recommended,
     //Setup typescript checking.
     ...tseslint.configs.recommended,
-    //Setup react checking.
-    pluginReactConfig,
     //Disable anything prettier will handle.
     eslintConfigPrettier,
 ];
+
+//This try catch block is to make ESLint React support optional.
+//Check and see if ESLint React support is installed.
+try {
+    //Try to import eslint's react support.
+    const eslintPluginReactModule = await import("eslint-plugin-react/configs/recommended.js");
+
+    //If we reached this point without error, ESLint react support is installed.
+    //Add ESLint React plugin.
+    config.push(eslintPluginReactModule.default);
+
+    //Tell pluginReactConfig to check the React version for itself.
+    //Note that if React isn't installed, this will result in a warning.
+    config.push(
+        {
+            settings: {
+                react: {
+                    version: "detect",
+                },
+            },
+        }
+    );
+
+    //If we fail to import ESLint React support.
+} catch {
+    //Tell user we are skipping react.
+    console.log("Package \"eslint-plugin-react\" is not installed, skipping React support.");
+}
 
 export default config;

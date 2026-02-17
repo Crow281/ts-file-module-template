@@ -223,6 +223,9 @@ Libraries this project is dependant on for building.
         </td>
         <td>
             Enables ESLint to check React code.
+            The project is designed to be able to
+            handle ignoring it if eslint-plugin-react
+            is not installed.
         </td>
     </tr>
     <tr>

@@ -263,6 +263,12 @@ The properties you will want to consider changing include the following:
                 also move package "ajv-formats" from devDependencies
                 to dependencies.
             </p>
+            <p>
+                If you are not planning to use React, then you can safely remove
+                packages
+                "@babel/preset-react" and
+                "eslint-plugin-react".
+            </p>
         </td>
     </tr>
     <tr>

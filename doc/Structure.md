@@ -164,6 +164,7 @@ This template is using the following list of ESLint plugins:
         </td>
         <td>
             Allows ESLint to be able to handle React.
+            You can uninstall this plugin and the ESLint config file will handle it just fine.
         </td>
     </tr>
     <tr>
