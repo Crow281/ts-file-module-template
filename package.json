@@ -15,8 +15,8 @@
     },
     "scripts": {
         "generate:json-schema:id-mapping": "tsx ./config/generate/json-schema/bin/GenerateIDMapping.ts",
-        "generate:json-schema:interfaces": "tsx ./config/generate/json-schema/bin/GenerateSchemaInterfaces.ts",
-        "generate:json-schema:validators": "tsx ./config/generate/json-schema/bin/GenerateValidators.ts",
+        "generate:json-schema:interfaces": "tsx ./config/generate/json-schema/bin/GenerateSchemaInterfaces.ts \"./src/**/*.schema.json\"",
+        "generate:json-schema:validators": "tsx ./config/generate/json-schema/bin/GenerateValidators.ts \"./src/**/*.schema.json\"",
         "generate:json-schema": "npm run generate:json-schema:id-mapping && npm run generate:json-schema:interfaces && npm run generate:json-schema:validators",
         "generate": "npm run clean:generated && npm run generate:json-schema",
         "knip": "knip --config config/knip/knip.config.ts",

@@ -151,6 +151,37 @@ function createSchemaImportMapping(
         idToSchemaConstants.push([schema, importReflection]);
     }
 
+    //Sort all schemas by their ids.
+    idToSchemaConstants.sort(
+        (
+            a: [Record<string, unknown>, ImportReflection],
+            b: [Record<string, unknown>, ImportReflection],
+        ): number => {
+            //We are sorting records by their ids.
+            const aId = a[0]["$id"];
+            const bId = b[0]["$id"];
+
+            //If Ids have the exact same value.
+            if (aId === bId) {
+                //They are equal.
+                return 0;
+            }
+
+            //If aId is not a string, it is before.
+            if (typeof aId !== "string") {
+                return -1;
+            }
+
+            //If bId is not a string, it is before.
+            if (typeof bId !== "string") {
+                return 1;
+            }
+
+            //If both are strings, compare them.
+            return aId.localeCompare(bId);
+        },
+    );
+
     return idToSchemaConstants;
 }
 

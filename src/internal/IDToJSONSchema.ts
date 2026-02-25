@@ -56,18 +56,6 @@ export const ID_TO_JSON_SCHEMA = {
      * {@link https://json-schema.org/ JSON Schema}
      * this id represents.
      *
-     * Represents a 3d coordinate in space.
-     */
-    "urn:module:math/geometry/Point3.schema.json": Point3 as Record<
-        string,
-        unknown
-    >,
-
-    /**
-     * A JSON object containing the
-     * {@link https://json-schema.org/ JSON Schema}
-     * this id represents.
-     *
      * Represents an application for some website.
      */
     "urn:module:form/Application.schema.json": Application as Record<
@@ -83,6 +71,18 @@ export const ID_TO_JSON_SCHEMA = {
      * Represents a circle.
      */
     "urn:module:math/geometry/Circle.schema.json": Circle as Record<
+        string,
+        unknown
+    >,
+
+    /**
+     * A JSON object containing the
+     * {@link https://json-schema.org/ JSON Schema}
+     * this id represents.
+     *
+     * Represents a 3d coordinate in space.
+     */
+    "urn:module:math/geometry/Point3.schema.json": Point3 as Record<
         string,
         unknown
     >,

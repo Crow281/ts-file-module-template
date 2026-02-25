@@ -26,6 +26,9 @@
  * of the source folder.
  * It then generates TypeScript interfaces for each of them.
  *
+ * Will read the first argument or the one marked as input
+ * as the glob pattern to search for the JSON Schema files.
+ *
  * All of the JSON Schema files it is generating
  * interfaces for must have a "title" property,
  * which will be used to identify and name the new type.
@@ -44,28 +47,7 @@ import {
 import { compile } from "json-schema-to-typescript";
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
-
-/**
- * Path to the JSON schemas we are operating on.
- *
- * Since this script is called at the project root,
- * that is what this path is relative to.
- */
-const inputPattern: string = "./src/**/*.schema.json";
-
-/**
- * Root path of the JSON schemas we are operating on.
- * Used to calculate their relative paths.
- *
- * Since this script is called at the project root,
- * that is what this path is relative to.
- */
-const inputRoot: string = "./src";
-
-/**
- * File path indicating where we want to output the results to.
- */
-export const outputRoot: string = "./src";
+import { parseArgs } from "node:util";
 
 //Comment used to mark this as a generated file
 //and comment telling user where script was created.
@@ -109,7 +91,7 @@ function createIdToImportPath(
         //This will basically convert the json schema path,
         //relative to the project, to a typescript module in the same folder.
         const absoluteImportPath: string = inputToOutputPath(
-            inputRoot,
+            "",
             "",
             absoluteFilePath,
             {
@@ -216,10 +198,6 @@ async function createInterfaceCode(
             return undefined;
         },
 
-        //Root directory for resolving referenced schema.
-        //Probably not necessary since we've already loaded everything.
-        cwd: inputRoot,
-
         //Tell library how to resolve file references.
         $refOptions: {
             resolve: {
@@ -301,8 +279,8 @@ ${interfaceCode}`;
 function createOutputPath(schemaAbsoluteFilePath: string): string {
     //Generate the output path.
     const outputPath: string = inputToOutputPath(
-        inputRoot,
-        outputRoot,
+        "",
+        "",
         schemaAbsoluteFilePath,
         {
             //Converting to a TypeScript file.
@@ -376,13 +354,72 @@ async function processSchema(
     await writeModule(outputFilePath, code);
 }
 
-//Catch anything that goes wrong.
-try {
+/**
+ * Function representing overall script.
+ */
+async function run(): Promise<void> {
+    //Arguments passed.
+    const args = parseArgs({
+        //List of options the user can pick from.
+        options: {
+            //If the user wants to know how this works.
+            help: {
+                type: "boolean",
+                short: "h",
+                multiple: false,
+                default: false,
+            },
+            //Where to read files from.
+            input: {
+                type: "string",
+                short: "i",
+                multiple: false,
+            },
+        },
+
+        //Whether to allow user to select input
+        //without parameter names, selecting just via position.
+        allowPositionals: true,
+
+        //Pass the actual command line arguments.
+        args: process.argv,
+    });
+
+    //If user wants to know how the script works.
+    if (args.values.help) {
+        //Print help.
+        console.log(
+            "--help  - Prints list of arguments." +
+                "--input - Glob pattern to find files to process.",
+        );
+
+        //Terminate script.
+        return;
+    }
+
+    //Fetch input.
+    //Assume input was passed to option --input first
+    //and then as the first argument passed to the script which will be at the 2nd index.
+    const inputGlob: string | undefined =
+        args.values.input || args.positionals[2];
+
+    //If user gave no input.
+    if (!inputGlob) {
+        //Tell user they must give an input path.
+        console.error(
+            "This script requires that a glob be passed to parameter --input. " +
+                'For example, "./src/**/*.schema.json"',
+        );
+
+        //Terminate script.
+        return;
+    }
+
     //Load the schemas.
     const absoluteFilePathToSchema: Map<
         string,
         Record<string, unknown>
-    > = await readJSONGlob(inputPattern);
+    > = await readJSONGlob(inputGlob);
 
     //Create a map, mapping all schema ids to the matching schema.
     const idToSchema: Map<string, Record<string, unknown>> = toIdToSchemaMap(
@@ -414,6 +451,12 @@ try {
 
     //Wait for all process promises to finish.
     await Promise.all(processPromises);
+}
+
+//Catch anything that goes wrong.
+try {
+    //Run the script.
+    await run();
 
     //If anything goes wrong, print it.
 } catch (error) {

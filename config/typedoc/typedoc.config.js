@@ -64,6 +64,8 @@ const config = {
         //Do not include test scripts in the build.
         "**/__tests__/**",
     ],
+    //Record the version according to NPM package.json.
+    includeVersion: true,
     //Location of the project readme file.
     readme: "../../README.md",
     //Additional documents to package into the TypeDoc.

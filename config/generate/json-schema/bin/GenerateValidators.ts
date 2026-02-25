@@ -41,28 +41,7 @@ import { Ajv } from "ajv";
 import addFormats from "ajv-formats";
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
-
-/**
- * Path to the JSON schemas we are operating on.
- *
- * Since this script is called at the project root,
- * that is what this path is relative to.
- */
-const inputPattern: string = "./src/**/*.schema.json";
-
-/**
- * Root path of the JSON schemas we are operating on.
- * Used to calculate their relative paths.
- *
- * Since this script is called at the project root,
- * that is what this path is relative to.
- */
-const inputRoot: string = "./src";
-
-/**
- * File path indicating where we want to output the results to.
- */
-export const outputRoot: string = "./src";
+import { parseArgs } from "node:util";
 
 /**
  * Records any of the generated validators that need
@@ -265,21 +244,16 @@ function toValidatorOutputPath(
     const typeName: string = fromTitleToTypeName(schema);
 
     //Generate the output path.
-    const outputPath: string = inputToOutputPath(
-        inputRoot,
-        outputRoot,
-        absoluteFilePath,
-        {
-            //Converting to the name of the function, "Validate{moduleType}".
-            transformBaseName: (oldBaseName: string): string => {
-                return `Validate${typeName}`;
-            },
-            //Converting to a CommonJS Module file.
-            transformFileExtension: (oldFileExtension: string): string => {
-                return "cjs";
-            },
+    const outputPath: string = inputToOutputPath("", "", absoluteFilePath, {
+        //Converting to the name of the function, "Validate{moduleType}".
+        transformBaseName: (oldBaseName: string): string => {
+            return `Validate${typeName}`;
         },
-    );
+        //Converting to a CommonJS Module file.
+        transformFileExtension: (oldFileExtension: string): string => {
+            return "cjs";
+        },
+    });
 
     return outputPath;
 }
@@ -301,21 +275,16 @@ function toDefinitionOutputPath(
     const typeName: string = fromTitleToTypeName(schema);
 
     //Generate the output path.
-    const outputPath: string = inputToOutputPath(
-        inputRoot,
-        outputRoot,
-        absoluteFilePath,
-        {
-            //Converting to the name of the function, "Validate{moduleType}".
-            transformBaseName: (oldBaseName: string): string => {
-                return `Validate${typeName}`;
-            },
-            //Converting to a normal JavaScript file.
-            transformFileExtension: (oldFileExtension: string): string => {
-                return "d.ts";
-            },
+    const outputPath: string = inputToOutputPath("", "", absoluteFilePath, {
+        //Converting to the name of the function, "Validate{moduleType}".
+        transformBaseName: (oldBaseName: string): string => {
+            return `Validate${typeName}`;
         },
-    );
+        //Converting to a normal JavaScript file.
+        transformFileExtension: (oldFileExtension: string): string => {
+            return "d.ts";
+        },
+    });
 
     return outputPath;
 }
@@ -390,13 +359,60 @@ async function writeDefinition(
     await writeDirAndFile(outputFilePath, code);
 }
 
-//Catch anything that goes wrong.
-try {
+/**
+ * Function representing overall script.
+ */
+async function run(): Promise<void> {
+    //Arguments passed.
+    const args = parseArgs({
+        //List of options the user can pick from.
+        options: {
+            //If the user wants to know how this works.
+            help: {
+                type: "boolean",
+                short: "h",
+                multiple: false,
+                default: false,
+            },
+            //Where to read files from.
+            input: {
+                type: "string",
+                short: "i",
+                multiple: false,
+            },
+        },
+
+        //Whether to allow user to select input
+        //without parameter names, selecting just via position.
+        allowPositionals: true,
+
+        //Pass the actual command line arguments.
+        args: process.argv,
+    });
+
+    //If user wants to know how the script works.
+    if (args.values.help) {
+        //Print help.
+        console.log(
+            "--help  - Prints list of arguments." +
+                "--input - Glob pattern to find files to process.",
+        );
+
+        //Terminate script.
+        return;
+    }
+
+    //Fetch input.
+    //Assume input was passed to option --input first
+    //and then as the first argument passed to the script which will be at the 2nd index.
+    const inputGlob: string | undefined =
+        args.values.input || args.positionals[2];
+
     //Load the schemas.
     const absoluteFilePathToSchema: Map<
         string,
         Record<string, unknown>
-    > = await readJSONGlob(inputPattern);
+    > = await readJSONGlob(inputGlob);
 
     //Get a list of all schema objects.
     const schemas: Record<string, unknown>[] = Array.from(
@@ -433,6 +449,12 @@ try {
 
     //Check if ajv-format is needed and warn the user if so.
     await logAjvFormatWarning();
+}
+
+//Catch anything that goes wrong.
+try {
+    //Run the script.
+    await run();
 
     //If anything goes wrong, print it.
 } catch (error) {

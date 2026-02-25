@@ -71,7 +71,8 @@ const config = [
 //Check and see if ESLint React support is installed.
 try {
     //Try to import eslint's react support.
-    const eslintPluginReactModule = await import("eslint-plugin-react/configs/recommended.js");
+    const eslintPluginReactModule =
+        await import("eslint-plugin-react/configs/recommended.js");
 
     //If we reached this point without error, ESLint react support is installed.
     //Add ESLint React plugin.
@@ -79,20 +80,20 @@ try {
 
     //Tell pluginReactConfig to check the React version for itself.
     //Note that if React isn't installed, this will result in a warning.
-    config.push(
-        {
-            settings: {
-                react: {
-                    version: "detect",
-                },
+    config.push({
+        settings: {
+            react: {
+                version: "detect",
             },
-        }
-    );
+        },
+    });
 
     //If we fail to import ESLint React support.
 } catch {
     //Tell user we are skipping react.
-    console.log("Package \"eslint-plugin-react\" is not installed, skipping React support.");
+    console.log(
+        'Package "eslint-plugin-react" is not installed, skipping React support.',
+    );
 }
 
 export default config;
