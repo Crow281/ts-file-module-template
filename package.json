@@ -14,7 +14,7 @@
         "url": "https://github.com/Crow281/ts-file-module-template"
     },
     "scripts": {
-        "generate:json-schema:id-mapping": "tsx ./config/generate/json-schema/bin/GenerateIDMapping.ts",
+        "generate:json-schema:id-mapping": "tsx ./config/generate/json-schema/bin/GenerateIDMapping.ts \"./src/**/*.schema.json\" \"./src/internal/IDToJSONSchema.ts\"",
         "generate:json-schema:interfaces": "tsx ./config/generate/json-schema/bin/GenerateSchemaInterfaces.ts \"./src/**/*.schema.json\"",
         "generate:json-schema:validators": "tsx ./config/generate/json-schema/bin/GenerateValidators.ts \"./src/**/*.schema.json\"",
         "generate:json-schema": "npm run generate:json-schema:id-mapping && npm run generate:json-schema:interfaces && npm run generate:json-schema:validators",

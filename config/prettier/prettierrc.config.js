@@ -47,6 +47,9 @@ const config = {
     //import { A, B } from "SomeModule"
     importOrderSortSpecifiers: true,
 
+    //Use case sensitivity when sorting.
+    importOrderCaseInsensitive: false,
+
     //Try to keep lines no bigger than 80 characters.
     printWidth: 80,
 

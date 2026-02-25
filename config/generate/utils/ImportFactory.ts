@@ -47,17 +47,24 @@ export class ImportReflection {
         //Sort the copy.
         importReflectionsCopy.sort(
             (a: ImportReflection, b: ImportReflection): number => {
-                //Compare by module path first.
-                const moduleCompare: number = a.module.localeCompare(b.module);
-
-                //If modules are not the same.
-                if (moduleCompare !== 0) {
-                    //Use their comparison.
-                    return moduleCompare;
+                //Compare by module then declaration.
+                //I am comparing using lexographic comparison because
+                //localeCompare is inconsistent.
+                //Compare modules.
+                if (a.module < b.module) {
+                    return -1;
+                } else if (a.module > b.module) {
+                    return 1;
                 }
 
-                //Otherwise sort by imported declaration.
-                return a.declarationName.localeCompare(b.declarationName);
+                //Compare by declaration.
+                if (a.declarationName < b.declarationName) {
+                    return -1;
+                } else if (a.declarationName > b.declarationName) {
+                    return 1;
+                }
+
+                return 0;
             },
         );
 

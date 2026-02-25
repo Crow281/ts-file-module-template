@@ -36,41 +36,13 @@ import { inputToOutputPath } from "../../utils/InputToOutputPath";
 import { readJSONGlob } from "../json/ReadJSONGlob";
 import { toIdToPathMap } from "../json/ToIdToPathMap";
 import { mkdir, writeFile } from "node:fs/promises";
-import { basename, dirname } from "node:path";
-
-/**
- * Path to the JSON schemas we are operating on.
- *
- * Since this script is called at the project root,
- * that is what this path is relative to.
- */
-const inputPattern: string = "./src/**/*.schema.json";
-
-/**
- * Root path of the JSON schemas we are operating on.
- * Used to calculate their relative paths.
- *
- * Since this script is called at the project root,
- * that is what this path is relative to.
- */
-const inputRoot: string = "./src";
+import { basename, dirname, resolve } from "node:path";
+import { parseArgs } from "node:util";
 
 /**
  * Name of the variable we are exporting.
  */
 const varName: string = "ID_TO_JSON_SCHEMA";
-
-/**
- * Module path we are writing to.
- *
- * The full import is "internal/IDToJSONSchema".
- */
-const outputImport: string = "internal/IDToJSONSchema";
-
-/**
- * Place we will write the resulting file to.
- */
-const outputFilePath: string = "./src/internal/IDToJSONSchema.ts";
 
 //Comment used to mark this as a generated file
 //and comment telling user where script was created.
@@ -125,8 +97,9 @@ function createSchemaImportMapping(
         }
 
         //Calculate the absolute path used to import this JSON schema.
+        //Since we are importing JSON, leave the file extension.
         const absoluteImportPath: string = inputToOutputPath(
-            inputRoot,
+            "",
             "",
             absoluteFilePath,
         );
@@ -134,12 +107,15 @@ function createSchemaImportMapping(
         //Figure out what we are going to call the
         //constant variable stored within the json file.
         //Use the file name without the extension.
-        const varName: string = basename(absoluteImportPath, ".schema.json");
+        const declarationName: string = basename(
+            absoluteImportPath,
+            ".schema.json",
+        );
 
         //Calculate how to import this JSON constant.
         const importReflection: ImportReflection = importFactory.import(
             absoluteImportPath,
-            varName,
+            declarationName,
             //Use false since it is a constant, not a type.
             false,
             //Since we are importing directly out of JSON files,
@@ -255,13 +231,107 @@ function createPropertyCode(
     return propertyCode;
 }
 
-//Catch anything that goes wrong.
-try {
+/**
+ * Function representing overall script.
+ */
+async function run(): Promise<void> {
+    //Arguments passed.
+    const args = parseArgs({
+        //List of options the user can pick from.
+        options: {
+            //If the user wants to know how this works.
+            help: {
+                type: "boolean",
+                short: "h",
+                multiple: false,
+                default: false,
+            },
+            //Where to read files from.
+            input: {
+                type: "string",
+                short: "i",
+                multiple: false,
+            },
+            //Where to read files from.
+            output: {
+                type: "string",
+                short: "o",
+                multiple: false,
+            },
+        },
+
+        //Whether to allow user to select input
+        //without parameter names, selecting just via position.
+        allowPositionals: true,
+
+        //Pass the actual command line arguments.
+        args: process.argv,
+    });
+
+    //If user wants to know how the script works.
+    if (args.values.help) {
+        //Print help.
+        console.log(
+            "--help  - Prints list of arguments." +
+                "--input - Glob pattern to find files to process.",
+        );
+
+        //Terminate script.
+        return;
+    }
+
+    //Fetch input.
+    //Assume input was passed to option --input first
+    //and then as the first argument passed to the script which will be at the 2nd index.
+    const inputGlob: string | undefined =
+        args.values.input || args.positionals[2];
+
+    //If user gave no input.
+    if (!inputGlob) {
+        //Tell user they must give an input path.
+        console.error(
+            "This script requires that a glob be passed to parameter --input. " +
+                'For example, "./src/**/*.schema.json"',
+        );
+
+        //Terminate script.
+        return;
+    }
+
+    //Fetch input.
+    //Assume input was passed to option --input first
+    //and then as the first argument passed to the script which will be at the 2nd index.
+    const outputFilePath: string | undefined =
+        args.values.output || args.positionals[3];
+
+    //If user gave no input.
+    if (!outputFilePath) {
+        //Tell user they must give an input path.
+        console.error(
+            "This script requires that a file path be passed to parameter --output. " +
+                'For example, "./src/internal/IDToJSONSchema.ts"',
+        );
+
+        //Terminate script.
+        return;
+    }
+
+    //Import path to output file.
+    const outputImport: string = inputToOutputPath("", "", outputFilePath, {
+        //Remove file extension.
+        transformFileExtension: (oldFileExtension: string): string => {
+            return "";
+        },
+    });
+
+    //Convert to absolute file path.
+    const absoluteOutputImport: string = resolve(outputImport);
+
     //Load the schemas.
     const absoluteFilePathToSchema: Map<
         string,
         Record<string, unknown>
-    > = await readJSONGlob(inputPattern);
+    > = await readJSONGlob(inputGlob);
 
     //Create object to manage imports.
     const importFactory: ImportFactory = new ImportFactory();
@@ -271,7 +341,7 @@ try {
         createSchemaImportMapping(absoluteFilePathToSchema, importFactory);
 
     //Generate code for importing all the JSON schema constants from the file.
-    const importCode: string = importFactory.toCode(outputImport);
+    const importCode: string = importFactory.toCode(absoluteOutputImport);
 
     //Generate code for each of the id to schema mappings.
     const propertyCode: string = createPropertyCode(schemaToImports);
@@ -306,6 +376,12 @@ ${mappingCode}
     await writeFile(outputFilePath, code, {
         encoding: "utf-8",
     });
+}
+
+//Catch anything that goes wrong.
+try {
+    //Run the script.
+    await run();
 
     //If anything goes wrong.
 } catch (error) {
