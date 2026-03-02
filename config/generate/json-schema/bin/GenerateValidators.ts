@@ -408,6 +408,18 @@ async function run(): Promise<void> {
     const inputGlob: string | undefined =
         args.values.input || args.positionals[2];
 
+    //If user gave no input.
+    if (!inputGlob) {
+        //Tell user they must give an input path.
+        console.error(
+            "This script requires that a glob be passed to parameter --input. " +
+                'For example, "./src/**/*.schema.json"',
+        );
+
+        //Terminate script.
+        return;
+    }
+
     //Load the schemas.
     const absoluteFilePathToSchema: Map<
         string,
