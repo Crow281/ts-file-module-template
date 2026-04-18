@@ -53,6 +53,9 @@ const config = {
     //Try to keep lines no bigger than 80 characters.
     printWidth: 80,
 
+    //Use double quotes.
+    singleQuote: false,
+
     //Make each indent 4 spaces.
     tabWidth: 4,
 };
