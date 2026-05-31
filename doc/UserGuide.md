@@ -31,6 +31,12 @@ One recommended guide is
 
 ## NPM Dependency Update
 
+Note that "{project}/.npmrc" has been configured to require
+packages to have existed for a minimum amount of time
+so that the community can double check for any security hazards.
+It has also been configured to prevent post-install scripts from
+running by default.
+
 You can use the following console command to update the project for
 any minor version changes to its devDependencies and dependencies.
 ```console
@@ -43,9 +49,9 @@ project's dependencies are outdated, especially in terms of major versions:
 npm outdated
 ```
 
-Make sure that whenever you update a project's packages,
-you use the following command to check for any known
-security hazards:
+If you want to double check for any known security hazards,
+you can use the following command.
+Note that update will also run its own audit:
 ```console
 npm audit
 ```
