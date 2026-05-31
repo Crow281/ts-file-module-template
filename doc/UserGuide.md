@@ -43,6 +43,13 @@ project's dependencies are outdated, especially in terms of major versions:
 npm outdated
 ```
 
+Make sure that whenever you update a project's packages,
+you use the following command to check for any known
+security hazards:
+```console
+npm audit
+```
+
 You can use the following console command to download
 this project's node_modules:
 ```console
