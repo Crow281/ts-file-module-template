@@ -144,7 +144,7 @@ const config = {
     // notifyMode: "failure-change",
 
     // A preset that is used as a base for Jest's configuration
-    // preset: undefined,
+    preset: "ts-jest",
 
     // Run tests from one or more projects
     // projects: undefined,
@@ -222,12 +222,27 @@ const config = {
 
     // A map from regular expressions to paths to transformers
     transform: {
-        //Tell Jest to handle js, ts, jsx, and tsx files with babel-jest.
+        //Tell Jest to handle js, ts, jsx, and tsx files with ts-jest.
         "\\.[jt]sx?$": [
-            "babel-jest",
+            "ts-jest",
             {
-                //Tell babel-jest where to find the babel config file.
-                extends: "./config/babel/babel.config.js",
+                //Point to TypeScript config file.
+                tsconfig: "./tsconfig.json",
+
+                //We are using ESM modules.
+                useESM: true,
+
+                //Adds import.meta support.
+                diagnostics: {
+                    ignoreCodes: [1343],
+                },
+                astTransformers: {
+                    before: [
+                        {
+                            path: "node_modules/ts-jest-mock-import-meta",
+                        },
+                    ],
+                },
             },
         ],
     },

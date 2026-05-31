@@ -184,14 +184,6 @@ Libraries this project is dependant on for building.
     </tr>
     <tr>
         <td>
-            babel-jest
-        </td>
-        <td>
-            Plugin that allows test library, Jest, to transpile via Babel.
-        </td>
-    </tr>
-    <tr>
-        <td>
             copyfiles
         </td>
         <td>
@@ -314,6 +306,22 @@ Libraries this project is dependant on for building.
         </td>
         <td>
             Tells Rollup which imports reference code outside the project.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            ts-jest
+        </td>
+        <td>
+            Plugin that allows test library, Jest, to process TypeScript.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            ts-jest-mock-import-meta
+        </td>
+        <td>
+            Tells ts-jest how to handle import.meta.
         </td>
     </tr>
     <tr>

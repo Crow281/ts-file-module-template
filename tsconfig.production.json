@@ -25,8 +25,10 @@
 
     //How to compile.
     "compilerOptions": {
-        //Use the project src folder as the base URL.
-        "baseUrl": "./src",
+        //Module system of the project,
+        //deciding how modules are loaded and linked.
+        //Since this is a Node project, use nodenext.
+        "module": "esnext",
 
         //Use source as the root so that the
         //source folder itself is not output to dist.
@@ -34,5 +36,12 @@
 
         //Indicate where to output the TypeScript definitions.
         "declarationDir": "./dist/types",
+
+        //Remaps paths.
+        "paths": {
+            //This is so that I can import from
+            //absolute paths instead of relative ones.
+            "*": ["./src/*"] 
+        }
     }
 }

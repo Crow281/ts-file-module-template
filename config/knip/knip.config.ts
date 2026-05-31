@@ -59,23 +59,16 @@ const config: KnipConfig = {
         //for other environments
         "@babel/preset-env",
 
-        //Tells Babel how to compile JSX.
-        //Note that if your library doesn't use JSX or React,
-        //then this dependency really is unused.
-        //However, being a developer dependency, it won't do
-        //any harm to the final compiled library.
-        "@babel/preset-react",
-
         //Tells Babel how to convert TypeScript to JavaScript.
         "@babel/preset-typescript",
-
-        //A plugin that allows Prettier to sort imports.
-        //Is used by prettierrc.config.js
-        "@trivago/prettier-plugin-sort-imports",
 
         //A tool used to test all versions of a dependency against Jest.
         //Is used by the {project}/config/TestAllVersions.ts script.
         "test-all-versions",
+
+        //Tells ts-jest how to process variable import.meta
+        //when it comes across it in TypeScript files.
+        "ts-jest-mock-import-meta",
 
         //One of the plugins used by TypeDoc.
         //TypeDoc uses it to create external links to MDN types.
@@ -93,10 +86,10 @@ const config: KnipConfig = {
     //they are deprecated.
     ignoreUnresolved: [
         //Script file used by Jest to setup the tests.
-        "./config/jest/scripts/GlobalSetup.ts",
+        "config/jest/scripts/GlobalSetup.ts",
 
         //Script file used by Jest to teardown the tests.
-        "./config/jest/scripts/GlobalTeardown.ts",
+        "config/jest/scripts/GlobalTeardown.ts",
     ],
 };
 
