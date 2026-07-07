@@ -322,7 +322,8 @@ The properties you will want to consider changing include the following:
                 that will make it so that NPM does not install it by default.
             </p>
             <p>
-                One reason to use this is if your library has optional features dependant on optional packages.
+                One reason to use this is if your library has
+                optional features dependant on optional packages.
                 For example, maybe your library provides a custom new
                 <a href="https://en.wikipedia.org/wiki/Query_language">Query language</a>.
                 Your library is designed to operate over multiple backends.

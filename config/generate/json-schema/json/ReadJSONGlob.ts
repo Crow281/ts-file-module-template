@@ -21,35 +21,50 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { readJSONFiles } from "./ReadJSONFiles";
-import { glob } from "glob";
+import { readJSONFile } from "./ReadJSONFile";
+import { glob } from "node:fs/promises";
 
 /**
- *
+ * Loads all files referred to by the given glob pattern
+ * as json objects.
  * @param inputPattern
  * Glob pattern to all UTF-8 JSON files that are to be loaded.
  * @returns
- * A map, mapping absolute file paths to the JSON objects stored to them.
+ * A map, mapping file paths to the JSON objects stored to them.
  */
 export async function readJSONGlob(
     inputPattern: string,
 ): Promise<Map<string, Record<string, unknown>>> {
-    //Get the file paths to the JSON files.
-    const filePaths: string[] = await glob(inputPattern);
-
-    //Load all of the JSON files into objects.
-    //The result will have the same order as parameter file paths.
-    const jsonObjects: Record<string, unknown>[] =
-        await readJSONFiles(filePaths);
-
     //Map to hold the schema objects.
     const filePathToObject: Map<string, Record<string, unknown>> = new Map();
 
-    //Map the file paths to the object they load.
-    for (let index: number = 0; index < filePaths.length; ++index) {
-        //Map the schema to its file path.
-        filePathToObject.set(filePaths[index], jsonObjects[index]);
+    //Get the file paths to the JSON files.
+    const filePathsIterator: NodeJS.AsyncIterator<string> =
+        await glob(inputPattern);
+
+    //Allocate array to store all the promises that need to finish.
+    const promises: Promise<void>[] = [];
+
+    //Iterate the file paths.
+    for await (const filePath of filePathsIterator) {
+        //Read in this file path.
+        const filePromise: Promise<Record<string, unknown>> =
+            readJSONFile(filePath);
+
+        //Upon completion, map the entry to its file path.
+        const storePromise: Promise<void> = filePromise.then(
+            (jsonObject: Record<string, unknown>): void => {
+                //Store to the map of paths to json objects.
+                filePathToObject.set(filePath, jsonObject);
+            },
+        );
+
+        //Store to the list of promises we will be waiting on.
+        promises.push(storePromise);
     }
+
+    //Wait for all operations on all files to complete.
+    await Promise.all(promises);
 
     return filePathToObject;
 }

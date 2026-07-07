@@ -130,9 +130,7 @@ function testVersion(packageName: string, versionRange: string): Promise<void> {
 async function testDependencies(
     npmPackage: Record<string, unknown>,
     dependencyType:
-        | "peerDependencies"
-        | "dependencies"
-        | "optionalDependencies",
+        "peerDependencies" | "dependencies" | "optionalDependencies",
 ): Promise<void> {
     //Fetch the desired dependencies.
     //Dependencies is expected to be an object, mapping package names to version ranges.

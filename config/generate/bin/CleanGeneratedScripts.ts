@@ -26,8 +26,7 @@
  * that were dynamically generated.
  */
 import { GENERATED_HEADER } from "../utils/GeneratedHeader";
-import { glob } from "glob";
-import { readFile, readdir, rmdir, stat, unlink } from "node:fs/promises";
+import { glob, readFile, readdir, rmdir, stat, unlink } from "node:fs/promises";
 import { dirname } from "node:path";
 
 /**
@@ -49,6 +48,28 @@ const internalSourceFilesGlob: string = `src/**/internal/**/*.${extensions}`;
  * The header of all generated files in byte form as utf-8 bytes.
  */
 const GENERATED_HEADER_BUFFER: Buffer = Buffer.from(GENERATED_HEADER, "utf-8");
+
+/**
+ * Awaits iterator and returns array of all items in it.
+ * @param iterator
+ * Iterator we are gathering from.
+ * @returns
+ * Array iterator results are stored to.
+ */
+async function gatherIterator<Type>(
+    iterator: NodeJS.AsyncIterator<Type>,
+): Promise<Type[]> {
+    //Array to gather iterator items into.
+    const result: Type[] = [];
+
+    //Iterate iterator.
+    for await (const item of iterator) {
+        //Store item to array.
+        result.push(item);
+    }
+
+    return result;
+}
 
 /**
  * Function allowing us to check if a given file path contains a generated script.
@@ -195,11 +216,11 @@ function deleteEmptyParentFolders(sourceFilePaths: string[]): Promise<void[]> {
 //Catch anything that goes wrong.
 try {
     //Get paths to all non-internal source files.
-    const exportedSourceFilePaths: string[] = await glob(
+    const exportedSourceFilePathsIterator: NodeJS.AsyncIterator<string> = glob(
         externalSourceFilesGlob,
         {
             //Which files that would otherwise fit that this should skip.
-            ignore: [
+            exclude: [
                 //Exclude all test folders from the build.
                 "**/__tests__/**",
 
@@ -209,16 +230,26 @@ try {
         },
     );
 
+    //Convert list of non-internal source files to an array.
+    const exportedSourceFilePaths: string[] = await gatherIterator(
+        exportedSourceFilePathsIterator,
+    );
+
     //Get paths to all internal source files.
-    const internalSourceFilePaths: string[] = await glob(
+    const internalSourceFilePathsIterator: NodeJS.AsyncIterator<string> = glob(
         internalSourceFilesGlob,
         {
             //Which files that would otherwise fit that this should skip.
-            ignore: [
+            exclude: [
                 //Exclude all test folders from the build.
                 "**/__tests__/**",
             ],
         },
+    );
+
+    //Convert list of internal source files to an array.
+    const internalSourceFilePaths: string[] = await gatherIterator(
+        internalSourceFilePathsIterator,
     );
 
     //Create combined array of all generated scripts.

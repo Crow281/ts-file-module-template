@@ -21,8 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+import NpmPackage from "../package.json";
 
 /**
  * A variable containing the name of the NPM library's package.
  */
-export const PACKAGE_NAME: string = "@crow281/ts-file-module-template";
+export const PACKAGE_NAME: string = NpmPackage.name;

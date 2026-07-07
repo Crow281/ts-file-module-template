@@ -24,6 +24,8 @@
 import { readJSONFile } from "./ReadJSONFile";
 
 /**
+ * @param jsonFilePaths
+ * Array of file paths we want to load.
  * @returns
  * Promise returning an array with each object,
  * their indexes corresponding to the matching json file path index.
@@ -31,8 +33,10 @@ import { readJSONFile } from "./ReadJSONFile";
 export async function readJSONFiles(
     jsonFilePaths: string[],
 ): Promise<Record<string, unknown>[]> {
-    //Allocate array of all the file promises.
-    const promises = new Array(jsonFilePaths.length);
+    //Allocate array to store all the file promises.
+    const promises: Promise<Record<string, unknown>>[] = new Array(
+        jsonFilePaths.length,
+    );
 
     //Iterate the file paths.
     for (let index = 0; index < jsonFilePaths.length; ++index) {

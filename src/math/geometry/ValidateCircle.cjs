@@ -33,8 +33,8 @@
 //config/generate/json-schema/validators/GenerateValidator.ts
 
 "use strict";
-exports.validateCircle = validate12;
-const schema13 = {
+exports.validateCircle = validate11;
+const schema12 = {
     $schema: "http://json-schema.org/draft-07/schema",
     $id: "urn:module:math/geometry/Circle.schema.json",
     title: "Circle",
@@ -81,7 +81,7 @@ const schema11 = {
     additionalProperties: true,
 };
 
-function validate12(
+function validate11(
     data,
     { instancePath = "", parentData, parentDataProperty, rootData = data } = {},
 ) {
@@ -96,8 +96,8 @@ function validate12(
                 keyword: "required",
                 params: { missingProperty: "center" },
                 message: "must have required property '" + "center" + "'",
-                schema: schema13.required,
-                parentSchema: schema13,
+                schema: schema12.required,
+                parentSchema: schema12,
                 data,
             };
             if (vErrors === null) {
@@ -114,8 +114,8 @@ function validate12(
                 keyword: "required",
                 params: { missingProperty: "radius" },
                 message: "must have required property '" + "radius" + "'",
-                schema: schema13.required,
-                parentSchema: schema13,
+                schema: schema12.required,
+                parentSchema: schema12,
                 data,
             };
             if (vErrors === null) {
@@ -282,7 +282,7 @@ function validate12(
                         params: { comparison: ">=", limit: 0 },
                         message: "must be >= 0",
                         schema: 0,
-                        parentSchema: schema13.properties.radius,
+                        parentSchema: schema12.properties.radius,
                         data: data4,
                     };
                     if (vErrors === null) {
@@ -299,8 +299,8 @@ function validate12(
                     keyword: "type",
                     params: { type: "number" },
                     message: "must be number",
-                    schema: schema13.properties.radius.type,
-                    parentSchema: schema13.properties.radius,
+                    schema: schema12.properties.radius.type,
+                    parentSchema: schema12.properties.radius,
                     data: data4,
                 };
                 if (vErrors === null) {
@@ -318,8 +318,8 @@ function validate12(
             keyword: "type",
             params: { type: "object" },
             message: "must be object",
-            schema: schema13.type,
-            parentSchema: schema13,
+            schema: schema12.type,
+            parentSchema: schema12,
             data,
         };
         if (vErrors === null) {
@@ -329,6 +329,6 @@ function validate12(
         }
         errors++;
     }
-    validate12.errors = vErrors;
+    validate11.errors = vErrors;
     return errors === 0;
 }

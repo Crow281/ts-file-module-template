@@ -222,17 +222,6 @@ Libraries this project is dependant on for building.
     </tr>
     <tr>
         <td>
-            glob
-        </td>
-        <td>
-            A library that makes it possible to search files via
-            glob patterns.
-            Is used by several of the project's scripts to
-            locate necessary files.
-        </td>
-    </tr>
-    <tr>
-        <td>
             globals
         </td>
         <td>

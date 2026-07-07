@@ -36,8 +36,8 @@ import commonjs from "@rollup/plugin-commonjs";
 import dsv from "@rollup/plugin-dsv";
 import json from "@rollup/plugin-json";
 import nodeResolve from "@rollup/plugin-node-resolve";
-import { globSync } from "glob";
-import * as path from "node:path";
+import { globSync } from "node:fs";
+import { extname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import includePaths from "rollup-plugin-includepaths";
 import { nodeExternals } from "rollup-plugin-node-externals";
@@ -172,14 +172,14 @@ function setEntryValue(input, key, value) {
  */
 function loadInputs(baseInputPath) {
     //Create path to load all files.
-    const globPath = path.join(
+    const globPath = join(
         baseInputPath,
         "/**/*" + supportedScriptFileExtensionsGlob,
     );
 
     //Load the desired list of files.
     const sourceFilePaths = globSync(globPath, {
-        ignore: [
+        exclude: [
             //Internal scripts should not be made available to the end user,
             //so do not include them in the inputs.
             //Let Rollup itself find and build them when inputs import them.
@@ -215,12 +215,12 @@ function loadInputs(baseInputPath) {
         //cutting off the base directory of "src" and the file extension.
         //For example,
         //"{projectPath}/src/folder/TestFile.js" becomes "folder/TestFile"
-        const entryName = path.relative(
+        const entryName = relative(
             baseInputPath,
             //Cut off the file extension.
             sourceFilePath.slice(
                 0,
-                sourceFilePath.length - path.extname(sourceFilePath).length,
+                sourceFilePath.length - extname(sourceFilePath).length,
             ),
         );
 

@@ -33,8 +33,8 @@
 //config/generate/json-schema/validators/GenerateValidator.ts
 
 "use strict";
-exports.validateApplication = validate11;
-const schema12 = {
+exports.validateApplication = validate12;
+const schema14 = {
     $schema: "http://json-schema.org/draft-07/schema",
     $id: "urn:module:form/Application.schema.json",
     title: "Application",
@@ -70,7 +70,7 @@ const formats0 = require("ajv-formats/dist/formats").fullFormats.date;
 const formats3 =
     /^P(?!$)((\d+Y)?(\d+M)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+S)?)?|(\d+W)?)$/;
 
-function validate11(
+function validate12(
     data,
     { instancePath = "", parentData, parentDataProperty, rootData = data } = {},
 ) {
@@ -85,8 +85,8 @@ function validate11(
                 keyword: "required",
                 params: { missingProperty: "firstName" },
                 message: "must have required property '" + "firstName" + "'",
-                schema: schema12.required,
-                parentSchema: schema12,
+                schema: schema14.required,
+                parentSchema: schema14,
                 data,
             };
             if (vErrors === null) {
@@ -103,8 +103,8 @@ function validate11(
                 keyword: "required",
                 params: { missingProperty: "birthDate" },
                 message: "must have required property '" + "birthDate" + "'",
-                schema: schema12.required,
-                parentSchema: schema12,
+                schema: schema14.required,
+                parentSchema: schema14,
                 data,
             };
             if (vErrors === null) {
@@ -121,8 +121,8 @@ function validate11(
                 keyword: "required",
                 params: { missingProperty: "duration" },
                 message: "must have required property '" + "duration" + "'",
-                schema: schema12.required,
-                parentSchema: schema12,
+                schema: schema14.required,
+                parentSchema: schema14,
                 data,
             };
             if (vErrors === null) {
@@ -133,14 +133,12 @@ function validate11(
             errors++;
         }
         for (const key0 in data) {
-            if (
-                !(
-                    key0 === "firstName" ||
-                    key0 === "birthDate" ||
-                    key0 === "duration" ||
-                    key0 === "specialNotes"
-                )
-            ) {
+            if (!(
+                key0 === "firstName" ||
+                key0 === "birthDate" ||
+                key0 === "duration" ||
+                key0 === "specialNotes"
+            )) {
                 const err3 = {
                     instancePath,
                     schemaPath: "#/additionalProperties",
@@ -148,7 +146,7 @@ function validate11(
                     params: { additionalProperty: key0 },
                     message: "must NOT have additional properties",
                     schema: false,
-                    parentSchema: schema12,
+                    parentSchema: schema14,
                     data,
                 };
                 if (vErrors === null) {
@@ -168,8 +166,8 @@ function validate11(
                     keyword: "type",
                     params: { type: "string" },
                     message: "must be string",
-                    schema: schema12.properties.firstName.type,
-                    parentSchema: schema12.properties.firstName,
+                    schema: schema14.properties.firstName.type,
+                    parentSchema: schema14.properties.firstName,
                     data: data0,
                 };
                 if (vErrors === null) {
@@ -191,7 +189,7 @@ function validate11(
                         params: { format: "date" },
                         message: 'must match format "' + "date" + '"',
                         schema: "date",
-                        parentSchema: schema12.properties.birthDate,
+                        parentSchema: schema14.properties.birthDate,
                         data: data1,
                     };
                     if (vErrors === null) {
@@ -209,7 +207,7 @@ function validate11(
                         params: { comparison: ">=", limit: "1850-01-01" },
                         message: "should be >= " + "1850-01-01",
                         schema: "1850-01-01",
-                        parentSchema: schema12.properties.birthDate,
+                        parentSchema: schema14.properties.birthDate,
                         data: data1,
                     };
                     if (vErrors === null) {
@@ -226,8 +224,8 @@ function validate11(
                     keyword: "type",
                     params: { type: "string" },
                     message: "must be string",
-                    schema: schema12.properties.birthDate.type,
-                    parentSchema: schema12.properties.birthDate,
+                    schema: schema14.properties.birthDate.type,
+                    parentSchema: schema14.properties.birthDate,
                     data: data1,
                 };
                 if (vErrors === null) {
@@ -249,7 +247,7 @@ function validate11(
                         params: { format: "duration" },
                         message: 'must match format "' + "duration" + '"',
                         schema: "duration",
-                        parentSchema: schema12.properties.duration,
+                        parentSchema: schema14.properties.duration,
                         data: data2,
                     };
                     if (vErrors === null) {
@@ -266,8 +264,8 @@ function validate11(
                     keyword: "type",
                     params: { type: "string" },
                     message: "must be string",
-                    schema: schema12.properties.duration.type,
-                    parentSchema: schema12.properties.duration,
+                    schema: schema14.properties.duration.type,
+                    parentSchema: schema14.properties.duration,
                     data: data2,
                 };
                 if (vErrors === null) {
@@ -287,8 +285,8 @@ function validate11(
                     keyword: "type",
                     params: { type: "string" },
                     message: "must be string",
-                    schema: schema12.properties.specialNotes.type,
-                    parentSchema: schema12.properties.specialNotes,
+                    schema: schema14.properties.specialNotes.type,
+                    parentSchema: schema14.properties.specialNotes,
                     data: data3,
                 };
                 if (vErrors === null) {
@@ -306,8 +304,8 @@ function validate11(
             keyword: "type",
             params: { type: "object" },
             message: "must be object",
-            schema: schema12.type,
-            parentSchema: schema12,
+            schema: schema14.type,
+            parentSchema: schema14,
             data,
         };
         if (vErrors === null) {
@@ -317,6 +315,6 @@ function validate11(
         }
         errors++;
     }
-    validate11.errors = vErrors;
+    validate12.errors = vErrors;
     return errors === 0;
 }
