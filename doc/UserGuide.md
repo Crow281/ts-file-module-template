@@ -49,6 +49,13 @@ project's dependencies are outdated, especially in terms of major versions:
 npm outdated
 ```
 
+If you need a more thorough package update check that
+ignores the semantic versioning range,
+you can install and use the following tool:
+```console
+npx npm-check-updates
+```
+
 If you want to double check for any known security hazards,
 you can use the following command.
 Note that update will also run its own audit:
