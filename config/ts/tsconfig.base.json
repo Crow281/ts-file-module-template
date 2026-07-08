@@ -25,9 +25,10 @@
         //Type Checking:
         //Enforce strict type checking.
         "strict": true,
-        //Trigger failure if there are variables that
-        //are not and cannot be used.
-        "noUnusedLocals": true,
+        //Do not trigger failure if there are variables that
+        //are not used. Makes testing easier.
+        //Leave checking for them to the lint.
+        "noUnusedLocals": false,
 
         //Interop Constraints:
         //Force user to NOT use case-insensitivity when importing.
