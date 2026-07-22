@@ -42,7 +42,7 @@
  * SOFTWARE.
  *
  */
-import { type Point3 } from "../Point3";
+import { type Point3 } from "math/Point3";
 
 /**
  * Represents a circle.

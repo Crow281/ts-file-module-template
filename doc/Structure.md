@@ -126,8 +126,17 @@ Knip couldn't detect that the project was in fact using them.
 
 This template uses ESLint to check for any coding problems.
 
-The ESLint config file is located in
-["{project}/config/eslint/eslint.config.mjs"](https://github.com/Crow281/ts-file-module-template/blob/main/config/eslint/eslint.config.mjs).
+There are two ESLint config files.
+
+["{project}/config/eslint/eslint.base.config.mjs"](https://github.com/Crow281/ts-file-module-template/blob/main/config/eslint/eslint.base.config.mjs)
+is used as a basic ESLint config file to be used throughout the entire project.
+
+The ESLint config file used to verify the source folder is
+["{project}/config/eslint/eslint.src.config.mjs"](https://github.com/Crow281/ts-file-module-template/blob/main/config/eslint/eslint.src.config.mjs).
+The reason the source config file is separate from the base
+is because the source folder needs the following extra feature(s)
+that other project scripts do not necessarily need:
+- Enforcing absolute imports.
 
 It is setup to handle JavaScript, TypeScript, React, and browser globals.
 
@@ -152,6 +161,14 @@ This template is using the following list of ESLint plugins:
     </tr>
     <tr>
         <td>
+            "eslint-plugin-no-relative-import-paths"
+        </td>
+        <td>
+            Allows ESLint to enforce absolute imports.
+        </td>
+    </tr>
+    <tr>
+        <td>
             "typescript-eslint"
         </td>
         <td>
@@ -164,7 +181,8 @@ This template is using the following list of ESLint plugins:
         </td>
         <td>
             Allows ESLint to be able to handle React.
-            You can uninstall this plugin and the ESLint config file will handle it just fine.
+            If you do not need this plugin, it is fine to remove it.
+            The config file is designed to only include it if it exists.
         </td>
     </tr>
     <tr>

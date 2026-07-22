@@ -42,9 +42,9 @@
  * SOFTWARE.
  *
  */
-import Application from "../form/Application.schema.json";
-import Point3 from "../math/Point3.schema.json";
-import Circle from "../math/geometry/Circle.schema.json";
+import Application from "form/Application.schema.json";
+import Point3 from "math/Point3.schema.json";
+import Circle from "math/geometry/Circle.schema.json";
 
 /**
  * A constant, mapping JSON Schema ids to the JSON Schema

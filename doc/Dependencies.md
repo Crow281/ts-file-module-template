@@ -211,6 +211,15 @@ Libraries this project is dependant on for building.
     </tr>
     <tr>
         <td>
+            eslint-plugin-no-relative-import-paths
+        </td>
+        <td>
+            Allows project user to ensure that imports
+            are consistent.
+        </td>
+    </tr>
+    <tr>
+        <td>
             eslint-plugin-react
         </td>
         <td>

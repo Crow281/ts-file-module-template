@@ -21,7 +21,7 @@
 //config/generate/json-schema/validators/GenerateValidatorDefinition.ts
 //Import the type being validated.
 //Use an alias, SchemaInterface, to make sure there is no name collision.
-import { Application as SchemaInterface } from "./Application";
+import { Application as SchemaInterface } from "form/Application";
 //We need to temporarily disable es-lint right here,
 //because having an error here really is optional.
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment

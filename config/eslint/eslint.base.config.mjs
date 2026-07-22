@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 /**
- * Exports the project's ESLint configuration.
+ * Exports the base ESLint configuration used by this project.
  * ESLint is a tool to find formatting problems in your code.
  */
 import pluginJs from "@eslint/js";
@@ -31,7 +31,7 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 /**
- * The configuration object this project is using for ESLint.
+ * The basic configuration object this project is using for ESLint.
  * ESLint is used to check for bad coding practices.
  * @type {import("eslint").Linter.Config[]}
  */

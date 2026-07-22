@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { Point3 } from "./Point3";
+import { Point3 } from "math/Point3";
 
 /**
  * Calculates the difference between 2 points.

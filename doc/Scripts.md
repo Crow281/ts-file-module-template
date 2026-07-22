@@ -117,10 +117,60 @@ ignoreUnresolved.
 
 The following script allows you to use
 [ESLint](https://www.npmjs.com/package/eslint)
-to search your code for problems.
+to search your project code for problems.
 
 ```console
 npm run lint
+```
+
+### Lint: Config
+
+The following script allows you to use
+[ESLint](https://www.npmjs.com/package/eslint)
+to search the project configuration code specifically for problems.
+
+```console
+npm run lint:config
+```
+
+### Lint: Source
+
+The following script allows you to use
+[ESLint](https://www.npmjs.com/package/eslint)
+to search the project source code specifically for problems.
+
+```console
+npm run lint:src
+```
+
+## Fix
+
+The following script allows you to use
+[ESLint](https://www.npmjs.com/package/eslint)
+to fix the problems it finds.
+
+```console
+npm run fix
+```
+
+### Fix: Config
+
+The following script allows you to use
+[ESLint](https://www.npmjs.com/package/eslint)
+to fix any problems in the project configuration code.
+
+```console
+npm run fix:config
+```
+
+### Fix: Source
+
+The following script allows you to use
+[ESLint](https://www.npmjs.com/package/eslint)
+to fix any problems in the project source code.
+
+```console
+npm run fix:src
 ```
 
 ## Format

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import Data from "./CSVData.csv";
+import Data from "printing/CSVData.csv";
 
 /**
  * Prints the contents of file "src/printing/CSVData.csv"

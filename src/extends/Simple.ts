@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { Base } from "./Base";
+import { Base } from "extends/Base";
 
 /**
  * A simple class to test extending classes.
