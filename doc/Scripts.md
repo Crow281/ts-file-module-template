@@ -1,6 +1,6 @@
 # Scripts
 
-A guide to all the NPM scripts built into this project for anyone developing it.
+A guide to useful NPM scripts for this project.
 
 ## Generate
 
@@ -328,3 +328,37 @@ to host it.
 
 Whenever you have a major update, you will probably want to archive
 the old documentation in a folder named after the version it referred to.
+
+## NPM Package Updates
+
+Note that "{project}/.npmrc" has been configured to require
+packages to have existed for a minimum amount of time
+so that the community can double check for any security hazards.
+It has also been configured to prevent post-install scripts from
+running by default.
+
+You can use the following console command to update the project for
+any minor version changes to its devDependencies and dependencies.
+```console
+npm update
+```
+
+You can use the following console command to check if any of the
+project's dependencies are outdated, especially in terms of major versions:
+```console
+npm outdated
+```
+
+If you need a more thorough package update check that
+ignores the semantic versioning range,
+you can install and use the following tool:
+```console
+npx npm-check-updates
+```
+
+If you want to double check for any known security hazards,
+you can use the following command.
+Note that update will also run its own audit:
+```console
+npm audit
+```

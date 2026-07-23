@@ -29,51 +29,13 @@ Whenever you publish a new version of your package, you will want to update
 One recommended guide is
 [here](https://keepachangelog.com/).
 
-## NPM Dependency Update
-
-Note that "{project}/.npmrc" has been configured to require
-packages to have existed for a minimum amount of time
-so that the community can double check for any security hazards.
-It has also been configured to prevent post-install scripts from
-running by default.
-
-You can use the following console command to update the project for
-any minor version changes to its devDependencies and dependencies.
-```console
-npm update
-```
-
-You can use the following console command to check if any of the
-project's dependencies are outdated, especially in terms of major versions:
-```console
-npm outdated
-```
-
-If you need a more thorough package update check that
-ignores the semantic versioning range,
-you can install and use the following tool:
-```console
-npx npm-check-updates
-```
-
-If you want to double check for any known security hazards,
-you can use the following command.
-Note that update will also run its own audit:
-```console
-npm audit
-```
+## NPM Packages
 
 You can use the following console command to download
 this project's node_modules:
 ```console
 npm install
 ```
-
-As for the project's peerDependencies, you will want to keep
-the version range as flexible as what your library supports,
-so barring a need for new library features,
-you will probably just be adding "| ^{newMajorVersion}.0.0"
-to updated peerDependencies.
 
 ## Package.json
 
@@ -315,6 +277,14 @@ The properties you will want to consider changing include the following:
             </p>
             <p>
                 By default, this project has no peerDependencies.
+            </p>
+            <p>
+                You will want to keep the version range as flexible
+                as what your library supports,
+                so barring a need for new library features,
+                you will probably just be adding
+                "| ^{newMajorVersion}.0.0"
+                when adding support for new major versions of peerDependencies.
             </p>
         </td>
     </tr>
