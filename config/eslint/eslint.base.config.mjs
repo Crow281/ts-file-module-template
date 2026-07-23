@@ -90,10 +90,7 @@ try {
 
     //If we fail to import ESLint React support.
 } catch {
-    //Tell user we are skipping react.
-    console.log(
-        'Package "eslint-plugin-react" is not installed, skipping React support.',
-    );
+    //Nothing to do.
 }
 
 export default config;

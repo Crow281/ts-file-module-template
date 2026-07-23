@@ -49,28 +49,42 @@ const config = {
             "@babel/plugin-transform-runtime",
             {
                 //Tell Babel transform plugin which version of the runtime
-                //it is using so it knows what polyfills are available.
+                //this project is using so that it knows what polyfills are available.
                 version: runtimePackage.version,
             },
         ],
     ],
 };
 
-//This try catch block is to make Babel React Preset optional.
-//Check and see if package @babel/preset-react is installed.
-try {
-    //Attempt to import the desired package.
-    await import("@babel/preset-react");
+/**
+ * Will check whether a given preset package is available
+ * and add it to the list of presets if it is.
+ * @param presetPackageName
+ * Name of the package of the preset.
+ */
+async function addPresetIfAvailable(
+    presetPackageName
+) {
+    //This try catch block will catch an error if the preset is not available.
+    try {
+        //Attempt to import the desired package.
+        //If it doesn't throw an exception, it must exist.
+        await import(presetPackageName);
 
-    //If we reached this point, then package exists.
-    //Add it to the config.
-    //Make Babel support React.
-    config.presets.push("@babel/preset-react");
+        //If we reached this point, then package exists.
+        //Add it to the config.
+        //Make Babel support React.
+        config.presets.push(presetPackageName);
 
-    //If we fail to import Babel React Preset.
-} catch {
-    //Nothing to do.
+        //If we fail to import the package.
+    } catch {
+        //Nothing to do.
+    }
 }
+
+//Add optional presets if installed.
+//Try to add React support.
+await addPresetIfAvailable("@babel/preset-react");
 
 //Provide the configuration object.
 export default config;

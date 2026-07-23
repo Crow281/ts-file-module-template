@@ -247,6 +247,12 @@ The properties you will want to consider changing include the following:
                 it doesn't need ESLint to run and as such end users don't need to install it.
             </p>
             <p>
+                If you are not planning to use React or JSX,
+                then you can safely remove packages
+                "@babel/preset-react" and
+                "eslint-plugin-react".
+            </p>
+            <p>
                 If you are not using
                 <a href="https://json-schema.org/">
                     JSON Schema
@@ -282,12 +288,6 @@ The properties you will want to consider changing include the following:
                 If you plan to use JSON Schema Formats, you should
                 also move package "ajv-formats" from devDependencies
                 to dependencies.
-            </p>
-            <p>
-                If you are not planning to use React, then you can safely remove
-                packages
-                "@babel/preset-react" and
-                "eslint-plugin-react".
             </p>
         </td>
     </tr>
